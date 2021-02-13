@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>José Miguel Sánchez Fernández</Authors>
+    <Company>Visual Studio EX3</Company>
+    <Description>Multiplatform framework to converts modern graphic format images to native DIV Games Studio graphic formats: PAL, MAP and FPG files.</Description>
+    <Copyright>© Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2021</Copyright>
+    <PackageProjectUrl>https://github.com/VisualStudioEX3/DIV2.Format.Exporter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VisualStudioEX3/DIV2.Format.Exporter</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>DIV DIV2 DIVGamesStudio DIVGamesStudio2 Games Graphics Tool Retro Windows Linux Mac</PackageTags>
+    <Platforms>AnyCPU;x64</Platforms>
+    <Version>1.0.0</Version>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReleaseNotes>First release.</PackageReleaseNotes>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>DIV2.png</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>D:\Projects\dotNET projects\DIV2.Format.Exporter\DIV2.Format.Exporter\DIV2.Format.Exporter.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DIV2.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
