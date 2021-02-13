@@ -40,7 +40,6 @@ This tool is not designed to work with DIV Games Studio forks like [Fenix Projec
 * Compatible with Unity editor (see the [Unity Editor dependencies](https://github.com/VisualStudioEX3/DIV2.Format.Exporter#unity-editor-dependencies)).
   
 # Future features
-* Exports as **NuGet** package.
 * Creates a wiki with API reference documentation and samples (FYI: the source code is full documented).
 * Implements support for FNT files.
 * Creates separated project with **CLI program** to operate with **DIV2.Format.Exporter** in Windows, Linux and Mac systems.
