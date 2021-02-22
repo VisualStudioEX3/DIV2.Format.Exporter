@@ -30,7 +30,7 @@ namespace DIV2.Format.Exporter.Tests
             if (Directory.Exists(this.ResultFolder))
             {
                 IEnumerable<string> files = Directory.EnumerateFiles(this.ResultFolder, "*.*", SearchOption.AllDirectories);
-                foreach (var file in files)
+                foreach (string file in files)
                     File.Delete(file); 
             }
         }

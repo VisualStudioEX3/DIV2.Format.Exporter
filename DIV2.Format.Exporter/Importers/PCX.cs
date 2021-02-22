@@ -56,7 +56,7 @@ namespace DIV2.Format.Importer
                     stream.BaseStream.Position = HEADER_HEIGHT_POSITION;
                     this.Height = (short)(stream.ReadInt16() + 1);
 
-                    int imageSize = (int)(stream.BaseStream.Length - (HEADER_LENGTH + (PALETTE_LENGTH + 1)));
+                    int imageSize = (int)(stream.BaseStream.Length - (HEADER_LENGTH + PALETTE_LENGTH + 1));
                     byte value, write;
                     int index = 0;
 

@@ -60,9 +60,21 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION =
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
+        /// <summary>
+        /// Default value for <see cref="colors"/> field.
+        /// </summary>
         public const RangeColors DEFAULT_RANGE_COLORS = RangeColors._8;
+        /// <summary>
+        /// Default value for <see cref="type"/> field.
+        /// </summary>
         public const RangeTypes DEFAULT_TYPE = RangeTypes.Direct;
+        /// <summary>
+        /// Default value for <see cref="isFixed"/> field.
+        /// </summary>
         public const bool DEFAULT_FIXED_STATE = false;
+        /// <summary>
+        /// Default value for <see cref="blackColor"/> field.
+        /// </summary>
         public const int DEFAULT_BLACK_COLOR = 0;
         /// <summary>
         /// Number of color index entries in the range.
@@ -169,6 +181,12 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ColorRange"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ColorRange"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(ColorRange a, ColorRange b)
         {
             if (a.colors == b.colors &&
@@ -186,6 +204,12 @@ namespace DIV2.Format.Exporter
                 return false;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ColorRange"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ColorRange"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(ColorRange a, ColorRange b)
         {
             return !(a == b);
@@ -242,6 +266,10 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
+        /// <summary>
+        /// Serialize this instance to binary format.
+        /// </summary>
+        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -256,21 +284,38 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<byte> GetEnumerator()
         {
             return new ColorRangeEnumerator(this._rangeColors);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is ColorRange)) return false;
@@ -278,15 +323,23 @@ namespace DIV2.Format.Exporter
             return this == (ColorRange)obj;
         }
 
+        /// <summary>
+        /// Generate a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            foreach (var index in this._rangeColors)
+            foreach (byte index in this._rangeColors)
                 sb.Append($"{index}, ");
 
             string rangeValues = sb.ToString();

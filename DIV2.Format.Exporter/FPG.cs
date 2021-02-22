@@ -74,7 +74,7 @@ namespace DIV2.Format.Exporter
                    (sizeof(byte) * FILENAME_LENGTH) + // Filename.
                    (sizeof(int) * 3) + // Width + Height + Control Points counter.
                    (ControlPoint.SIZE * this.map.ControlPoints.Count) + // Control Points list.
-                   (sizeof(byte) * (this.map.Width * this.map.Height)); // Bitmap.
+                   (sizeof(byte) * this.map.Width * this.map.Height); // Bitmap.
         }
 
         public byte[] Serialize()
@@ -236,6 +236,12 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="FPG"/> value to compare.</param>
+        /// <param name="b">Right <see cref="FPG"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(FPG a, FPG b)
         {
             if (a.Palette == b.Palette)
@@ -253,6 +259,12 @@ namespace DIV2.Format.Exporter
                 return false;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="FPG"/> value to compare.</param>
+        /// <param name="b">Right <see cref="FPG"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(FPG a, FPG b)
         {
             return !(a == b);
@@ -376,7 +388,7 @@ namespace DIV2.Format.Exporter
         /// <returns>Returns true if the <see cref="MAP"/> exists.</returns>
         public bool Contains(MAP map)
         {
-            foreach (var item in this)
+            foreach (MAP item in this)
                 if (item == map)
                     return true;
 
@@ -390,7 +402,7 @@ namespace DIV2.Format.Exporter
         /// <returns>Returns true if a <see cref="MAP"/> graphic identifier exists.</returns>
         public bool Contains(int graphId)
         {
-            foreach (var map in this)
+            foreach (MAP map in this)
                 if (map.GraphId == graphId)
                     return true;
 
@@ -558,13 +570,17 @@ namespace DIV2.Format.Exporter
             using (var stream = new BinaryWriter(new MemoryStream()))
             {
                 this.Palette.Write(stream);
-                foreach (var register in this._registers)
+                foreach (Register register in this._registers)
                     register.Write(stream);
 
                 return (stream.BaseStream as MemoryStream).ToArray();
             }
         }
 
+        /// <summary>
+        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -583,16 +599,29 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<MAP> GetEnumerator()
         {
             return new FPGEnumerator(this._registers);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is FPG)) return false;
@@ -600,15 +629,23 @@ namespace DIV2.Format.Exporter
             return this == (FPG)obj;
         }
 
+        /// <summary>
+        /// Generate a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             int registersHash = 0;
-            foreach (var register in this._registers)
+            foreach (Register register in this._registers)
                 registersHash ^= register.GetHashCode();
 
             var sb = new StringBuilder();

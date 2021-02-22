@@ -50,8 +50,8 @@ namespace DIV2.Format.Exporter
                 var header = new DIVFileHeader(buffer);
 
                 bool id = header._id.ToASCIIString().Equals(this._id.ToASCIIString());
-                bool magicNumber = (header._magicNumber == MAGIC_NUMBER);
-                bool version = (header._version == VERSION);
+                bool magicNumber = header._magicNumber == MAGIC_NUMBER;
+                bool version = header._version == VERSION;
 
                 return id && magicNumber && version; 
             }
@@ -79,20 +79,26 @@ namespace DIV2.Format.Exporter
         #endregion
     }
 
+    /// <summary>
+    /// An exception ocurred when the a DIV Games Studio file header is invalid.
+    /// </summary>
     public sealed class DIVFormatHeaderException : Exception
     {
         #region Constructor
-        public DIVFormatHeaderException()
+        internal DIVFormatHeaderException()
             : base("Invalid file header.")
         {
         } 
         #endregion
     }
 
+    /// <summary>
+    /// An exception ocurred when a DIV Games Studio content data format is invalid.
+    /// </summary>
     public sealed class DIVFileFormatException<T> : Exception where T : IAssetFile
     {
         #region Constructor
-        public DIVFileFormatException(Exception exception)
+        internal DIVFileFormatException(Exception exception)
             : base($"Error loading {typeof(T).Name} file.", exception)
         {
         } 

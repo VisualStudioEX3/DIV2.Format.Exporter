@@ -113,7 +113,7 @@ namespace DIV2.Format.Exporter.Converters
 
         static byte[] ExtractPalette(byte[] buffer)
         {
-            var palette = new byte[RGB_PALETTE_LENGTH];
+            byte[] palette = new byte[RGB_PALETTE_LENGTH];
 
             for (int i = 0, j = 0; i < palette.Length; i += 4)
             {

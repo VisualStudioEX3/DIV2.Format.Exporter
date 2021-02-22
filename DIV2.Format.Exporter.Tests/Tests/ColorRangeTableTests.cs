@@ -117,7 +117,7 @@ namespace DIV2.Format.Exporter.Tests
             var b = new ColorRangeTable();
             int i = 0;
 
-            foreach (var range in b)
+            foreach (ColorRange range in b)
                 Assert.AreEqual(a[i++], range);
         }
 
