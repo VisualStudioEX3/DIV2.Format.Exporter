@@ -69,10 +69,10 @@ namespace DIV2.Format.Exporter.ExtensionMethods
             if (colors.Length != ColorPalette.LENGTH)
                 throw CreateException(ColorPalette.LENGTH);
 
-            var buffer = new byte[ColorPalette.SIZE];
+            byte[] buffer = new byte[ColorPalette.SIZE];
 
             int i = 0;
-            foreach (var color in colors)
+            foreach (Color color in colors)
             {
                 buffer[i++] = color.red;
                 buffer[i++] = color.green;

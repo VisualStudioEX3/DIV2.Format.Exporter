@@ -14,12 +14,12 @@ namespace DIV2.Format.Exporter.Tests.ExtensionMethods
         {
             Color[] rgb = Enumerable.Repeat(new Color(byte.MaxValue, byte.MaxValue, byte.MaxValue), ColorPalette.LENGTH).ToArray();
 
-            foreach (var color in rgb)
+            foreach (Color color in rgb)
                 Assert.IsFalse(color.IsDAC());
 
             rgb = rgb.ToDAC();
 
-            foreach (var color in rgb)
+            foreach (Color color in rgb)
                 Assert.IsTrue(color.IsDAC());
         }
 
@@ -38,12 +38,12 @@ namespace DIV2.Format.Exporter.Tests.ExtensionMethods
         {
             Color[] dac = Enumerable.Repeat(new Color(Color.MAX_DAC_VALUE, Color.MAX_DAC_VALUE, Color.MAX_DAC_VALUE), ColorPalette.LENGTH).ToArray();
 
-            foreach (var color in dac)
+            foreach (Color color in dac)
                 Assert.IsTrue(color.IsDAC());
 
             dac = dac.ToRGB();
 
-            foreach (var color in dac)
+            foreach (Color color in dac)
                 Assert.IsFalse(color.IsDAC());
         }
 
@@ -60,7 +60,7 @@ namespace DIV2.Format.Exporter.Tests.ExtensionMethods
         [TestMethod]
         public void ToColorArray()
         {
-            var buffer = new byte[ColorPalette.SIZE];
+            byte[] buffer = new byte[ColorPalette.SIZE];
 
             for (int i = 0, j = 0; i < ColorPalette.LENGTH; i++)
                 for (int k = 0; k < 3; k++)
@@ -76,7 +76,7 @@ namespace DIV2.Format.Exporter.Tests.ExtensionMethods
         [TestMethod]
         public void FailToColorArray()
         {
-            var buffer = new byte[3];
+            byte[] buffer = new byte[3];
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => buffer.ToColorArray());
 
             buffer = new byte[1024];

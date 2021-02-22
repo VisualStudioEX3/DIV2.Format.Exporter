@@ -58,7 +58,7 @@ namespace DIV2.Format.Exporter.Tests
             Assert.AreEqual(FPG_TEST_REGISTERS_COUNT, fpg.Count);
 
             for (int i = 0; i < FPG_TEST_REGISTERS_COUNT; i++)
-                AssertAreEqualDefaultRegisters(fpg, i);
+                this.AssertAreEqualDefaultRegisters(fpg, i);
         }
 
         void AssertAreEqualDefaultRegisters(Register reg, MAP map, string filename)
@@ -82,7 +82,7 @@ namespace DIV2.Format.Exporter.Tests
         int GetDefaultFPGSize()
         {
             int size = ColorPalette.SIZE + ColorRangeTable.SIZE;
-            foreach (var reg in this._testFPGRegisters)
+            foreach (Register reg in this._testFPGRegisters)
                 size += FPG_REGISTER_BASE_SIZE + (ControlPoint.SIZE * reg.controlPoints.Length) + reg.BitmapLength;
             return size;
         }
@@ -215,7 +215,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var fpg = new FPG(this.GetAssetPath(SharedConstants.FILENAME_FPG_TEST));
             for (int i = 0; i < FPG_TEST_REGISTERS_COUNT; i++)
-                AssertAreEqualDefaultRegisters(fpg, i);
+                this.AssertAreEqualDefaultRegisters(fpg, i);
         }
 
         [TestMethod]
@@ -231,9 +231,9 @@ namespace DIV2.Format.Exporter.Tests
         {
             int i = 0;
             var fpg = new FPG(this.GetAssetPath(SharedConstants.FILENAME_FPG_TEST));
-            foreach (var map in fpg)
+            foreach (MAP map in fpg)
             {
-                AssertAreEqualDefaultRegisters(this._testFPGRegisters[i], map, fpg.GetFilename(i));
+                this.AssertAreEqualDefaultRegisters(this._testFPGRegisters[i], map, fpg.GetFilename(i));
                 i++;
             }
         }

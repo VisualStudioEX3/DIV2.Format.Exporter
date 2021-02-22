@@ -2,7 +2,6 @@
 using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
 using SixLabors.ImageSharp.PixelFormats;
-using System;
 using System.Linq;
 using System.Numerics;
 

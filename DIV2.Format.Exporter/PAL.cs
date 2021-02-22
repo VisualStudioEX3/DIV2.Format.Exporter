@@ -64,12 +64,24 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="PAL"/> value to compare.</param>
+        /// <param name="b">Right <see cref="PAL"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(PAL a, PAL b)
         {
             return a.Colors == b.Colors &&
                    a.Ranges == b.Ranges;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="PAL"/> value to compare.</param>
+        /// <param name="b">Right <see cref="PAL"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(PAL a, PAL b)
         {
             return !(a == b);
@@ -179,7 +191,7 @@ namespace DIV2.Format.Exporter
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>
         public static PAL FromImage(byte[] buffer, bool sortColors = false)
         {
-            var pal = PaletteProcessor.ProcessPalette(buffer);
+            PAL pal = PaletteProcessor.ProcessPalette(buffer);
 
             if (sortColors)
                 pal.Sort();
@@ -262,6 +274,10 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -280,16 +296,29 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<Color> GetEnumerator()
         {
             return this.Colors.GetEnumerator();
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is PAL)) return false;
@@ -297,11 +326,19 @@ namespace DIV2.Format.Exporter
             return this == (PAL)obj;
         }
 
+        /// <summary>
+        /// Generate a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             return $"{{ {nameof(PAL)}: {{ Hash: {this.GetHashCode()} }} }}";
