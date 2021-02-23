@@ -97,16 +97,9 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void FailWriteByIndex()
         {
-            Assert.ThrowsException<IndexOutOfRangeException>(() =>
-            {
-                var color = new Color();
-                color[-1] = 0;
-            });
-            Assert.ThrowsException<IndexOutOfRangeException>(() =>
-            {
-                var color = new Color();
-                color[Color.LENGTH + 1] = 0;
-            });
+            var color = new Color();
+            Assert.ThrowsException<IndexOutOfRangeException>(() => color[-1] = 0);
+            Assert.ThrowsException<IndexOutOfRangeException>(() => color[Color.LENGTH + 1] = 0);
         }
 
         [TestMethod]

@@ -160,6 +160,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var a = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
             var b = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
+
             Assert.AreEqual(a, b);
         }
 
@@ -168,6 +169,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var a = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
             var b = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT, MAP.MIN_GRAPH_ID, TEST_DESCRIPTION);
+
             Assert.AreNotEqual(a, b);
         }
 
@@ -245,8 +247,9 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void WriteByCoordinates()
         {
-            this.CreateTestMap(out byte[] bitmap);
             var map = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
+
+            this.CreateTestMap(out byte[] bitmap);
 
             for (int y = 0; y < TEST_HEIGHT; y++)
                 for (int x = 0; x < TEST_WIDTH; x++)
@@ -371,6 +374,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             string assetPath = this.GetOutputPath("TEST.MAP");
             this.CreateTestMap(out _).Save(assetPath);
+
             Assert.IsTrue(MAP.ValidateFormat(assetPath));
         }
 

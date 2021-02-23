@@ -259,6 +259,7 @@ namespace DIV2.Format.Exporter.Tests
         public void AddMapWithDifferentPalette()
         {
             const string PLAYER_MAP_FILENAME_FIELD = "PLAYER.MAP";
+
             string playerMapPath = this.GetAssetPath(SharedConstants.FILENAME_IMG_PLAYER_MAP);
 
             var pal = new PAL(this.GetAssetPath(SharedConstants.FILENAME_PAL_DIV));
@@ -325,6 +326,7 @@ namespace DIV2.Format.Exporter.Tests
         public void RemoveMapByGraphId()
         {
             const int GRAPH_ID = 100; // PLAYER.MAP, index 1.
+
             var fpg = new FPG(this.GetAssetPath(SharedConstants.FILENAME_FPG_TEST));
 
             fpg.Remove(GRAPH_ID);
@@ -392,6 +394,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             const int GRAPH_ID = 100; // PLAYER.MAP, index 1.
             const int INDEX = 1;
+
             var fpg = new FPG(this.GetAssetPath(SharedConstants.FILENAME_FPG_TEST));
 
             fpg.RemoveAt(INDEX);
@@ -403,6 +406,7 @@ namespace DIV2.Format.Exporter.Tests
         public void FailRemoveMapByIndex()
         {
             var fpg = new FPG(this.GetAssetPath(SharedConstants.FILENAME_FPG_TEST));
+
             Assert.ThrowsException<IndexOutOfRangeException>(() => fpg.RemoveAt(-1));
             Assert.ThrowsException<IndexOutOfRangeException>(() => fpg.RemoveAt(fpg.Count + 1));
         }
@@ -412,6 +416,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var pal = new PAL(this.GetAssetPath(SharedConstants.FILENAME_PAL_SPACE));
             var fpg = new FPG(pal);
+
             Assert.ThrowsException<InvalidOperationException>(() => fpg.Remove(0));
         }
 

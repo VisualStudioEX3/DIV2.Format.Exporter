@@ -63,7 +63,6 @@ namespace DIV2.Format.Exporter.Tests
         public void AreNotEqual()
         {
             var a = new ColorRangeTable();
-            
             var b = new ColorRangeTable();
             byte startIndex = 64;
             for (int i = 0; i < ColorRangeTable.LENGTH; i++)
