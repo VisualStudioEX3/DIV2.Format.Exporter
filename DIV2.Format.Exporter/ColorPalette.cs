@@ -69,7 +69,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set the component color value.
+        /// Gets or sets the component color value.
         /// </summary>
         /// <param name="index">Index of the component.</param>
         /// <returns>Returns the component color value.</returns>
@@ -151,7 +151,7 @@ namespace DIV2.Format.Exporter
         /// </summary>
         /// <param name="a">Left <see cref="Color"/> value to compare.</param>
         /// <param name="b">Right <see cref="Color"/> value to compare.</param>
-        /// <returns>Returns true if the left value are less or equal than the right value.</returns>
+        /// <returns>Returns <see langword="true"/> if the left value are less or equal than the right value.</returns>
         public static bool operator <=(Color a, Color b)
         {
             return (int)a <= (int)b;
@@ -246,7 +246,7 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <summary>
-        /// Serialize this instance to binary format.
+        /// Serializes this instance to binary format.
         /// </summary>
         /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
@@ -255,7 +255,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -327,7 +327,7 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Is a valid DAC color value?
         /// </summary>
-        /// <returns>Returns true if the RGB components are into the DAC range values [0..63].</returns>
+        /// <returns>Returns <see langword="true"/> if the RGB components are into the DAC range values [0..63].</returns>
         public bool IsDAC()
         {
             return this.red.IsClamped(0, MAX_DAC_VALUE) ||
@@ -348,7 +348,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> value compose with the RGB values for the first 3 bytes and a zero for fourth byte.</returns>
         public override int GetHashCode()
@@ -439,7 +439,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set a <see cref="Color"/> value in DAC format [0..63].
+        /// Gets or sets a <see cref="Color"/> value in DAC format [0..63].
         /// </summary>
         /// <param name="index">Index in palette.</param>
         /// <returns>Returns the <see cref="Color"/> value.</returns>
@@ -556,7 +556,7 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <summary>
-        /// Serialize this instance to binary format.
+        /// Serializes this instance to binary format.
         /// </summary>
         /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
@@ -571,7 +571,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -651,7 +651,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()

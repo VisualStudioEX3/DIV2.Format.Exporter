@@ -24,6 +24,7 @@ namespace DIV2.Format.Exporter
         /// Number of colors.
         /// </summary>
         public const int LENGTH = ColorPalette.LENGTH;
+
         /// <summary>
         /// Memory size.
         /// </summary>
@@ -35,12 +36,14 @@ namespace DIV2.Format.Exporter
         /// Palette colors, in DAC format.
         /// </summary>
         public ColorPalette Colors { get; private set; }
+
         /// <summary>
         /// Color range table.
         /// </summary>
         public ColorRangeTable Ranges { get; private set; }
+
         /// <summary>
-        /// Get or set a <see cref="Color"/> value.
+        /// Gets or sets a <see cref="Color"/> value.
         /// </summary>
         /// <param name="index"><see cref="Color"/> index.</param>
         /// <returns>Return the <see cref="Color"/> value.</returns>
@@ -172,7 +175,7 @@ namespace DIV2.Format.Exporter
         /// Creates new <see cref="PAL"/> instance from a supported image file.
         /// </summary>
         /// <param name="filename">Image file to load.</param>
-        /// <param name="sortColors">Sort colors of the imported palette. By default is false.</param>
+        /// <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
         /// <returns>Returns a new <see cref="PAL"/> instance.</returns>
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>
@@ -185,7 +188,7 @@ namespace DIV2.Format.Exporter
         /// Creates new <see cref="PAL"/> instance from a supported image file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contains a supported image file.</param>
-        /// <param name="sortColors">Sort colors of the imported palette. By default is false.</param>
+        /// <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
         /// <returns>Returns a new <see cref="PAL"/> instance.</returns>
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>
@@ -200,40 +203,40 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public static bool ValidateFormat(string filename)
         {
             return VALIDATOR.Validate(filename);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="PAL"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public static bool ValidateFormat(byte[] buffer)
         {
             return VALIDATOR.Validate(buffer);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public bool Validate(string filename)
         {
             return this.Validate(File.ReadAllBytes(filename));
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="PAL"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public bool Validate(byte[] buffer)
         {
             return PAL_FILE_HEADER.Validate(buffer[0..DIVFileHeader.SIZE]) && this.TryToReadFile(buffer);
@@ -259,7 +262,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Serialize the <see cref="PAL"/> instance in a <see cref="byte"/> array.
+        /// Serializes the <see cref="PAL"/> instance in a <see cref="byte"/> array.
         /// </summary>
         /// <returns>Returns the <see cref="byte"/> array with the <see cref="PAL"/> serialized data.</returns>
         /// <remarks>This function not include the file header data.</remarks>
@@ -275,7 +278,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -284,7 +287,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Save the instance in a <see cref="PAL"/> file.
+        /// Saves the instance in a <see cref="PAL"/> file.
         /// </summary>
         /// <param name="filename">Filename to write the data.</param>
         public void Save(string filename)
@@ -327,7 +330,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
