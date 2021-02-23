@@ -40,7 +40,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set the coordinate value.
+        /// Gets or sets the coordinate value.
         /// </summary>
         /// <param name="index">Index of the coordinate in the structure.</param>
         /// <returns>Returns the coordinate value.</returns>
@@ -159,7 +159,7 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <summary>
-        /// Serialize this instance to binary format.
+        /// Serializes this instance to binary format.
         /// </summary>
         /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
@@ -174,7 +174,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -195,7 +195,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> value of X and Y coordinates XOR operation.</returns>
         public override int GetHashCode()
@@ -340,10 +340,10 @@ namespace DIV2.Format.Exporter
         /// </summary>
         public int Count => this._bitmap.Length;
         /// <summary>
-        /// Get or set the color index in the bitmap.
+        /// Gets or sets the color index in the bitmap.
         /// </summary>
         /// <param name="index">Pixel index in the bitmap array.</param>
-        /// <returns>Returns the color index in color palette of the pixel.</returns>
+        /// <returns>Returns the color index in the <see cref="PAL"/> instance.</returns>
         public byte this[int index]
         {
             get
@@ -362,11 +362,11 @@ namespace DIV2.Format.Exporter
             }
         }
         /// <summary>
-        /// Get or set the color index in the bitmap.
+        /// Gets or sets the color index in the bitmap.
         /// </summary>
         /// <param name="x">Horizontal coordinate of the pixel to read.</param>
         /// <param name="y">Vertical coordinate of the pixel to read.</param>
-        /// <returns>Returns the color index in color palette of the pixel.</returns>
+        /// <returns>Returns the color index in the <see cref="PAL"/> instance.</returns>
         public byte this[int x, int y]
         {
             get
@@ -602,13 +602,13 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Get the bitmap array data of this instance.
+        /// Gets the bitmap array data of this instance.
         /// </summary>
         /// <returns>Returns a <see cref="byte"/> array with all pixels with their color indexes from the <see cref="PAL"/> instance.</returns>
         public byte[] GetBitmapArray() => this._bitmap;
 
         /// <summary>
-        /// Set the bitmap array data for this instance.
+        /// Sets the bitmap array data for this instance.
         /// </summary>
         /// <param name="pixels"><see cref="byte"/> array that contains pixel data for this instance.</param>
         public void SetBitmapArray(byte[] pixels)
@@ -629,40 +629,40 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public static bool ValidateFormat(string filename)
         {
             return VALIDATOR.Validate(filename);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="MAP"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public static bool ValidateFormat(byte[] buffer)
         {
             return VALIDATOR.Validate(buffer);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public bool Validate(string filename)
         {
             return this.Validate(File.ReadAllBytes(filename));
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="MAP"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public bool Validate(byte[] buffer)
         {
             return MAP_FILE_HEADER.Validate(buffer[0..DIVFileHeader.SIZE]) && this.TryToReadFile(buffer);
@@ -703,7 +703,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Serialize the <see cref="MAP"/> instance in a <see cref="byte"/> array.
+        /// Serializes the <see cref="MAP"/> instance in a <see cref="byte"/> array.
         /// </summary>
         /// <returns>Returns the <see cref="byte"/> array with the <see cref="MAP"/> serialized data.</returns>
         /// <remarks>This function not include the file header data.</remarks>
@@ -733,7 +733,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -742,7 +742,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Save the instance in a <see cref="MAP"/> file.
+        /// Saves the instance in a <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename">Filename to write the data.</param>
         public void Save(string filename)
@@ -796,7 +796,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()

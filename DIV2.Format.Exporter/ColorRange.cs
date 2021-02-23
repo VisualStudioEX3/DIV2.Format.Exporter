@@ -157,7 +157,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set the range entry value.
+        /// Gets or sets the range entry value.
         /// </summary>
         /// <param name="index">Index of the entry.</param>
         /// <returns>Returns the range entry value.</returns>
@@ -267,7 +267,7 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <summary>
-        /// Serialize this instance to binary format.
+        /// Serializes this instance to binary format.
         /// </summary>
         /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
@@ -285,7 +285,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -324,7 +324,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()

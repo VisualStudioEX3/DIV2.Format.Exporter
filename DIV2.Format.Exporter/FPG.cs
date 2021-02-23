@@ -219,7 +219,7 @@ namespace DIV2.Format.Exporter
         /// </summary>
         public int Count => this._registers.Count;
         /// <summary>
-        /// Get a <see cref="MAP"/> instance.
+        /// Gets a <see cref="MAP"/> instance.
         /// </summary>
         /// <param name="index">Index of the <see cref="MAP"/> in the <see cref="FPG"/>.</param>
         /// <returns>Returns the <see cref="MAP"/> instance.</returns>
@@ -385,7 +385,7 @@ namespace DIV2.Format.Exporter
         /// Determines whether a <see cref="MAP"/> is in this instance.
         /// </summary>
         /// <param name="map">The <see cref="MAP"/> to locate in this instance.</param>
-        /// <returns>Returns true if the <see cref="MAP"/> exists.</returns>
+        /// <returns>Returns <see langword="true"/> if the <see cref="MAP"/> exists.</returns>
         public bool Contains(MAP map)
         {
             foreach (MAP item in this)
@@ -399,7 +399,7 @@ namespace DIV2.Format.Exporter
         /// Determines whether a <see cref="MAP"/> with a graphic identifier is in this instance.
         /// </summary>
         /// <param name="graphId"><see cref="MAP"/> graphic identifier to search.</param>
-        /// <returns>Returns true if a <see cref="MAP"/> graphic identifier exists.</returns>
+        /// <returns>Returns <see langword="true"/> if a <see cref="MAP"/> graphic identifier exists.</returns>
         public bool Contains(int graphId)
         {
             foreach (MAP map in this)
@@ -471,7 +471,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Gets the associate filename value for this <see cref="MAP"/> in the <see cref="FPG"/>.
+        /// Gets the associated filename value for this <see cref="MAP"/> in the <see cref="FPG"/>.
         /// </summary>
         /// <param name="map"><see cref="MAP"/> instance to find.</param>
         /// <returns>Returns the <see cref="MAP"/> filename value.</returns>
@@ -485,7 +485,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Gets the associate filename value for this <see cref="MAP"/> in the <see cref="FPG"/>.
+        /// Gets the associated filename value for this <see cref="MAP"/> in the <see cref="FPG"/>.
         /// </summary>
         /// <param name="index">The index of the <see cref="MAP"/> instance to find. Not confuse with the <see cref="MAP.GraphId"/> value.</param>
         /// <returns>Returns the <see cref="MAP"/> filename value.</returns>
@@ -495,40 +495,40 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="FPG"/> file.
+        /// Validates if the file is a valid <see cref="FPG"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="FPG"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="FPG"/>.</returns>
         public static bool ValidateFormat(string filename)
         {
             return VALIDATOR.Validate(filename);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="FPG"/> file.
+        /// Validates if the file is a valid <see cref="FPG"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="FPG"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="FPG"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="FPG"/>.</returns>
         public static bool ValidateFormat(byte[] buffer)
         {
             return VALIDATOR.Validate(buffer);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="FPG"/> file.
+        /// Validates if the file is a valid <see cref="FPG"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="FPG"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="FPG"/>.</returns>
         public bool Validate(string filename)
         {
             return this.Validate(File.ReadAllBytes(filename));
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="FPG"/> file.
+        /// Validates if the file is a valid <see cref="FPG"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="FPG"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="FPG"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="FPG"/>.</returns>
         public bool Validate(byte[] buffer)
         {
             return FPG_FILE_HEADER.Validate(buffer[0..DIVFileHeader.SIZE]) && this.TryToReadFile(buffer);
@@ -561,7 +561,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Serialize the <see cref="FPG"/> instance in a <see cref="byte"/> array.
+        /// Serializes the <see cref="FPG"/> instance in a <see cref="byte"/> array.
         /// </summary>
         /// <returns>Returns the <see cref="byte"/> array with the <see cref="FPG"/> serialized data.</returns>
         /// <remarks>This function not include the file header data.</remarks>
@@ -578,7 +578,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Write this instance data in a <see cref="BinaryWriter"/> instance.
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
         /// </summary>
         /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
@@ -587,7 +587,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Save the instance in a <see cref="FPG"/> file.
+        /// Saves the instance in a <see cref="FPG"/> file.
         /// </summary>
         /// <param name="filename">Filename to write the data.</param>
         public void Save(string filename)
@@ -630,7 +630,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Generate a hash code for this instance.
+        /// Generates a hash code for this instance.
         /// </summary>
         /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
