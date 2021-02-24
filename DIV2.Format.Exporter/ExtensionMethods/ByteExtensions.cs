@@ -24,7 +24,7 @@ namespace DIV2.Format.Exporter.ExtensionMethods
         /// Calculates the checksum of this <see cref="string"/>.
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array.</param>
-        /// <returns>Returns the checksum string of this <see cref="byte"/> array.</returns>
+        /// <returns>Returns the checksum <see cref="string"/> value of this <see cref="byte"/> array.</returns>
         public static string CalculateChecksum(this byte[] buffer)
         {
             return HashGenerator.CalculateChecksum(buffer);
