@@ -9,7 +9,7 @@ namespace DIV2.Format.Exporter.Utils
     /// Nearest Neighbour algorithm.
     /// </summary>
     /// <remarks>Algorithm description: https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm </remarks>
-    public static class NNAlgorithm
+    static class NNAlgorithm
     {
         #region Structs
         struct NNVector
