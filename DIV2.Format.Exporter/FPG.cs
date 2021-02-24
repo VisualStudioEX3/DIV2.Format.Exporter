@@ -343,7 +343,7 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Adds a <see cref="MAP"/> file.
         /// </summary>
-        /// <param name="filename">Filename to load.</param>
+        /// <param name="filename"><see cref="MAP"/> file to load.</param>
         public void Add(string filename)
         {
             this.Add(new MAP(File.ReadAllBytes(filename)));

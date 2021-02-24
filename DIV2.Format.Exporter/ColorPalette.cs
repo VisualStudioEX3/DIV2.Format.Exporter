@@ -20,7 +20,7 @@ namespace DIV2.Format.Exporter
         /// </summary>
         DAC = Color.MAX_DAC_VALUE,
         /// <summary>
-        /// RGB format [0.255].
+        /// RGB format [0..255].
         /// </summary>
         RGB = byte.MaxValue
     }
@@ -295,7 +295,7 @@ namespace DIV2.Format.Exporter
         /// Gets a <see cref="Vector3"/> with normalized values [0..1].
         /// </summary>
         /// <param name="colorType">Indicate the color range for set the normalization factor.</param>
-        /// <returns>Returns a <see cref="Vector3"/> with the <see cref="Color"/> componentes normalized.</returns>
+        /// <returns>Returns a <see cref="Vector3"/> with the <see cref="Color"/> components normalized.</returns>
         public Vector3 Normalize(ColorFormat colorType)
         {
             float factor = (float)colorType;
@@ -350,7 +350,7 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Generates a hash code for this instance.
         /// </summary>
-        /// <returns>Returns an <see cref="int"/> value compose with the RGB values for the first 3 bytes and a zero for fourth byte.</returns>
+        /// <returns>Returns an <see cref="int"/> value composed by the RGB values for the first 3 bytes and a zero for fourth byte.</returns>
         public override int GetHashCode()
         {
             return BitConverter.ToInt32(new byte[] { this.red, this.green, this.blue, 0 }, 0);
