@@ -16,8 +16,14 @@
         </member>
         <member name="F:DIV2.Format.Exporter.ColorFormat.RGB">
             <summary>
-            RGB format [0.255].
+            RGB format [0..255].
             </summary>
+        </member>
+        <member name="T:DIV2.Format.Exporter.Color">
+            <summary>
+            Color structure.
+            </summary>
+            <remarks>Represents a RGB color format value.</remarks>
         </member>
         <member name="F:DIV2.Format.Exporter.Color.MAX_DAC_VALUE">
             <summary>
@@ -34,12 +40,75 @@
             Memory size.
             </summary>
         </member>
+        <member name="F:DIV2.Format.Exporter.Color.red">
+            <summary>
+            Red component.
+            </summary>
+        </member>
+        <member name="F:DIV2.Format.Exporter.Color.green">
+            <summary>
+            Green component.
+            </summary>
+        </member>
+        <member name="F:DIV2.Format.Exporter.Color.blue">
+            <summary>
+            Blue component.
+            </summary>
+        </member>
         <member name="P:DIV2.Format.Exporter.Color.Item(System.Int32)">
             <summary>
-            Get or set the component color value.
+            Gets or sets the component color value.
             </summary>
             <param name="index">Index of the component.</param>
             <returns>Returns the component color value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.op_Equality(DIV2.Format.Exporter.Color,DIV2.Format.Exporter.Color)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.op_Inequality(DIV2.Format.Exporter.Color,DIV2.Format.Exporter.Color)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.op_LessThan(DIV2.Format.Exporter.Color,DIV2.Format.Exporter.Color)">
+            <summary>
+            Less than operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if the left value are less than the right value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.op_GreaterThan(DIV2.Format.Exporter.Color,DIV2.Format.Exporter.Color)">
+            <summary>
+            Greater than operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if the left value are greater than the right value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.op_LessThanOrEqual(DIV2.Format.Exporter.Color,DIV2.Format.Exporter.Color)">
+            <summary>
+            Less than or equal operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if the left value are less or equal than the right value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.op_GreaterThanOrEqual(DIV2.Format.Exporter.Color,DIV2.Format.Exporter.Color)">
+            <summary>
+            Greater than or equal operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.Color"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if the left value are greater or equal than the right value.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.op_Implicit(System.Int32)~DIV2.Format.Exporter.Color">
             <summary>
@@ -81,6 +150,18 @@
             </summary>
             <param name="stream"><see cref="T:System.IO.BinaryReader"/> stream that contains the <see cref="T:DIV2.Format.Exporter.Color"/> value.</param>
         </member>
+        <member name="M:DIV2.Format.Exporter.Color.Serialize">
+            <summary>
+            Serializes this instance to binary format.
+            </summary>
+            <returns>Returns a <see cref="T:System.Byte"/> array with the serialized data.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
         <member name="M:DIV2.Format.Exporter.Color.ToRGB">
             <summary>
             Converts DAC values [0..63] to RGB range [0..255].
@@ -104,13 +185,32 @@
             Gets a <see cref="T:System.Numerics.Vector3"/> with normalized values [0..1].
             </summary>
             <param name="colorType">Indicate the color range for set the normalization factor.</param>
-            <returns>Returns a <see cref="T:System.Numerics.Vector3"/> with the <see cref="T:DIV2.Format.Exporter.Color"/> componentes normalized.</returns>
+            <returns>Returns a <see cref="T:System.Numerics.Vector3"/> with the <see cref="T:DIV2.Format.Exporter.Color"/> components normalized.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.IsDAC">
             <summary>
             Is a valid DAC color value?
             </summary>
-            <returns>Returns true if the RGB components are into the DAC range values [0..63].</returns>
+            <returns>Returns <see langword="true"/> if the RGB components are into the DAC range values [0..63].</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> value composed by the RGB values for the first 3 bytes and a zero for fourth byte.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.Color.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.ColorPalette">
             <summary>
@@ -129,10 +229,26 @@
         </member>
         <member name="P:DIV2.Format.Exporter.ColorPalette.Item(System.Int32)">
             <summary>
-            Get or set a <see cref="T:DIV2.Format.Exporter.Color"/> value in DAC format [0..63].
+            Gets or sets a <see cref="T:DIV2.Format.Exporter.Color"/> value in DAC format [0..63].
             </summary>
             <param name="index">Index in palette.</param>
             <returns>Returns the <see cref="T:DIV2.Format.Exporter.Color"/> value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.op_Equality(DIV2.Format.Exporter.ColorPalette,DIV2.Format.Exporter.ColorPalette)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ColorPalette"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ColorPalette"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.op_Inequality(DIV2.Format.Exporter.ColorPalette,DIV2.Format.Exporter.ColorPalette)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ColorPalette"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ColorPalette"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ColorPalette.#ctor">
             <summary>
@@ -157,6 +273,18 @@
             </summary>
             <param name="stream">A <see cref="T:System.IO.BinaryReader"/> stream that contains the data of the 256 <see cref="T:DIV2.Format.Exporter.Color"/> values.</param>
         </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.Serialize">
+            <summary>
+            Serializes this instance to binary format.
+            </summary>
+            <returns>Returns a <see cref="T:System.Byte"/> array with the serialized data.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
         <member name="M:DIV2.Format.Exporter.ColorPalette.ToRGB">
             <summary>
             Gets a full RGB range values [0..255].
@@ -177,9 +305,60 @@
             <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color (0, 0, 0), if exists in palette, be the first color.
             This implementation is based on this article: https://www.alanzucconi.com/2015/09/30/colour-sorting/ </remarks>
         </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorPalette.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
+        </member>
         <member name="T:DIV2.Format.Exporter.ColorRange">
             <summary>
             Color range values.
+            </summary>
+        </member>
+        <member name="F:DIV2.Format.Exporter.ColorRange.DEFAULT_RANGE_COLORS">
+            <summary>
+            Default value for <see cref="F:DIV2.Format.Exporter.ColorRange.colors"/> field.
+            </summary>
+        </member>
+        <member name="F:DIV2.Format.Exporter.ColorRange.DEFAULT_TYPE">
+            <summary>
+            Default value for <see cref="F:DIV2.Format.Exporter.ColorRange.type"/> field.
+            </summary>
+        </member>
+        <member name="F:DIV2.Format.Exporter.ColorRange.DEFAULT_FIXED_STATE">
+            <summary>
+            Default value for <see cref="F:DIV2.Format.Exporter.ColorRange.isFixed"/> field.
+            </summary>
+        </member>
+        <member name="F:DIV2.Format.Exporter.ColorRange.DEFAULT_BLACK_COLOR">
+            <summary>
+            Default value for <see cref="F:DIV2.Format.Exporter.ColorRange.blackColor"/> field.
             </summary>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.LENGTH">
@@ -264,10 +443,26 @@
         </member>
         <member name="P:DIV2.Format.Exporter.ColorRange.Item(System.Int32)">
             <summary>
-            Get or set the range entry value.
+            Gets or sets the range entry value.
             </summary>
             <param name="index">Index of the entry.</param>
             <returns>Returns the range entry value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.op_Equality(DIV2.Format.Exporter.ColorRange,DIV2.Format.Exporter.ColorRange)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ColorRange"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ColorRange"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.op_Inequality(DIV2.Format.Exporter.ColorRange,DIV2.Format.Exporter.ColorRange)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ColorRange"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ColorRange"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ColorRange.#ctor(System.Byte@)">
             <summary>
@@ -283,6 +478,49 @@
             Creates a new color range from memory.
             </summary>
             <param name="buffer">A <see cref="T:System.Byte"/> array that contains the <see cref="T:DIV2.Format.Exporter.ColorRange"/> data.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.Serialize">
+            <summary>
+            Serializes this instance to binary format.
+            </summary>
+            <returns>Returns a <see cref="T:System.Byte"/> array with the serialized data.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRange.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.ColorRangeTable">
             <summary>
@@ -303,10 +541,26 @@
         </member>
         <member name="P:DIV2.Format.Exporter.ColorRangeTable.Item(System.Int32)">
             <summary>
-            Get or set the <see cref="T:DIV2.Format.Exporter.ColorRange"/> value.
+            Gets or sets the <see cref="T:DIV2.Format.Exporter.ColorRange"/> value.
             </summary>
             <param name="index">Index of the range.</param>
             <returns>Returns the <see cref="T:DIV2.Format.Exporter.ColorRange"/> value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.op_Equality(DIV2.Format.Exporter.ColorRangeTable,DIV2.Format.Exporter.ColorRangeTable)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ColorRangeTable"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ColorRangeTable"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.op_Inequality(DIV2.Format.Exporter.ColorRangeTable,DIV2.Format.Exporter.ColorRangeTable)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ColorRangeTable"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ColorRangeTable"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ColorRangeTable.#ctor">
             <summary>
@@ -318,6 +572,49 @@
             Creates a new <see cref="T:DIV2.Format.Exporter.ColorRangeTable"/> from memory.
             </summary>
             <param name="buffer">A <see cref="T:System.Byte"/> array that contains a <see cref="T:DIV2.Format.Exporter.ColorRangeTable"/> data.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.Serialize">
+            <summary>
+            Serializes this instance to binary format.
+            </summary>
+            <returns>Returns a <see cref="T:System.Byte"/> array with the serialized data.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ColorRangeTable.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.Converters.BMP256Converter">
             <summary>
@@ -350,6 +647,16 @@
             DIV Games Studio file header.
             </summary>
         </member>
+        <member name="T:DIV2.Format.Exporter.DIVFormatHeaderException">
+            <summary>
+            An exception ocurred when the a DIV Games Studio file header is invalid.
+            </summary>
+        </member>
+        <member name="T:DIV2.Format.Exporter.DIVFileFormatException`1">
+            <summary>
+            An exception ocurred when a DIV Games Studio content data format is invalid.
+            </summary>
+        </member>
         <member name="T:DIV2.Format.Exporter.ExtensionMethods.ByteExtensions">
             <summary>
             Extension methods for <see cref="T:System.Byte"/> arrays.
@@ -368,7 +675,7 @@
             Calculates the checksum of this <see cref="T:System.String"/>.
             </summary>
             <param name="buffer"><see cref="T:System.Byte"/> array.</param>
-            <returns>Returns the checksum string of this <see cref="T:System.Byte"/> array.</returns>
+            <returns>Returns the checksum <see cref="T:System.String"/> value of this <see cref="T:System.Byte"/> array.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.ExtensionMethods.ColorExtensions">
             <summary>
@@ -420,7 +727,7 @@
             <param name="value"><see cref="T:System.Int32"/> value instance.</param>
             <param name="min">Min value of the range.</param>
             <param name="max">Max value of the range.</param>
-            <returns>Returns true if the value is in range.</returns>
+            <returns>Returns <see langword="true"/> if the value is in range.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.MathExtensions.IsClamped(System.UInt32,System.UInt32,System.UInt32)">
             <summary>
@@ -429,7 +736,7 @@
             <param name="value"><see cref="T:System.UInt32"/> value instance.</param>
             <param name="min">Min value of the range.</param>
             <param name="max">Max value of the range.</param>
-            <returns>Returns true if the value is in range.</returns>
+            <returns>Returns <see langword="true"/> if the value is in range.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.MathExtensions.IsClamped(System.Int16,System.Int16,System.Int16)">
             <summary>
@@ -438,7 +745,7 @@
             <param name="value"><see cref="T:System.Int16"/> value instance.</param>
             <param name="min">Min value of the range.</param>
             <param name="max">Max value of the range.</param>
-            <returns>Returns true if the value is in range.</returns>
+            <returns>Returns <see langword="true"/> if the value is in range.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.MathExtensions.IsClamped(System.Byte,System.Byte,System.Byte)">
             <summary>
@@ -447,7 +754,7 @@
             <param name="value"><see cref="T:System.Byte"/> value instance.</param>
             <param name="min">Min value of the range.</param>
             <param name="max">Max value of the range.</param>
-            <returns>Returns true if the value is in range.</returns>
+            <returns>Returns <see langword="true"/> if the value is in range.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.ExtensionMethods.StringExtensions">
             <summary>
@@ -456,10 +763,10 @@
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.StringExtensions.ToASCIIString(System.Byte[])">
             <summary>
-            Get <see cref="T:System.String"/> representation, without null chars and other possible garbage data.
+            Gets <see cref="T:System.String"/> representation, without null chars and other possible garbage data.
             </summary>
             <param name="buffer"><see cref="T:System.Byte"/> array with the ASCIIZ string data (ASCII null terminated string or C string).</param>
-            <returns></returns>
+            <returns>Returns a <see cref="T:System.String"/> instance in ASCII format, terminated with null chars.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.StringExtensions.ToByteArray(System.Char[])">
             <summary>
@@ -477,7 +784,7 @@
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.StringExtensions.GetASCIIZString(System.String,System.Int32)">
             <summary>
-            Get a binary representation of this <see cref="T:System.String"/> in ASCIIZ format (ASCII null terminated string or C string).
+            Gets a binary representation of this <see cref="T:System.String"/> in ASCIIZ format (ASCII null terminated string or C string).
             </summary>
             <param name="text">This <see cref="T:System.String"/> instance.</param>
             <param name="length">Characters length.</param>
@@ -511,10 +818,26 @@
         </member>
         <member name="P:DIV2.Format.Exporter.FPG.Item(System.Int32)">
             <summary>
-            Get a <see cref="T:DIV2.Format.Exporter.MAP"/> instance.
+            Gets a <see cref="T:DIV2.Format.Exporter.MAP"/> instance.
             </summary>
             <param name="index">Index of the <see cref="T:DIV2.Format.Exporter.MAP"/> in the <see cref="T:DIV2.Format.Exporter.FPG"/>.</param>
             <returns>Returns the <see cref="T:DIV2.Format.Exporter.MAP"/> instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.op_Equality(DIV2.Format.Exporter.FPG,DIV2.Format.Exporter.FPG)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.FPG"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.FPG"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.op_Inequality(DIV2.Format.Exporter.FPG,DIV2.Format.Exporter.FPG)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.FPG"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.FPG"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.#ctor(DIV2.Format.Exporter.PAL)">
             <summary>
@@ -538,7 +861,7 @@
             <summary>
             Adds a <see cref="T:DIV2.Format.Exporter.MAP"/> file.
             </summary>
-            <param name="filename">Filename to load.</param>
+            <param name="filename"><see cref="T:DIV2.Format.Exporter.MAP"/> file to load.</param>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Add(System.Byte[],System.String)">
             <summary>
@@ -559,14 +882,14 @@
             Determines whether a <see cref="T:DIV2.Format.Exporter.MAP"/> is in this instance.
             </summary>
             <param name="map">The <see cref="T:DIV2.Format.Exporter.MAP"/> to locate in this instance.</param>
-            <returns>Returns true if the <see cref="T:DIV2.Format.Exporter.MAP"/> exists.</returns>
+            <returns>Returns <see langword="true"/> if the <see cref="T:DIV2.Format.Exporter.MAP"/> exists.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Contains(System.Int32)">
             <summary>
             Determines whether a <see cref="T:DIV2.Format.Exporter.MAP"/> with a graphic identifier is in this instance.
             </summary>
             <param name="graphId"><see cref="T:DIV2.Format.Exporter.MAP"/> graphic identifier to search.</param>
-            <returns>Returns true if a <see cref="T:DIV2.Format.Exporter.MAP"/> graphic identifier exists.</returns>
+            <returns>Returns <see langword="true"/> if a <see cref="T:DIV2.Format.Exporter.MAP"/> graphic identifier exists.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Remove(DIV2.Format.Exporter.MAP)">
             <summary>
@@ -593,58 +916,95 @@
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.GetFilename(DIV2.Format.Exporter.MAP)">
             <summary>
-            Gets the associate filename value for this <see cref="T:DIV2.Format.Exporter.MAP"/> in the <see cref="T:DIV2.Format.Exporter.FPG"/>.
+            Gets the associated filename value for this <see cref="T:DIV2.Format.Exporter.MAP"/> in the <see cref="T:DIV2.Format.Exporter.FPG"/>.
             </summary>
             <param name="map"><see cref="T:DIV2.Format.Exporter.MAP"/> instance to find.</param>
             <returns>Returns the <see cref="T:DIV2.Format.Exporter.MAP"/> filename value.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.GetFilename(System.Int32)">
             <summary>
-            Gets the associate filename value for this <see cref="T:DIV2.Format.Exporter.MAP"/> in the <see cref="T:DIV2.Format.Exporter.FPG"/>.
+            Gets the associated filename value for this <see cref="T:DIV2.Format.Exporter.MAP"/> in the <see cref="T:DIV2.Format.Exporter.FPG"/>.
             </summary>
             <param name="index">The index of the <see cref="T:DIV2.Format.Exporter.MAP"/> instance to find. Not confuse with the <see cref="P:DIV2.Format.Exporter.MAP.GraphId"/> value.</param>
             <returns>Returns the <see cref="T:DIV2.Format.Exporter.MAP"/> filename value.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.ValidateFormat(System.String)">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
             </summary>
             <param name="filename">File to validate.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.ValidateFormat(System.Byte[])">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
             </summary>
             <param name="buffer">Memory buffer that contain a <see cref="T:DIV2.Format.Exporter.FPG"/> file data.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Validate(System.String)">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
             </summary>
             <param name="filename">File to validate.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Validate(System.Byte[])">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/> file.
             </summary>
             <param name="buffer">Memory buffer that contain a <see cref="T:DIV2.Format.Exporter.FPG"/> file data.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.FPG"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Serialize">
             <summary>
-            Serialize the <see cref="T:DIV2.Format.Exporter.FPG"/> instance in a <see cref="T:System.Byte"/> array.
+            Serializes the <see cref="T:DIV2.Format.Exporter.FPG"/> instance in a <see cref="T:System.Byte"/> array.
             </summary>
             <returns>Returns the <see cref="T:System.Byte"/> array with the <see cref="T:DIV2.Format.Exporter.FPG"/> serialized data.</returns>
             <remarks>This function not include the file header data.</remarks>
         </member>
+        <member name="M:DIV2.Format.Exporter.FPG.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
         <member name="M:DIV2.Format.Exporter.FPG.Save(System.String)">
             <summary>
-            Save the instance in a <see cref="T:DIV2.Format.Exporter.FPG"/> file.
+            Saves the instance in a <see cref="T:DIV2.Format.Exporter.FPG"/> file.
             </summary>
             <param name="filename">Filename to write the data.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.FPG.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.ControlPoint">
             <summary>
@@ -673,10 +1033,97 @@
         </member>
         <member name="P:DIV2.Format.Exporter.ControlPoint.Item(System.Int32)">
             <summary>
-            Get or set the coordinate value.
+            Gets or sets the coordinate value.
             </summary>
             <param name="index">Index of the coordinate in the structure.</param>
             <returns>Returns the coordinate value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.op_Equality(DIV2.Format.Exporter.ControlPoint,DIV2.Format.Exporter.ControlPoint)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ControlPoint"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ControlPoint"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.op_Inequality(DIV2.Format.Exporter.ControlPoint,DIV2.Format.Exporter.ControlPoint)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.ControlPoint"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.ControlPoint"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.#ctor(System.Int16,System.Int16)">
+            <summary>
+            Initializes a new instance.
+            </summary>
+            <param name="x">X coordinate.</param>
+            <param name="y">Y coordinate.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance.
+            </summary>
+            <param name="x">X coordinate.</param>
+            <param name="y">Y coordinate.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.#ctor(System.Single,System.Single)">
+            <summary>
+            Initializes a new instance.
+            </summary>
+            <param name="x">X coordinate.</param>
+            <param name="y">Y coordinate.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance.
+            </summary>
+            <param name="x">X coordinate.</param>
+            <param name="y">Y coordinate.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance.
+            </summary>
+            <param name="buffer">4 <see cref="T:System.Byte"/> length array that contains the X and Y coordinates in <see cref="T:System.Int16"/> format.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.#ctor(System.IO.BinaryReader)">
+            <summary>
+            Initializes a new instance.
+            </summary>
+            <param name="stream">A <see cref="T:System.IO.BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="T:System.Int16"/> values for X and Y coordinates.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.Serialize">
+            <summary>
+            Serializes this instance to binary format.
+            </summary>
+            <returns>Returns a <see cref="T:System.Byte"/> array with the serialized data.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> value of X and Y coordinates XOR operation.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.ControlPoint.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.MAP">
             <summary>
@@ -747,18 +1194,34 @@
         </member>
         <member name="P:DIV2.Format.Exporter.MAP.Item(System.Int32)">
             <summary>
-            Get or set the color index in the bitmap.
+            Gets or sets the color index in the bitmap.
             </summary>
             <param name="index">Pixel index in the bitmap array.</param>
-            <returns>Returns the color index in color palette of the pixel.</returns>
+            <returns>Returns the color index in the <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
         </member>
         <member name="P:DIV2.Format.Exporter.MAP.Item(System.Int32,System.Int32)">
             <summary>
-            Get or set the color index in the bitmap.
+            Gets or sets the color index in the bitmap.
             </summary>
             <param name="x">Horizontal coordinate of the pixel to read.</param>
             <param name="y">Vertical coordinate of the pixel to read.</param>
-            <returns>Returns the color index in color palette of the pixel.</returns>
+            <returns>Returns the color index in the <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.op_Equality(DIV2.Format.Exporter.MAP,DIV2.Format.Exporter.MAP)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.MAP"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.MAP"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.op_Inequality(DIV2.Format.Exporter.MAP,DIV2.Format.Exporter.MAP)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.MAP"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.MAP"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.#ctor(DIV2.Format.Exporter.PAL,System.Int16,System.Int16,System.Int32,System.String)">
             <summary>
@@ -820,13 +1283,13 @@
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.GetBitmapArray">
             <summary>
-            Get the bitmap array data of this instance.
+            Gets the bitmap array data of this instance.
             </summary>
             <returns>Returns a <see cref="T:System.Byte"/> array with all pixels with their color indexes from the <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.SetBitmapArray(System.Byte[])">
             <summary>
-            Set the bitmap array data for this instance.
+            Sets the bitmap array data for this instance.
             </summary>
             <param name="pixels"><see cref="T:System.Byte"/> array that contains pixel data for this instance.</param>
         </member>
@@ -838,44 +1301,75 @@
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.ValidateFormat(System.String)">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
             </summary>
             <param name="filename">File to validate.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.ValidateFormat(System.Byte[])">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
             </summary>
             <param name="buffer">Memory buffer that contain a <see cref="T:DIV2.Format.Exporter.MAP"/> file data.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.Validate(System.String)">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
             </summary>
             <param name="filename">File to validate.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.Validate(System.Byte[])">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/> file.
             </summary>
             <param name="buffer">Memory buffer that contain a <see cref="T:DIV2.Format.Exporter.MAP"/> file data.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.MAP"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.Serialize">
             <summary>
-            Serialize the <see cref="T:DIV2.Format.Exporter.MAP"/> instance in a <see cref="T:System.Byte"/> array.
+            Serializes the <see cref="T:DIV2.Format.Exporter.MAP"/> instance in a <see cref="T:System.Byte"/> array.
             </summary>
             <returns>Returns the <see cref="T:System.Byte"/> array with the <see cref="T:DIV2.Format.Exporter.MAP"/> serialized data.</returns>
             <remarks>This function not include the file header data.</remarks>
         </member>
+        <member name="M:DIV2.Format.Exporter.MAP.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
         <member name="M:DIV2.Format.Exporter.MAP.Save(System.String)">
             <summary>
-            Save the instance in a <see cref="T:DIV2.Format.Exporter.MAP"/> file.
+            Saves the instance in a <see cref="T:DIV2.Format.Exporter.MAP"/> file.
             </summary>
             <param name="filename">Filename to write the data.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.GetRGBTexture">
             <summary>
@@ -883,6 +1377,12 @@
             </summary>
             <returns>Returns a new <see cref="T:DIV2.Format.Exporter.Color"/> array with all pixel data from this bitmap. All colors are RGB format [0..255].</returns>
             <remarks>Use this function when need to render this <see cref="T:DIV2.Format.Exporter.MAP"/> in any modern system that works in full 32 bits color space.</remarks>
+        </member>
+        <member name="M:DIV2.Format.Exporter.MAP.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.PAL">
             <summary>
@@ -912,10 +1412,26 @@
         </member>
         <member name="P:DIV2.Format.Exporter.PAL.Item(System.Int32)">
             <summary>
-            Get or set a <see cref="T:DIV2.Format.Exporter.Color"/> value.
+            Gets or sets a <see cref="T:DIV2.Format.Exporter.Color"/> value.
             </summary>
             <param name="index"><see cref="T:DIV2.Format.Exporter.Color"/> index.</param>
             <returns>Return the <see cref="T:DIV2.Format.Exporter.Color"/> value.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.op_Equality(DIV2.Format.Exporter.PAL,DIV2.Format.Exporter.PAL)">
+            <summary>
+            Equality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.PAL"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.PAL"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are equal.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.op_Inequality(DIV2.Format.Exporter.PAL,DIV2.Format.Exporter.PAL)">
+            <summary>
+            Inequality operator.
+            </summary>
+            <param name="a">Left <see cref="T:DIV2.Format.Exporter.PAL"/> value to compare.</param>
+            <param name="b">Right <see cref="T:DIV2.Format.Exporter.PAL"/> value to compare.</param>
+            <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.#ctor">
             <summary>
@@ -958,7 +1474,7 @@
             Creates new <see cref="T:DIV2.Format.Exporter.PAL"/> instance from a supported image file.
             </summary>
             <param name="filename">Image file to load.</param>
-            <param name="sortColors">Sort colors of the imported palette. By default is false.</param>
+            <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
             <returns>Returns a new <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
             <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
             Also supported 256 color PCX images, <see cref="T:DIV2.Format.Exporter.MAP"/> and <see cref="T:DIV2.Format.Exporter.FPG"/> files.</remarks>
@@ -968,51 +1484,88 @@
             Creates new <see cref="T:DIV2.Format.Exporter.PAL"/> instance from a supported image file.
             </summary>
             <param name="buffer">Memory buffer that contains a supported image file.</param>
-            <param name="sortColors">Sort colors of the imported palette. By default is false.</param>
+            <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
             <returns>Returns a new <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
             <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
             Also supported 256 color PCX images, <see cref="T:DIV2.Format.Exporter.MAP"/> and <see cref="T:DIV2.Format.Exporter.FPG"/> files.</remarks>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.ValidateFormat(System.String)">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
             </summary>
             <param name="filename">File to validate.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.ValidateFormat(System.Byte[])">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
             </summary>
             <param name="buffer">Memory buffer that contain a <see cref="T:DIV2.Format.Exporter.PAL"/> file data.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.Validate(System.String)">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
             </summary>
             <param name="filename">File to validate.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.Validate(System.Byte[])">
             <summary>
-            Validate if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
+            Validates if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/> file.
             </summary>
             <param name="buffer">Memory buffer that contain a <see cref="T:DIV2.Format.Exporter.PAL"/> file data.</param>
-            <returns>Returns true if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
+            <returns>Returns <see langword="true"/> if the file is a valid <see cref="T:DIV2.Format.Exporter.PAL"/>.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.Serialize">
             <summary>
-            Serialize the <see cref="T:DIV2.Format.Exporter.PAL"/> instance in a <see cref="T:System.Byte"/> array.
+            Serializes the <see cref="T:DIV2.Format.Exporter.PAL"/> instance in a <see cref="T:System.Byte"/> array.
             </summary>
             <returns>Returns the <see cref="T:System.Byte"/> array with the <see cref="T:DIV2.Format.Exporter.PAL"/> serialized data.</returns>
             <remarks>This function not include the file header data.</remarks>
         </member>
+        <member name="M:DIV2.Format.Exporter.PAL.Write(System.IO.BinaryWriter)">
+            <summary>
+            Writes this instance data in a <see cref="T:System.IO.BinaryWriter"/> instance.
+            </summary>
+            <param name="stream"><see cref="T:System.IO.BinaryWriter"/> instance.</param>
+        </member>
         <member name="M:DIV2.Format.Exporter.PAL.Save(System.String)">
             <summary>
-            Save the instance in a <see cref="T:DIV2.Format.Exporter.PAL"/> file.
+            Saves the instance in a <see cref="T:DIV2.Format.Exporter.PAL"/> file.
             </summary>
             <param name="filename">Filename to write the data.</param>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection. 
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal. 
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.GetHashCode">
+            <summary>
+            Generates a hash code for this instance.
+            </summary>
+            <returns>Returns an <see cref="T:System.Int32"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
+        </member>
+        <member name="M:DIV2.Format.Exporter.PAL.ToString">
+            <summary>
+            Serializes the relevant data of this instance in a <see cref="T:System.String"/> value.
+            </summary>
+            <returns>Returns a <see cref="T:System.String"/> value with the relevant serialized data in JSON format.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.ToRGB">
             <summary>
