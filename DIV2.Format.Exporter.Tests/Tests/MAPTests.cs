@@ -160,6 +160,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var a = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
             var b = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
+
             Assert.AreEqual(a, b);
         }
 
@@ -168,13 +169,14 @@ namespace DIV2.Format.Exporter.Tests
         {
             var a = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
             var b = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT, MAP.MIN_GRAPH_ID, TEST_DESCRIPTION);
+
             Assert.AreNotEqual(a, b);
         }
 
         [TestMethod]
         public void ReadByIndex()
         {
-            var map = this.CreateTestMap(out byte[] bitmap);
+            MAP map = this.CreateTestMap(out byte[] bitmap);
 
             for (int i = 0; i < map.Count; i++)
                 Assert.AreEqual(bitmap[i], map[i]);
@@ -192,8 +194,8 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void WriteByIndex()
         {
-            var map = this.CreateTestMap(out byte[] bitmap);
-            map = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
+            this.CreateTestMap(out byte[] bitmap);
+            var map = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
 
             for (int i = 0; i < map.Count; i++)
                 map[i] = bitmap[i];
@@ -214,17 +216,17 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void ReadByForEach()
         {
-            var map = this.CreateTestMap(out byte[] bitmap);
+            MAP map = this.CreateTestMap(out byte[] bitmap);
 
             int index = 0;
-            foreach (var pixel in map)
+            foreach (byte pixel in map)
                 Assert.AreEqual(bitmap[index++], pixel);
         }
 
         [TestMethod]
         public void ReadByCoordinates()
         {
-            var map = this.CreateTestMap(out byte[] bitmap);
+            MAP map = this.CreateTestMap(out byte[] bitmap);
 
             for (int y = 0; y < TEST_HEIGHT; y++)
                 for (int x = 0; x < TEST_WIDTH; x++)
@@ -245,8 +247,9 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void WriteByCoordinates()
         {
-            var map = this.CreateTestMap(out byte[] bitmap);
-            map = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
+            var map = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
+
+            this.CreateTestMap(out byte[] bitmap);
 
             for (int y = 0; y < TEST_HEIGHT; y++)
                 for (int x = 0; x < TEST_WIDTH; x++)
@@ -271,7 +274,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void GetBitmapArray()
         {
-            var map = this.CreateTestMap(out byte[] a);
+            MAP map = this.CreateTestMap(out byte[] a);
             byte[] b = map.GetBitmapArray();
 
             Assert.AreEqual(a.Length, b.Length);
@@ -283,7 +286,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void SetBitmapArray()
         {
-            var b = this.CreateTestMap(out byte[] a);
+            MAP b = this.CreateTestMap(out byte[] a);
             for (int i = 0; i < b.Count; i++)
                 Assert.AreEqual(a[i], b[i]);
         }
@@ -291,14 +294,14 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void ClearBitmap()
         {
-            var map = this.CreateTestMap(out byte[] bitmap);
+            MAP map = this.CreateTestMap(out byte[] bitmap);
 
             for (int i = 0; i < map.Count; i++)
                 Assert.AreEqual(bitmap[i], map[i]);
 
             map.Clear();
 
-            foreach (var pixel in map)
+            foreach (byte pixel in map)
                 Assert.AreEqual(0, pixel);
         }
 
@@ -308,7 +311,7 @@ namespace DIV2.Format.Exporter.Tests
             Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
                 var map = new MAP(this._palette, TEST_WIDTH, TEST_HEIGHT);
-                var buffer = new byte[map.Count - 1];
+                byte[] buffer = new byte[map.Count - 1];
                 map.SetBitmapArray(buffer);
             });
         }
@@ -316,7 +319,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void Serialize()
         {
-            var map = this.CreateTestMap(out _);
+            MAP map = this.CreateTestMap(out _);
             map.GraphId = TEST_GRAPH_ID;
             map.Description = TEST_DESCRIPTION;
             for (int i = 0; i < MAP.MAX_CONTROL_POINTS; i++)
@@ -371,13 +374,14 @@ namespace DIV2.Format.Exporter.Tests
         {
             string assetPath = this.GetOutputPath("TEST.MAP");
             this.CreateTestMap(out _).Save(assetPath);
+
             Assert.IsTrue(MAP.ValidateFormat(assetPath));
         }
 
         [TestMethod]
         public void GetTexture()
         {
-            var bitmap = new byte[TEST_WIDTH * TEST_HEIGHT];
+            byte[] bitmap = new byte[TEST_WIDTH * TEST_HEIGHT];
             var a = new Color[bitmap.Length];
 
             this.Random.NextBytes(bitmap);

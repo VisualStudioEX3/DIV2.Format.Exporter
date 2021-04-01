@@ -10,10 +10,10 @@ namespace DIV2.Format.Exporter.ExtensionMethods
     {
         #region Methods & Functions
         /// <summary>
-        /// Get <see cref="string"/> representation, without null chars and other possible garbage data.
+        /// Gets <see cref="string"/> representation, without null chars and other possible garbage data.
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array with the ASCIIZ string data (ASCII null terminated string or C string).</param>
-        /// <returns></returns>
+        /// <returns>Returns a <see cref="string"/> instance in ASCII format, terminated with null chars.</returns>
         public static string ToASCIIString(this byte[] buffer)
         {
             int i;
@@ -46,7 +46,7 @@ namespace DIV2.Format.Exporter.ExtensionMethods
         }
 
         /// <summary>
-        /// Get a binary representation of this <see cref="string"/> in ASCIIZ format (ASCII null terminated string or C string).
+        /// Gets a binary representation of this <see cref="string"/> in ASCIIZ format (ASCII null terminated string or C string).
         /// </summary>
         /// <param name="text">This <see cref="string"/> instance.</param>
         /// <param name="length">Characters length.</param>

@@ -60,7 +60,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void CreateDefaultInstance()
         {
-            var range = this.CreateDefaultRange(out byte index);
+            ColorRange range = this.CreateDefaultRange(out byte index);
             Assert.AreEqual(ColorRange.LENGTH, index);
             this.AssertAreEqualDefaults(range);
         }
@@ -75,8 +75,8 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void AreEqual()
         {
-            var a = this.CreateDefaultRange(out _);
-            var b = this.CreateDefaultRange(out _);
+            ColorRange a = this.CreateDefaultRange(out _);
+            ColorRange b = this.CreateDefaultRange(out _);
 
             Assert.AreEqual(a, b);
         }
@@ -84,8 +84,8 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void AreNotEqual()
         {
-            var a = this.CreateDefaultRange(out _);
-            var b = this.CreateCustomRange(out _);
+            ColorRange a = this.CreateDefaultRange(out _);
+            ColorRange b = this.CreateCustomRange(out _);
 
             Assert.AreNotEqual(a, b);
         }
@@ -93,7 +93,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void ReadByIndex()
         {
-            var range = this.CreateDefaultRange(out _);
+            ColorRange range = this.CreateDefaultRange(out _);
             for (byte i = 0; i < ColorRange.LENGTH; i++)
                 Assert.AreEqual(i, range[i]);
         }
@@ -108,7 +108,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void WriteByIndex()
         {
-            var range = this.CreateDefaultRange(out _);
+            ColorRange range = this.CreateDefaultRange(out _);
 
             for (byte i = 0, j = 64; i < ColorRange.LENGTH; i++, j++)
                 range[i] = j;
@@ -128,8 +128,8 @@ namespace DIV2.Format.Exporter.Tests
         public void ReadByForEach()
         {
             int i = 0;
-            var range = this.CreateDefaultRange(out _);
-            foreach (var value in range)
+            ColorRange range = this.CreateDefaultRange(out _);
+            foreach (byte value in range)
                 Assert.AreEqual(i++, value);
         }
 
@@ -143,7 +143,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void TestCustomValuesFromSerialization()
         {
-            var a = this.CreateCustomRange(out _);
+            ColorRange a = this.CreateCustomRange(out _);
             var b = new ColorRange(a.Serialize());
 
             this.AssertAreEqual(a, b);

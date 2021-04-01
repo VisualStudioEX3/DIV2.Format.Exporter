@@ -9,7 +9,7 @@ namespace DIV2.Format.Exporter.Utils
     /// Nearest Neighbour algorithm.
     /// </summary>
     /// <remarks>Algorithm description: https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm </remarks>
-    public static class NNAlgorithm
+    static class NNAlgorithm
     {
         #region Structs
         struct NNVector
@@ -48,7 +48,7 @@ namespace DIV2.Format.Exporter.Utils
         /// <returns>Returns a <see cref="List{T}"/> of <see cref="int"/> with the sorted indexes.</returns>
         public static List<int> CalculatePath(IEnumerable<Vector3> input, int start, out float cost)
         {
-            var vectors = input.Select((e, i) => new NNVector(i, e)).ToArray();
+            NNVector[] vectors = input.Select((e, i) => new NNVector(i, e)).ToArray();
             int current = start;
             var path = new List<int>();
             int visited = 0;

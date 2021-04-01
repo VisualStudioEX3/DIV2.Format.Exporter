@@ -40,7 +40,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set the coordinate value.
+        /// Gets or sets the coordinate value.
         /// </summary>
         /// <param name="index">Index of the coordinate in the structure.</param>
         /// <returns>Returns the coordinate value.</returns>
@@ -68,12 +68,24 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ControlPoint"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ControlPoint"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(ControlPoint a, ControlPoint b)
         {
             return a.x == b.x &&
                    a.y == b.y;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ControlPoint"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ControlPoint"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(ControlPoint a, ControlPoint b)
         {
             return !(a == b);
@@ -81,27 +93,51 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
         public ControlPoint(short x, short y)
         {
             this.x = x;
             this.y = y;
         }
 
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
         public ControlPoint(int x, int y)
             : this((short)x, (short)y)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
         public ControlPoint(float x, float y)
             : this((short)x, (short)y)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
         public ControlPoint(double x, double y)
             : this((short)x, (short)y)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="buffer">4 <see cref="byte"/> length array that contains the X and Y coordinates in <see cref="short"/> format.</param>
         public ControlPoint(byte[] buffer)
         {
             if (buffer.Length != SIZE)
@@ -111,6 +147,10 @@ namespace DIV2.Format.Exporter
             this.y = BitConverter.ToInt16(buffer, 2);
         }
 
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="stream">A <see cref="BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="short"/> values for X and Y coordinates.</param>
         public ControlPoint(BinaryReader stream)
             : this(stream.ReadInt16(), stream.ReadInt16())
         {
@@ -118,6 +158,10 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
+        /// <summary>
+        /// Serializes this instance to binary format.
+        /// </summary>
+        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -129,11 +173,20 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is ControlPoint)) return false;
@@ -141,11 +194,19 @@ namespace DIV2.Format.Exporter
             return this == (ControlPoint)obj;
         }
 
+        /// <summary>
+        /// Generates a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> value of X and Y coordinates XOR operation.</returns>
         public override int GetHashCode()
         {
             return this.x ^ this.y;
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             return $"{{ {nameof(ControlPoint)}: {{ x: {this.x}, y: {this.y} }} }}";
@@ -279,10 +340,10 @@ namespace DIV2.Format.Exporter
         /// </summary>
         public int Count => this._bitmap.Length;
         /// <summary>
-        /// Get or set the color index in the bitmap.
+        /// Gets or sets the color index in the bitmap.
         /// </summary>
         /// <param name="index">Pixel index in the bitmap array.</param>
-        /// <returns>Returns the color index in color palette of the pixel.</returns>
+        /// <returns>Returns the color index in the <see cref="PAL"/> instance.</returns>
         public byte this[int index]
         {
             get
@@ -301,11 +362,11 @@ namespace DIV2.Format.Exporter
             }
         }
         /// <summary>
-        /// Get or set the color index in the bitmap.
+        /// Gets or sets the color index in the bitmap.
         /// </summary>
         /// <param name="x">Horizontal coordinate of the pixel to read.</param>
         /// <param name="y">Vertical coordinate of the pixel to read.</param>
-        /// <returns>Returns the color index in color palette of the pixel.</returns>
+        /// <returns>Returns the color index in the <see cref="PAL"/> instance.</returns>
         public byte this[int x, int y]
         {
             get
@@ -332,6 +393,12 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="MAP"/> value to compare.</param>
+        /// <param name="b">Right <see cref="MAP"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(MAP a, MAP b)
         {
             if (a.Width == b.Width &&
@@ -357,6 +424,12 @@ namespace DIV2.Format.Exporter
                 return false;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="MAP"/> value to compare.</param>
+        /// <param name="b">Right <see cref="MAP"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(MAP a, MAP b)
         {
             return !(a == b);
@@ -529,13 +602,13 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Get the bitmap array data of this instance.
+        /// Gets the bitmap array data of this instance.
         /// </summary>
         /// <returns>Returns a <see cref="byte"/> array with all pixels with their color indexes from the <see cref="PAL"/> instance.</returns>
         public byte[] GetBitmapArray() => this._bitmap;
 
         /// <summary>
-        /// Set the bitmap array data for this instance.
+        /// Sets the bitmap array data for this instance.
         /// </summary>
         /// <param name="pixels"><see cref="byte"/> array that contains pixel data for this instance.</param>
         public void SetBitmapArray(byte[] pixels)
@@ -556,40 +629,40 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public static bool ValidateFormat(string filename)
         {
             return VALIDATOR.Validate(filename);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="MAP"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public static bool ValidateFormat(byte[] buffer)
         {
             return VALIDATOR.Validate(buffer);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public bool Validate(string filename)
         {
             return this.Validate(File.ReadAllBytes(filename));
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="MAP"/> file.
+        /// Validates if the file is a valid <see cref="MAP"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="MAP"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="MAP"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="MAP"/>.</returns>
         public bool Validate(byte[] buffer)
         {
             return MAP_FILE_HEADER.Validate(buffer[0..DIVFileHeader.SIZE]) && this.TryToReadFile(buffer);
@@ -630,7 +703,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Serialize the <see cref="MAP"/> instance in a <see cref="byte"/> array.
+        /// Serializes the <see cref="MAP"/> instance in a <see cref="byte"/> array.
         /// </summary>
         /// <returns>Returns the <see cref="byte"/> array with the <see cref="MAP"/> serialized data.</returns>
         /// <remarks>This function not include the file header data.</remarks>
@@ -647,7 +720,7 @@ namespace DIV2.Format.Exporter
 
                 this.Palette.Write(stream);
 
-                var count = (short)Math.Min(this.ControlPoints.Count, MAX_CONTROL_POINTS);
+                short count = (short)Math.Min(this.ControlPoints.Count, MAX_CONTROL_POINTS);
                 stream.Write(count);
 
                 for (int i = 0; i < count; i++)
@@ -659,13 +732,17 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
         /// <summary>
-        /// Save the instance in a <see cref="MAP"/> file.
+        /// Saves the instance in a <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename">Filename to write the data.</param>
         public void Save(string filename)
@@ -688,16 +765,29 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<byte> GetEnumerator()
         {
             return new MAPEnumerator(this._bitmap);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is MAP)) return false;
@@ -705,6 +795,10 @@ namespace DIV2.Format.Exporter
             return this == (MAP)obj;
         }
 
+        /// <summary>
+        /// Generates a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
@@ -720,10 +814,14 @@ namespace DIV2.Format.Exporter
             return this._bitmap.Select(e => this.Palette[e].ToRGB()).ToArray();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             int controlPointsHash = 0;
-            foreach (var point in this.ControlPoints)
+            foreach (ControlPoint point in this.ControlPoints)
                 controlPointsHash ^= point.GetHashCode();
 
             var sb = new StringBuilder();

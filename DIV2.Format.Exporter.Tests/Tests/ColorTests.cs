@@ -19,10 +19,10 @@ namespace DIV2.Format.Exporter.Tests
         const byte GREEN = 128;
         const byte BLUE = 255;
 
-        readonly byte[] COLOR_VALUES = { RED, GREEN, BLUE };
+        static readonly byte[] COLOR_VALUES = { RED, GREEN, BLUE };
 
-        readonly Color RGB_COLOR = new Color(byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        readonly Color DAC_COLOR = new Color(Color.MAX_DAC_VALUE, Color.MAX_DAC_VALUE, Color.MAX_DAC_VALUE);
+        static readonly Color RGB_COLOR = new Color(byte.MaxValue, byte.MaxValue, byte.MaxValue);
+        static readonly Color DAC_COLOR = new Color(Color.MAX_DAC_VALUE, Color.MAX_DAC_VALUE, Color.MAX_DAC_VALUE);
         #endregion
 
         #region Test methods
@@ -97,16 +97,9 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void FailWriteByIndex()
         {
-            Assert.ThrowsException<IndexOutOfRangeException>(() =>
-            {
-                var color = new Color();
-                color[-1] = 0;
-            });
-            Assert.ThrowsException<IndexOutOfRangeException>(() =>
-            {
-                var color = new Color();
-                color[Color.LENGTH + 1] = 0;
-            });
+            var color = new Color();
+            Assert.ThrowsException<IndexOutOfRangeException>(() => color[-1] = 0);
+            Assert.ThrowsException<IndexOutOfRangeException>(() => color[Color.LENGTH + 1] = 0);
         }
 
         [TestMethod]
@@ -153,7 +146,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var a = new Color(0, 128, 255); // 33023
             var b = new Color(32, 255, 64); // 2162496
-            var c = a;
+            Color c = a;
 
             Assert.IsTrue(a < b);
             Assert.IsFalse(b < a);
@@ -167,7 +160,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             var a = new Color(32, 255, 64); // 2162496
             var b = new Color(0, 128, 255); // 33023
-            var c = b;
+            Color c = b;
 
             Assert.IsTrue(a > b);
             Assert.IsFalse(b > a);
@@ -179,7 +172,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void Normalize()
         {
-            var factor = (float)ColorFormat.DAC;
+            float factor = (float)ColorFormat.DAC;
             var color = new Color(8, 32, 63);
             var expected = new Vector3(color.red / factor, color.green / factor, color.blue / factor);
 

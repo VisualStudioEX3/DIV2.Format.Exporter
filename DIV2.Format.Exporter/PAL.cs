@@ -24,6 +24,7 @@ namespace DIV2.Format.Exporter
         /// Number of colors.
         /// </summary>
         public const int LENGTH = ColorPalette.LENGTH;
+
         /// <summary>
         /// Memory size.
         /// </summary>
@@ -35,12 +36,14 @@ namespace DIV2.Format.Exporter
         /// Palette colors, in DAC format.
         /// </summary>
         public ColorPalette Colors { get; private set; }
+
         /// <summary>
         /// Color range table.
         /// </summary>
         public ColorRangeTable Ranges { get; private set; }
+
         /// <summary>
-        /// Get or set a <see cref="Color"/> value.
+        /// Gets or sets a <see cref="Color"/> value.
         /// </summary>
         /// <param name="index"><see cref="Color"/> index.</param>
         /// <returns>Return the <see cref="Color"/> value.</returns>
@@ -64,12 +67,24 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="PAL"/> value to compare.</param>
+        /// <param name="b">Right <see cref="PAL"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(PAL a, PAL b)
         {
             return a.Colors == b.Colors &&
                    a.Ranges == b.Ranges;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="PAL"/> value to compare.</param>
+        /// <param name="b">Right <see cref="PAL"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(PAL a, PAL b)
         {
             return !(a == b);
@@ -160,7 +175,7 @@ namespace DIV2.Format.Exporter
         /// Creates new <see cref="PAL"/> instance from a supported image file.
         /// </summary>
         /// <param name="filename">Image file to load.</param>
-        /// <param name="sortColors">Sort colors of the imported palette. By default is false.</param>
+        /// <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
         /// <returns>Returns a new <see cref="PAL"/> instance.</returns>
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>
@@ -173,13 +188,13 @@ namespace DIV2.Format.Exporter
         /// Creates new <see cref="PAL"/> instance from a supported image file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contains a supported image file.</param>
-        /// <param name="sortColors">Sort colors of the imported palette. By default is false.</param>
+        /// <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
         /// <returns>Returns a new <see cref="PAL"/> instance.</returns>
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>
         public static PAL FromImage(byte[] buffer, bool sortColors = false)
         {
-            var pal = PaletteProcessor.ProcessPalette(buffer);
+            PAL pal = PaletteProcessor.ProcessPalette(buffer);
 
             if (sortColors)
                 pal.Sort();
@@ -188,40 +203,40 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public static bool ValidateFormat(string filename)
         {
             return VALIDATOR.Validate(filename);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="PAL"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public static bool ValidateFormat(byte[] buffer)
         {
             return VALIDATOR.Validate(buffer);
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="filename">File to validate.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public bool Validate(string filename)
         {
             return this.Validate(File.ReadAllBytes(filename));
         }
 
         /// <summary>
-        /// Validate if the file is a valid <see cref="PAL"/> file.
+        /// Validates if the file is a valid <see cref="PAL"/> file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contain a <see cref="PAL"/> file data.</param>
-        /// <returns>Returns true if the file is a valid <see cref="PAL"/>.</returns>
+        /// <returns>Returns <see langword="true"/> if the file is a valid <see cref="PAL"/>.</returns>
         public bool Validate(byte[] buffer)
         {
             return PAL_FILE_HEADER.Validate(buffer[0..DIVFileHeader.SIZE]) && this.TryToReadFile(buffer);
@@ -247,7 +262,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Serialize the <see cref="PAL"/> instance in a <see cref="byte"/> array.
+        /// Serializes the <see cref="PAL"/> instance in a <see cref="byte"/> array.
         /// </summary>
         /// <returns>Returns the <see cref="byte"/> array with the <see cref="PAL"/> serialized data.</returns>
         /// <remarks>This function not include the file header data.</remarks>
@@ -262,13 +277,17 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
         /// <summary>
-        /// Save the instance in a <see cref="PAL"/> file.
+        /// Saves the instance in a <see cref="PAL"/> file.
         /// </summary>
         /// <param name="filename">Filename to write the data.</param>
         public void Save(string filename)
@@ -280,16 +299,29 @@ namespace DIV2.Format.Exporter
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<Color> GetEnumerator()
         {
             return this.Colors.GetEnumerator();
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is PAL)) return false;
@@ -297,11 +329,19 @@ namespace DIV2.Format.Exporter
             return this == (PAL)obj;
         }
 
+        /// <summary>
+        /// Generates a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             return $"{{ {nameof(PAL)}: {{ Hash: {this.GetHashCode()} }} }}";

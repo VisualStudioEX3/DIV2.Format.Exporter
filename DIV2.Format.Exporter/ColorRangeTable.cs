@@ -77,7 +77,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set the <see cref="ColorRange"/> value.
+        /// Gets or sets the <see cref="ColorRange"/> value.
         /// </summary>
         /// <param name="index">Index of the range.</param>
         /// <returns>Returns the <see cref="ColorRange"/> value.</returns>
@@ -101,6 +101,12 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ColorRangeTable"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ColorRangeTable"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(ColorRangeTable a, ColorRangeTable b)
         {
             for (int i = 0; i < LENGTH; i++)
@@ -110,6 +116,12 @@ namespace DIV2.Format.Exporter
             return true;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ColorRangeTable"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ColorRangeTable"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(ColorRangeTable a, ColorRangeTable b)
         {
             return !(a == b);
@@ -145,32 +157,53 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
+        /// <summary>
+        /// Serializes this instance to binary format.
+        /// </summary>
+        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
             {
-                foreach (var range in this._ranges)
+                foreach (ColorRange range in this._ranges)
                     buffer.Write(range.Serialize());
 
                 return buffer.ToArray();
             }
         }
 
+        /// <summary>
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<ColorRange> GetEnumerator()
         {
             return new ColorRangeTableEnumerator(this._ranges);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is ColorRangeTable)) return false;
@@ -178,11 +211,19 @@ namespace DIV2.Format.Exporter
             return this == (ColorRangeTable)obj;
         }
 
+        /// <summary>
+        /// Generates a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             return $"{{ {nameof(ColorRangeTable)}: {{ Hash: {this.GetHashCode()} }} }}";

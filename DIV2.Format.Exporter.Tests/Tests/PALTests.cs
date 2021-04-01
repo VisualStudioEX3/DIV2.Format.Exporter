@@ -75,7 +75,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void CreateInstanceFromBuffer()
         {
-            var palette = new PAL(this.GetAssetPath(SharedConstants.FILENAME_PAL_DIV));
+            new PAL(this.GetAssetPath(SharedConstants.FILENAME_PAL_DIV));
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace DIV2.Format.Exporter.Tests
         [DataRow(SharedConstants.FILENAME_IMG_PLAYER_FPG)]
         public void CreateFromImage(string file)
         {
-            var palette = PAL.FromImage(this.GetAssetPath(file));
+            PAL palette = PAL.FromImage(this.GetAssetPath(file));
             string saveFilename = $"{Path.GetExtension(file)[1..4]}.PAL";
             palette.Save(this.GetOutputPath(saveFilename));
         }
@@ -105,7 +105,7 @@ namespace DIV2.Format.Exporter.Tests
         [DataRow(SharedConstants.FILENAME_IMG_PLAYER_FPG)]
         public void CreateFromImageSortingColors(string file)
         {
-            var palette = PAL.FromImage(this.GetAssetPath(file), true);
+            PAL palette = PAL.FromImage(this.GetAssetPath(file), true);
             string saveFilename = $"{Path.GetExtension(file)[1..4]}_S.PAL";
             palette.Save(this.GetOutputPath(saveFilename));
         }
@@ -178,7 +178,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             int i = 0;
             var palette = new PAL(this._colors.ToDAC());
-            foreach (var value in palette)
+            foreach (Color value in palette)
                 Assert.AreEqual(palette[i++], value);
         }
 

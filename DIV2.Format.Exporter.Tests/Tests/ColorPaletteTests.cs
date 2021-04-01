@@ -41,7 +41,7 @@ namespace DIV2.Format.Exporter.Tests
         [TestMethod]
         public void CreateInstanceFromBuffer()
         {
-            var buffer = new byte[ColorPalette.SIZE];
+            byte[] buffer = new byte[ColorPalette.SIZE];
 
             for (int i = 0; i < buffer.Length; i++)
                 buffer[i] = (byte)this.Random.Next(0, Color.MAX_DAC_VALUE + 1);
@@ -62,7 +62,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                var buffer = new byte[ColorPalette.SIZE];
+                byte[] buffer = new byte[ColorPalette.SIZE];
 
                 for (int i = 0; i < buffer.Length; i++)
                     buffer[i] = byte.MaxValue;
@@ -149,7 +149,7 @@ namespace DIV2.Format.Exporter.Tests
         {
             int i = 0;
             ColorPalette palette = this.CreateTestsPalette();
-            foreach (var value in palette)
+            foreach (Color value in palette)
                 Assert.AreEqual(palette[i++], value);
         }
 

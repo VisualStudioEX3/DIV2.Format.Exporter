@@ -18,7 +18,7 @@ namespace DIV2.Format.Exporter.Processors.Images
         #region Methods & Functions
         public static Image ProcessImage(byte[] buffer, out IImageFormat mime)
         {
-            foreach (var processor in IMAGE_PROCESSORS)
+            foreach (IImageProcessor processor in IMAGE_PROCESSORS)
                 if (processor.Validate(buffer))
                     return processor.Process(buffer, out mime);
 

@@ -20,11 +20,15 @@ namespace DIV2.Format.Exporter
         /// </summary>
         DAC = Color.MAX_DAC_VALUE,
         /// <summary>
-        /// RGB format [0.255].
+        /// RGB format [0..255].
         /// </summary>
         RGB = byte.MaxValue
     }
 
+    /// <summary>
+    /// Color structure.
+    /// </summary>
+    /// <remarks>Represents a RGB color format value.</remarks>
     public struct Color : ISerializableAsset
     {
         #region Constants
@@ -49,14 +53,23 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Public vars
+        /// <summary>
+        /// Red component.
+        /// </summary>
         public byte red;
+        /// <summary>
+        /// Green component.
+        /// </summary>
         public byte green;
+        /// <summary>
+        /// Blue component.
+        /// </summary>
         public byte blue;
         #endregion
 
         #region Properties
         /// <summary>
-        /// Get or set the component color value.
+        /// Gets or sets the component color value.
         /// </summary>
         /// <param name="index">Index of the component.</param>
         /// <returns>Returns the component color value.</returns>
@@ -87,6 +100,12 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="Color"/> value to compare.</param>
+        /// <param name="b">Right <see cref="Color"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(Color a, Color b)
         {
             return a.red == b.red &&
@@ -94,26 +113,56 @@ namespace DIV2.Format.Exporter
                    a.blue == b.blue;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="Color"/> value to compare.</param>
+        /// <param name="b">Right <see cref="Color"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(Color a, Color b)
         {
             return !(a == b);
         }
 
+        /// <summary>
+        /// Less than operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="Color"/> value to compare.</param>
+        /// <param name="b">Right <see cref="Color"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if the left value are less than the right value.</returns>
         public static bool operator <(Color a, Color b)
         {
             return (int)a < (int)b;
         }
 
+        /// <summary>
+        /// Greater than operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="Color"/> value to compare.</param>
+        /// <param name="b">Right <see cref="Color"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if the left value are greater than the right value.</returns>
         public static bool operator >(Color a, Color b)
         {
             return (int)a > (int)b;
         }
 
+        /// <summary>
+        /// Less than or equal operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="Color"/> value to compare.</param>
+        /// <param name="b">Right <see cref="Color"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if the left value are less or equal than the right value.</returns>
         public static bool operator <=(Color a, Color b)
         {
             return (int)a <= (int)b;
         }
 
+        /// <summary>
+        /// Greater than or equal operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="Color"/> value to compare.</param>
+        /// <param name="b">Right <see cref="Color"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if the left value are greater or equal than the right value.</returns>
         public static bool operator >=(Color a, Color b)
         {
             return (int)a >= (int)b;
@@ -196,11 +245,19 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
+        /// <summary>
+        /// Serializes this instance to binary format.
+        /// </summary>
+        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
         {
             return new byte[LENGTH] { this.red, this.green, this.blue };
         }
 
+        /// <summary>
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -238,7 +295,7 @@ namespace DIV2.Format.Exporter
         /// Gets a <see cref="Vector3"/> with normalized values [0..1].
         /// </summary>
         /// <param name="colorType">Indicate the color range for set the normalization factor.</param>
-        /// <returns>Returns a <see cref="Vector3"/> with the <see cref="Color"/> componentes normalized.</returns>
+        /// <returns>Returns a <see cref="Vector3"/> with the <see cref="Color"/> components normalized.</returns>
         public Vector3 Normalize(ColorFormat colorType)
         {
             float factor = (float)colorType;
@@ -251,7 +308,7 @@ namespace DIV2.Format.Exporter
         {
             const float REPETITIONS = 8f;
 
-            float lum = MathF.Sqrt(this.red * 0.241f + this.green * 0.691f + this.blue * 0.068f);
+            float lum = MathF.Sqrt((this.red * 0.241f) + (this.green * 0.691f) + (this.blue * 0.068f));
             Vector3 hsv = this.ToRGB().ToHSV(ColorFormat.DAC);
 
             float h2 = hsv.X * REPETITIONS;
@@ -270,14 +327,19 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Is a valid DAC color value?
         /// </summary>
-        /// <returns>Returns true if the RGB components are into the DAC range values [0..63].</returns>
+        /// <returns>Returns <see langword="true"/> if the RGB components are into the DAC range values [0..63].</returns>
         public bool IsDAC()
         {
-            return (this.red.IsClamped(0, MAX_DAC_VALUE) ||
-                    this.green.IsClamped(0, MAX_DAC_VALUE) ||
-                    this.blue.IsClamped(0, MAX_DAC_VALUE));
+            return this.red.IsClamped(0, MAX_DAC_VALUE) ||
+                   this.green.IsClamped(0, MAX_DAC_VALUE) ||
+                   this.blue.IsClamped(0, MAX_DAC_VALUE);
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is Color)) return false;
@@ -285,11 +347,19 @@ namespace DIV2.Format.Exporter
             return this == (Color)obj;
         }
 
+        /// <summary>
+        /// Generates a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> value composed by the RGB values for the first 3 bytes and a zero for fourth byte.</returns>
         public override int GetHashCode()
         {
             return BitConverter.ToInt32(new byte[] { this.red, this.green, this.blue, 0 }, 0);
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             return $"{{ {nameof(Color)}: {{ Red: {this.red}, Green: {this.green}, Blue: {this.blue}}} }}";
@@ -369,7 +439,7 @@ namespace DIV2.Format.Exporter
 
         #region Properties
         /// <summary>
-        /// Get or set a <see cref="Color"/> value in DAC format [0..63].
+        /// Gets or sets a <see cref="Color"/> value in DAC format [0..63].
         /// </summary>
         /// <param name="index">Index in palette.</param>
         /// <returns>Returns the <see cref="Color"/> value.</returns>
@@ -400,6 +470,12 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Operators
+        /// <summary>
+        /// Equality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ColorPalette"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ColorPalette"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are equal.</returns>
         public static bool operator ==(ColorPalette a, ColorPalette b)
         {
             for (int i = 0; i < LENGTH; i++)
@@ -409,6 +485,12 @@ namespace DIV2.Format.Exporter
             return true;
         }
 
+        /// <summary>
+        /// Inequality operator.
+        /// </summary>
+        /// <param name="a">Left <see cref="ColorPalette"/> value to compare.</param>
+        /// <param name="b">Right <see cref="ColorPalette"/> value to compare.</param>
+        /// <returns>Returns <see langword="true"/> if both values are not equal.</returns>
         public static bool operator !=(ColorPalette a, ColorPalette b)
         {
             return !(a == b);
@@ -453,7 +535,7 @@ namespace DIV2.Format.Exporter
             if (colors.Length != LENGTH)
                 throw OUT_OF_RANGE_DAC_EXCEPTION;
 
-            foreach (var color in colors)
+            foreach (Color color in colors)
                 if (!color.IsDAC())
                     throw OUT_OF_RANGE_DAC_EXCEPTION;
 
@@ -473,17 +555,25 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
+        /// <summary>
+        /// Serializes this instance to binary format.
+        /// </summary>
+        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
             {
-                foreach (var color in this._colors)
+                foreach (Color color in this._colors)
                     buffer.Write(color.Serialize(), 0, Color.SIZE);
 
                 return buffer.ToArray();
             }
         }
 
+        /// <summary>
+        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
+        /// </summary>
+        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -525,21 +615,34 @@ namespace DIV2.Format.Exporter
             var vectors = this._colors.Select(e => e.Normalize(ColorFormat.DAC)).ToList();
 #endif
             int start = vectors.FindIndex(e => e == Vector3.Zero); // Try to localize the black color.
-            List<int> path = NNAlgorithm.CalculatePath(vectors, (start == -1 ? 0 : start), out _);
+            List<int> path = NNAlgorithm.CalculatePath(vectors, start == -1 ? 0 : start, out _);
 
             this._colors = path.Select(e => this._colors[e]).ToArray();
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<Color> GetEnumerator()
         {
             return new ColorPaletteEnumerator(this._colors);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection. 
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal. 
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is ColorPalette)) return false;
@@ -547,11 +650,19 @@ namespace DIV2.Format.Exporter
             return this == (ColorPalette)obj;
         }
 
+        /// <summary>
+        /// Generates a hash code for this instance.
+        /// </summary>
+        /// <returns>Returns an <see cref="int"/> SHA256 hash code from the MD5 hash created by the binary serialized data of this instance.</returns>
         public override int GetHashCode()
         {
             return this.Serialize().CalculateChecksum().GetSecureHashCode();
         }
 
+        /// <summary>
+        /// Serializes the relevant data of this instance in a <see cref="string"/> value.
+        /// </summary>
+        /// <returns>Returns a <see cref="string"/> value with the relevant serialized data in JSON format.</returns>
         public override string ToString()
         {
             return $"{{ {nameof(ColorPalette)}: {{ Hash: {this.GetHashCode()} }} }}";
