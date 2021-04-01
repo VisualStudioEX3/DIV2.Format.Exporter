@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/VisualStudioEX3/DIV2.Format.Exporter</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>DIV DIV2 DIVGamesStudio DIVGamesStudio2 Games Graphics Tool Retro Windows Linux Mac</PackageTags>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>x64</Platforms>
     <Version>1.0.1</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageReleaseNotes>- Updated ImageSharp to version 1.0.3.
@@ -22,21 +22,10 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Optimize>false</Optimize>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Optimize>false</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>D:\Projects\dotNET projects\DIV2.Format.Exporter\DIV2.Format.Exporter\DIV2.Format.Exporter.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

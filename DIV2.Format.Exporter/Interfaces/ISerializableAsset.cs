@@ -2,6 +2,7 @@
 
 namespace DIV2.Format.Exporter.Interfaces
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public interface ISerializableAsset
     {
         #region Methods & Functions
@@ -9,4 +10,5 @@ namespace DIV2.Format.Exporter.Interfaces
         void Write(BinaryWriter stream);
         #endregion
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
