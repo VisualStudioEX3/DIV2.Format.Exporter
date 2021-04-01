@@ -55,4 +55,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DIV2.Format.Exporter.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
