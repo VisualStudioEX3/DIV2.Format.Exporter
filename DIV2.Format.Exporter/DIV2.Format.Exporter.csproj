@@ -13,8 +13,9 @@
     <Platforms>x64</Platforms>
     <Version>1.0.1</Version>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageReleaseNotes>- Updated ImageSharp to version 1.0.3.
-- Completed missing documentation in code.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Compiled as x64 instead of AnyCPU.
+- Updated ImageSharp to version 1.0.3.
+- Fixed XML documentation (required to show DLL documentation reference when coding on IDEs like Visual Studio). Now the XML file is included in the NuGet package.</PackageReleaseNotes>
     <PackageLicenseFile></PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>DIV2.png</PackageIcon>
