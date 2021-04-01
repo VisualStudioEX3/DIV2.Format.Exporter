@@ -62,6 +62,8 @@ namespace DIV2.Format.Exporter.ExtensionMethods
             return buffer.ToByteArray();
         }
 
+
+#pragma warning disable CS0419 // Ambiguous reference in cref attribute
         /// <summary>
         /// Returns a secure hash code for this string.
         /// </summary>
@@ -72,6 +74,7 @@ namespace DIV2.Format.Exporter.ExtensionMethods
         {
             return HashGenerator.CalculateHashCode(text);
         } 
+#pragma warning restore CS0419 // Ambiguous reference in cref attribute
         #endregion
     }
 }
