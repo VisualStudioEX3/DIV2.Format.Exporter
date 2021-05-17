@@ -20,14 +20,14 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION =
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
+        /// <value>
         /// Number of colors.
-        /// </summary>
+        /// </value>
         public const int LENGTH = ColorPalette.LENGTH;
 
-        /// <summary>
+        /// <value>
         /// Memory size.
-        /// </summary>
+        /// </value>
         public const int SIZE = DIVFileHeader.SIZE + ColorPalette.SIZE + ColorRangeTable.SIZE;
         #endregion
 
@@ -35,18 +35,20 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Palette colors, in DAC format.
         /// </summary>
+        /// <value>Returns the <see cref="ColorPalette"/> instance.</value>
         public ColorPalette Colors { get; private set; }
 
         /// <summary>
         /// Color range table.
         /// </summary>
+        /// <value>Returns the <see cref="ColorRangeTable"/> instance.</value>
         public ColorRangeTable Ranges { get; private set; }
 
         /// <summary>
         /// Gets or sets a <see cref="Color"/> value.
         /// </summary>
         /// <param name="index"><see cref="Color"/> index.</param>
-        /// <returns>Return the <see cref="Color"/> value.</returns>
+        /// <returns>Returns the <see cref="Color"/> value.</returns>
         public Color this[int index]
         {
             get
@@ -261,11 +263,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Serializes the <see cref="PAL"/> instance in a <see cref="byte"/> array.
-        /// </summary>
-        /// <returns>Returns the <see cref="byte"/> array with the <see cref="PAL"/> serialized data.</returns>
-        /// <remarks>This function not include the file header data.</remarks>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
@@ -277,10 +275,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -299,29 +294,19 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<Color> GetEnumerator()
         {
             return this.Colors.GetEnumerator();
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is PAL)) return false;

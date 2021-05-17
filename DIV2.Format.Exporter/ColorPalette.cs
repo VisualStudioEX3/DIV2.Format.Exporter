@@ -38,17 +38,15 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION =
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
-        /// Max suported value in DAC format [0..63].
-        /// </summary>
+        /// <value>
+        /// Max supported value in DAC format [0..63].
+        /// </value>
         public const byte MAX_DAC_VALUE = 63;
-        /// <summary>
-        /// Number of components.
-        /// </summary>
+        /// <value>Number of components.</value>
         public const int LENGTH = 3;
-        /// <summary>
+        /// <value>
         /// Memory size.
-        /// </summary>
+        /// </value>
         public const int SIZE = sizeof(byte) * LENGTH;
         #endregion
 
@@ -56,13 +54,16 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Red component.
         /// </summary>
+        /// <value>A value between 0 and 255.</value>
         public byte red;
         /// <summary>
         /// Green component.
         /// </summary>
+        /// <value>A value between 0 and 255.</value>
         public byte green;
         /// <summary>
         /// Blue component.
+        /// <value>A value between 0 and 255.</value>
         /// </summary>
         public byte blue;
         #endregion
@@ -245,19 +246,13 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             return new byte[LENGTH] { this.red, this.green, this.blue };
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -423,13 +418,13 @@ namespace DIV2.Format.Exporter
         readonly static string[] COLOR_FIELD_NAMES = { "Red", "Green", "Blue" };
         const string DAC_VALUE_OUT_OF_RANGE_EXCEPTION_MESSAGE = "The {0} value must be a DAC range value [{1}..{2}].";
 
-        /// <summary>
+        /// <value>
         /// Number of colors.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 256;
-        /// <summary>
+        /// <value>
         /// Memory size of the palette.
-        /// </summary>
+        /// </value>
         public const int SIZE = LENGTH * Color.SIZE;
         #endregion
 
@@ -555,10 +550,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
@@ -570,10 +562,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -620,29 +609,19 @@ namespace DIV2.Format.Exporter
             this._colors = path.Select(e => this._colors[e]).ToArray();
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<Color> GetEnumerator()
         {
             return new ColorPaletteEnumerator(this._colors);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is ColorPalette)) return false;

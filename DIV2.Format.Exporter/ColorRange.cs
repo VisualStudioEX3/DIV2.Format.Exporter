@@ -60,29 +60,29 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION =
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="colors"/> field.
-        /// </summary>
+        /// </value>
         public const RangeColors DEFAULT_RANGE_COLORS = RangeColors._8;
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="type"/> field.
-        /// </summary>
+        /// </value>
         public const RangeTypes DEFAULT_TYPE = RangeTypes.Direct;
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="isFixed"/> field.
-        /// </summary>
+        /// </value>
         public const bool DEFAULT_FIXED_STATE = false;
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="blackColor"/> field.
-        /// </summary>
+        /// </value>
         public const int DEFAULT_BLACK_COLOR = 0;
-        /// <summary>
+        /// <value>
         /// Number of color index entries in the range.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 32;
-        /// <summary>
+        /// <value>
         /// Memory size of the range.
-        /// </summary>
+        /// </value>
         public const int SIZE = (sizeof(byte) * 4) + (sizeof(byte) * LENGTH);
         #endregion
 
@@ -266,10 +266,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -284,38 +281,25 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<byte> GetEnumerator()
         {
             return new ColorRangeEnumerator(this._rangeColors);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is ColorRange)) return false;

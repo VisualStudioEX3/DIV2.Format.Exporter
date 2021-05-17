@@ -61,13 +61,13 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION = 
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
+        /// <value>
         /// Number of <see cref="ColorRange"/>s in the table.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 16;
-        /// <summary>
+        /// <value>
         /// Memory size of the color range table.
-        /// </summary>
+        /// </value>
         public const int SIZE = LENGTH * ColorRange.SIZE;
         #endregion
 
@@ -157,10 +157,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
@@ -172,38 +169,25 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<ColorRange> GetEnumerator()
         {
             return new ColorRangeTableEnumerator(this._ranges);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is ColorRangeTable)) return false;

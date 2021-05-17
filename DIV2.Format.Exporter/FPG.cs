@@ -213,10 +213,13 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Color palette used by this <see cref="FPG"/>.
         /// </summary>
+        /// <value>Returns the <see cref="PAL"/> instance for this <see cref="FPG"/> object.</value>
+        /// <remarks>All <see cref="MAP"/>s stored in the <see cref="FPG"/> shared this palette.</remarks>
         public PAL Palette { get; private set; }
         /// <summary>
-        /// Gets the number of <see cref="MAP"/> instances contained in the <see cref="FPG"/>.
+        /// Number of <see cref="MAP"/> objects stored in this <see cref="FPG"/>.
         /// </summary>
+        /// <value>Gets the number of <see cref="MAP"/> instances contained in the <see cref="FPG"/>.</value>
         public int Count => this._registers.Count;
         /// <summary>
         /// Gets a <see cref="MAP"/> instance.
@@ -560,11 +563,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Serializes the <see cref="FPG"/> instance in a <see cref="byte"/> array.
-        /// </summary>
-        /// <returns>Returns the <see cref="byte"/> array with the <see cref="FPG"/> serialized data.</returns>
-        /// <remarks>This function not include the file header data.</remarks>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -577,10 +576,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -599,29 +595,19 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<MAP> GetEnumerator()
         {
             return new FPGEnumerator(this._registers);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is FPG)) return false;

@@ -17,13 +17,13 @@ namespace DIV2.Format.Exporter
     public struct ControlPoint : ISerializableAsset
     {
         #region Constants
-        /// <summary>
+        /// <value>
         /// Number of items.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 2;
-        /// <summary>
+        /// <value>
         /// Memory size.
-        /// </summary>
+        /// </value>
         public const int SIZE = sizeof(short) * LENGTH;
         #endregion
 
@@ -158,10 +158,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -173,20 +170,13 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is ControlPoint)) return false;
@@ -272,25 +262,25 @@ namespace DIV2.Format.Exporter
         const string INDEX_OUT_OF_RANGE_EXCEPTION_MESSAGE = "The index value must be a value beteween 0 and {0} (Index: {1}).";
         const string COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE = "{0} coordinate must be a value beteween 0 and {1} ({0}: {2}).";
 
-        /// <summary>
+        /// <value>
         /// Min supported size value for width or height properties.
-        /// </summary>
+        /// </value>
         public const int MIN_PIXEL_SIZE = 1;
-        /// <summary>
+        /// <value>
         /// Max description character length.
-        /// </summary>
+        /// </value>
         public const int DESCRIPTION_LENGTH = 32;
-        /// <summary>
+        /// <value>
         /// Min allowed graph id value.
-        /// </summary>
+        /// </value>
         public const int MIN_GRAPH_ID = 1;
-        /// <summary>
+        /// <value>
         /// Max allowed graph id value.
-        /// </summary>
+        /// </value>
         public const int MAX_GRAPH_ID = 999;
-        /// <summary>
+        /// <value>
         /// Max supported control points count.
-        /// </summary>
+        /// </value>
         public const int MAX_CONTROL_POINTS = 1000;
         #endregion
 
@@ -303,14 +293,17 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Width of the graphic map.
         /// </summary>
+        /// <value>Returns the width value in pixels.</value>
         public short Width { get; }
         /// <summary>
         /// Height of the graphic map.
         /// </summary>
+        /// <value>Returns the Height value in pixels.</value>
         public short Height { get; }
         /// <summary>
-        /// Graphic identifiers used in <see cref="FPG"/> files.
+        /// Graphic identifier used in <see cref="FPG"/> files.
         /// </summary>
+        /// <value>Gets or sets the graphic indentifier for this <see cref="MAP"/> object.</value>
         public int GraphId
         {
             get => this._graphId;
@@ -325,19 +318,23 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Optional graphic description.
         /// </summary>
+        /// <value>Gets or sets the description for this <see cref="MAP"/> object.</value>
         /// <remarks>The description only allow a 32 length ASCII null terminated string.</remarks>
         public string Description { get; set; }
         /// <summary>
         /// Color palette used by this graphic map.
         /// </summary>
+        /// <value>Returns the <see cref="PAL"/> instance for this <see cref="MAP"/> object.</value>
         public PAL Palette { get; private set; }
         /// <summary>
         /// Optional control point list.
         /// </summary>
+        /// <value>Returns the <see cref="ControlPoint"/> list for this <see cref="MAP"/> object.</value>
         public List<ControlPoint> ControlPoints { get; private set; }
         /// <summary>
         /// Number of pixels in the bitmap.
         /// </summary>
+        /// <value>Returns the number of pixels for this <see cref="MAP"/> object.</value>
         public int Count => this._bitmap.Length;
         /// <summary>
         /// Gets or sets the color index in the bitmap.
@@ -702,11 +699,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Serializes the <see cref="MAP"/> instance in a <see cref="byte"/> array.
-        /// </summary>
-        /// <returns>Returns the <see cref="byte"/> array with the <see cref="MAP"/> serialized data.</returns>
-        /// <remarks>This function not include the file header data.</remarks>
+        /// <inheritdoc/>
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -732,10 +725,7 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -765,29 +755,19 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<byte> GetEnumerator()
         {
             return new MAPEnumerator(this._bitmap);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is MAP)) return false;
