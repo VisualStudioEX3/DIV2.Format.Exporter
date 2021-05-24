@@ -63,8 +63,8 @@ namespace DIV2.Format.Exporter
         public byte green;
         /// <summary>
         /// Blue component.
-        /// <value>A value between 0 and 255.</value>
         /// </summary>
+        /// <value>A value between 0 and 255.</value>
         public byte blue;
         #endregion
 

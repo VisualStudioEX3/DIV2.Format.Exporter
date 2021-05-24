@@ -279,7 +279,7 @@ namespace DIV2.Format.Exporter
         /// </value>
         public const int MAX_GRAPH_ID = 999;
         /// <value>
-        /// Max supported control points count.
+        /// Max supported <see cref="ControlPoint"/>s.
         /// </value>
         public const int MAX_CONTROL_POINTS = 1000;
         #endregion

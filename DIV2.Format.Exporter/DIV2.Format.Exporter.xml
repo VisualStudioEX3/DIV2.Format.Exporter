@@ -53,8 +53,8 @@
         <member name="F:DIV2.Format.Exporter.Color.blue">
             <summary>
             Blue component.
-            <value>A value between 0 and 255.</value>
             </summary>
+            <value>A value between 0 and 255.</value>
         </member>
         <member name="P:DIV2.Format.Exporter.Color.Item(System.Int32)">
             <summary>
