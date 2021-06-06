@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using DIV2.Format.Exporter.Utils;
+using System.IO;
 
 namespace DIV2.Format.Exporter.Interfaces
 {
     /// <summary>
     /// Implements a serializable asset.
     /// </summary>
+    [DocFxIgnore]
     public interface ISerializableAsset
     {
         #region Methods & Functions

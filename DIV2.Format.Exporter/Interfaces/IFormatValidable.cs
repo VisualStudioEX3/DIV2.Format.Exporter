@@ -1,8 +1,11 @@
-﻿namespace DIV2.Format.Exporter.Interfaces
+﻿using DIV2.Format.Exporter.Utils;
+
+namespace DIV2.Format.Exporter.Interfaces
 {
     /// <summary>
     /// Implements a format validator.
     /// </summary>
+    [DocFxIgnore]
     public interface IFormatValidable
     {
         #region Methods & Functions

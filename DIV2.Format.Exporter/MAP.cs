@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using DIV2.Format.Exporter.Utils;
 
 namespace DIV2.Format.Exporter
 {
@@ -159,6 +160,7 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -171,12 +173,14 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
             if (!(obj is ControlPoint)) return false;
@@ -700,6 +704,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -726,6 +731,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -756,18 +762,21 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<byte> GetEnumerator()
         {
             return new MAPEnumerator(this._bitmap);
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
             if (!(obj is MAP)) return false;

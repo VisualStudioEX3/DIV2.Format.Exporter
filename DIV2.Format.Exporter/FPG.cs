@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Interfaces;
+using DIV2.Format.Exporter.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -564,6 +565,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -577,6 +579,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -596,18 +599,21 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<MAP> GetEnumerator()
         {
             return new FPGEnumerator(this._registers);
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
             if (!(obj is FPG)) return false;

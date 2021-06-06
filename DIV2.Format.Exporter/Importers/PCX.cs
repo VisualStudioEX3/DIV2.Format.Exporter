@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Interfaces;
+using DIV2.Format.Exporter.Utils;
 using System;
 using System.IO;
 
@@ -8,6 +9,7 @@ namespace DIV2.Format.Importer
     /// <summary>
     /// PCX 256 color importer.
     /// </summary>
+    [DocFxIgnore]
     class PCX : IFormatValidable
     {
         #region Constants

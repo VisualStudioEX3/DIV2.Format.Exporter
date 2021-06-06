@@ -1,4 +1,5 @@
-﻿using SixLabors.ImageSharp;
+﻿using DIV2.Format.Exporter.Utils;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
 using SixLabors.ImageSharp.PixelFormats;
@@ -10,6 +11,7 @@ namespace DIV2.Format.Exporter.ExtensionMethods
     /// <summary>
     /// Extension methods to interoperate between DIV2.Format.Exporter and ImageSharp formats.
     /// </summary>
+    [DocFxIgnore]
     public static class ImageSharpExtensions
     {
         #region Methods & Functions

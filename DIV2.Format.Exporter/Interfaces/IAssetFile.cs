@@ -1,8 +1,11 @@
-﻿namespace DIV2.Format.Exporter.Interfaces
+﻿using DIV2.Format.Exporter.Utils;
+
+namespace DIV2.Format.Exporter.Interfaces
 {
     /// <summary>
     /// Implements an asset file.
     /// </summary>
+    [DocFxIgnore]
     public interface IAssetFile : IFormatValidable, ISerializableAsset
     {
         #region Methods & Functions

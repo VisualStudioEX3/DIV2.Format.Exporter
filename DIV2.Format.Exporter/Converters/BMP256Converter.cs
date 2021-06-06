@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Processors.Images;
+using DIV2.Format.Exporter.Utils;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Bmp;
@@ -13,6 +14,7 @@ namespace DIV2.Format.Exporter.Converters
     /// Base converter for all supported image formats to BMP 256 colors.
     /// </summary>
     /// <remarks>This class is the core of the image conversions to DIV Games Studio formats like <see cref="PAL"/> and <see cref="MAP"/> files.</remarks>
+    [DocFxIgnore]
     class BMP256Converter
     {
         #region Constants
