@@ -57,6 +57,7 @@
     <None Include="articles\intro.md" />
     <None Include="articles\toc.md" />
     <None Include="docfx.json" />
+    <None Include="filterConfig.yml" />
     <None Include="index.md" />
     <None Include="packages.config" />
     <None Include="toc.yml" />

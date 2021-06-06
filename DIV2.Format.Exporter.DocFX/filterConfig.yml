@@ -1,0 +1,4 @@
+﻿apiRules:
+- exclude:
+    hasAttribute:
+      uid: DIV2.Format.Exporter.Utils.DocFxIgnoreAttribute
