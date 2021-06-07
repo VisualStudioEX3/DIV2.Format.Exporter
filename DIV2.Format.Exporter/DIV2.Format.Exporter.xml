@@ -603,6 +603,7 @@
             <summary>
             An exception ocurred when a DIV Games Studio content data format is invalid.
             </summary>
+            <typeparam name="T"><see cref="T:DIV2.Format.Exporter.Interfaces.IAssetFile"/> type that reprensents any DIV Games Studio format.</typeparam>
         </member>
         <member name="T:DIV2.Format.Exporter.ExtensionMethods.ByteExtensions">
             <summary>

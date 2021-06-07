@@ -97,6 +97,7 @@ namespace DIV2.Format.Exporter
     /// <summary>
     /// An exception ocurred when a DIV Games Studio content data format is invalid.
     /// </summary>
+    /// <typeparam name="T"><see cref="IAssetFile"/> type that reprensents any DIV Games Studio format.</typeparam>
     public sealed class DIVFileFormatException<T> : Exception where T : IAssetFile
     {
         #region Constructor

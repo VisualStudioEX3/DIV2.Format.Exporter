@@ -247,12 +247,14 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             return new byte[LENGTH] { this.red, this.green, this.blue };
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -551,6 +553,7 @@ namespace DIV2.Format.Exporter
 
         #region Methods & Functions
         /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
@@ -563,6 +566,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -610,18 +614,21 @@ namespace DIV2.Format.Exporter
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<Color> GetEnumerator()
         {
             return new ColorPaletteEnumerator(this._colors);
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
         /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
             if (!(obj is ColorPalette)) return false;
