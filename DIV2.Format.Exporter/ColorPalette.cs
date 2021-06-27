@@ -173,6 +173,7 @@ namespace DIV2.Format.Exporter
         /// Cast an <see cref="int"/> value to <see cref="Color"/> value.
         /// </summary>
         /// <param name="value"><see cref="int"/> value.</param>
+        /// <returns>Retutns the <see cref="Color"/> value from the <see cref="int"/> value.</returns>
         public static implicit operator Color(int value)
         {
             int red = (value >> 16) & 0xFF;
@@ -186,6 +187,7 @@ namespace DIV2.Format.Exporter
         /// Cast the <see cref="Color"/> value to <see cref="int"/> value.
         /// </summary>
         /// <param name="value"><see cref="Color"/> value.</param>
+        /// <returns>Retutns the <see cref="int"/> value from the <see cref="Color"/> value.</returns>
         public static explicit operator int(Color value)
         {
             int rgb = value.red;

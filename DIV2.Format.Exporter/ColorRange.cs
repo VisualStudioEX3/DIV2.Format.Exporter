@@ -138,21 +138,21 @@ namespace DIV2.Format.Exporter
         #region Public vars
         byte[] _rangeColors;
 
-        /// <summary>
+        /// <value>
         /// Ammount of colors for the range.
-        /// </summary>
+        /// </value>
         public RangeColors colors;
-        /// <summary>
+        /// <value>
         /// Range type.
-        /// </summary>
+        /// </value>
         public RangeTypes type;
-        /// <summary>
+        /// <value>
         /// Defines if the range is editable (false) or not (true). By default is false.
-        /// </summary>
+        /// </value>
         public bool isFixed;
-        /// <summary>
+        /// <value>
         /// Index of the black color. Default is zero.
-        /// </summary>
+        /// </value>
         public byte blackColor;
         #endregion
 

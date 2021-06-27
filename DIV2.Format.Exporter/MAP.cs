@@ -29,13 +29,13 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Public vars
-        /// <summary>
+        /// <value>
         /// Horizontal coordinate.
-        /// </summary>
+        /// </value>
         public short x;
-        /// <summary>
+        /// <value>
         /// Vertical coordinate.
-        /// </summary>
+        /// </value>
         public short y;
         #endregion
 

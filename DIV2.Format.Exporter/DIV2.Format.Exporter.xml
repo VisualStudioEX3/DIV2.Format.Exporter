@@ -116,12 +116,14 @@
             Cast an <see cref="T:System.Int32"/> value to <see cref="T:DIV2.Format.Exporter.Color"/> value.
             </summary>
             <param name="value"><see cref="T:System.Int32"/> value.</param>
+            <returns>Retutns the <see cref="T:DIV2.Format.Exporter.Color"/> value from the <see cref="T:System.Int32"/> value.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.op_Explicit(DIV2.Format.Exporter.Color)~System.Int32">
             <summary>
             Cast the <see cref="T:DIV2.Format.Exporter.Color"/> value to <see cref="T:System.Int32"/> value.
             </summary>
             <param name="value"><see cref="T:DIV2.Format.Exporter.Color"/> value.</param>
+            <returns>Retutns the <see cref="T:System.Int32"/> value from the <see cref="T:DIV2.Format.Exporter.Color"/> value.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.#ctor(System.Byte,System.Byte,System.Byte)">
             <summary>
@@ -401,24 +403,24 @@
             </summary>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.colors">
-            <summary>
+            <value>
             Ammount of colors for the range.
-            </summary>
+            </value>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.type">
-            <summary>
+            <value>
             Range type.
-            </summary>
+            </value>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.isFixed">
-            <summary>
+            <value>
             Defines if the range is editable (false) or not (true). By default is false.
-            </summary>
+            </value>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.blackColor">
-            <summary>
+            <value>
             Index of the black color. Default is zero.
-            </summary>
+            </value>
         </member>
         <member name="P:DIV2.Format.Exporter.ColorRange.Item(System.Int32)">
             <summary>
@@ -983,14 +985,14 @@
             </value>
         </member>
         <member name="F:DIV2.Format.Exporter.ControlPoint.x">
-            <summary>
+            <value>
             Horizontal coordinate.
-            </summary>
+            </value>
         </member>
         <member name="F:DIV2.Format.Exporter.ControlPoint.y">
-            <summary>
+            <value>
             Vertical coordinate.
-            </summary>
+            </value>
         </member>
         <member name="P:DIV2.Format.Exporter.ControlPoint.Item(System.Int32)">
             <summary>
