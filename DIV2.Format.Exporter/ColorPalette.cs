@@ -78,13 +78,13 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0: return this.red;
-                    case 1: return this.green;
-                    case 2: return this.blue;
-                    default: throw INDEX_OUT_OF_RANGE_EXCEPTION;
-                }
+                    0 => this.red,
+                    1 => this.green,
+                    2 => this.blue,
+                    _ => throw INDEX_OUT_OF_RANGE_EXCEPTION,
+                };
             }
 
             set
@@ -173,7 +173,7 @@ namespace DIV2.Format.Exporter
         /// Cast an <see cref="int"/> value to <see cref="Color"/> value.
         /// </summary>
         /// <param name="value"><see cref="int"/> value.</param>
-        /// <returns>Retutns the <see cref="Color"/> value from the <see cref="int"/> value.</returns>
+        /// <returns>Returns the <see cref="Color"/> value from the <see cref="int"/> value.</returns>
         public static implicit operator Color(int value)
         {
             int red = (value >> 16) & 0xFF;
@@ -187,7 +187,7 @@ namespace DIV2.Format.Exporter
         /// Cast the <see cref="Color"/> value to <see cref="int"/> value.
         /// </summary>
         /// <param name="value"><see cref="Color"/> value.</param>
-        /// <returns>Retutns the <see cref="int"/> value from the <see cref="Color"/> value.</returns>
+        /// <returns>Returns the <see cref="int"/> value from the <see cref="Color"/> value.</returns>
         public static explicit operator int(Color value)
         {
             int rgb = value.red;
@@ -341,9 +341,7 @@ namespace DIV2.Format.Exporter
         /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is Color)) return false;
-
-            return this == (Color)obj;
+            return obj is Color color && this == color;
         }
 
         /// <summary>
@@ -369,7 +367,7 @@ namespace DIV2.Format.Exporter
     class ColorPaletteEnumerator : IEnumerator<Color>
     {
         #region Internal vars
-        IList<Color> _items;
+        readonly IList<Color> _items;
         int _currentIndex;
         #endregion
 
@@ -382,7 +380,7 @@ namespace DIV2.Format.Exporter
         public ColorPaletteEnumerator(IList<Color> items)
         {
             this._items = items;
-            this.Current = default(Color);
+            this.Current = default;
             this.Reset();
         }
 
@@ -420,7 +418,6 @@ namespace DIV2.Format.Exporter
         readonly static ArgumentOutOfRangeException OUT_OF_RANGE_DAC_EXCEPTION =
             new ArgumentOutOfRangeException($"The color array must be contains a {LENGTH} array length, with RGB colors in DAC format [0..{Color.MAX_DAC_VALUE}].");
         readonly static string[] COLOR_FIELD_NAMES = { "Red", "Green", "Blue" };
-        const string DAC_VALUE_OUT_OF_RANGE_EXCEPTION_MESSAGE = "The {0} value must be a DAC range value [{1}..{2}].";
 
         /// <value>
         /// Number of colors.
@@ -446,10 +443,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this._colors[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this._colors[index];
             }
             set
             {
@@ -458,10 +454,7 @@ namespace DIV2.Format.Exporter
 
                 for (int i = 0; i < Color.LENGTH; i++)
                     if (!value[i].IsClamped(0, Color.MAX_DAC_VALUE))
-                        throw new ArgumentOutOfRangeException(string.Format(DAC_VALUE_OUT_OF_RANGE_EXCEPTION_MESSAGE,
-                                                                            COLOR_FIELD_NAMES[i],
-                                                                            0,
-                                                                            Color.MAX_DAC_VALUE));
+                        throw new ArgumentOutOfRangeException($"The {COLOR_FIELD_NAMES[i]} value must be a DAC range value [0..{Color.MAX_DAC_VALUE}].");
 
                 this._colors[index] = value;
             }
@@ -601,13 +594,13 @@ namespace DIV2.Format.Exporter
         public void Sort()
         {
 #if SORT_BY_HSV
-            var vectors = this._colors.Select(e => e.ToHSV(ColorFormat.DAC)).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.ToHSV(ColorFormat.DAC)).ToList();
 #elif SORT_BY_HSL
-            var vectors = this._colors.Select(e => e.ToHSL(ColorFormat.DAC)).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.ToHSL(ColorFormat.DAC)).ToList();
 #elif SORT_BY_HLV_STEP
-            var vectors = this._colors.Select(e => e.Step()).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.Step()).ToList();
 #else
-            var vectors = this._colors.Select(e => e.Normalize(ColorFormat.DAC)).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.Normalize(ColorFormat.DAC)).ToList();
 #endif
             int start = vectors.FindIndex(e => e == Vector3.Zero); // Try to localize the black color.
             List<int> path = NNAlgorithm.CalculatePath(vectors, start == -1 ? 0 : start, out _);
@@ -633,9 +626,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ColorPalette)) return false;
-
-            return this == (ColorPalette)obj;
+            return obj is ColorPalette palette && this == palette;
         }
 
         /// <summary>

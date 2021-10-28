@@ -20,9 +20,9 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Internal vars
-        byte[] _id;
-        int _magicNumber;
-        byte _version;
+        readonly byte[] _id;
+        readonly int _magicNumber;
+        readonly byte _version;
         #endregion
 
         #region Constructors

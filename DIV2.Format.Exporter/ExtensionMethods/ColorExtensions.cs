@@ -21,10 +21,9 @@ namespace DIV2.Format.Exporter.ExtensionMethods
         /// <returns>Returns a new <see cref="Color"/> array in DAC format [0..63].</returns>
         public static Color[] ToDAC(this Color[] colors)
         {
-            if (colors.Length != ColorPalette.LENGTH)
-                throw CreateException(ColorPalette.LENGTH);
-
-            return colors.Select(e => e.ToDAC()).ToArray();
+            return colors.Length != ColorPalette.LENGTH ? 
+                throw CreateException(ColorPalette.LENGTH) : 
+                colors.Select(e => e.ToDAC()).ToArray();
         }
 
         /// <summary>
@@ -34,10 +33,9 @@ namespace DIV2.Format.Exporter.ExtensionMethods
         /// <returns>Returns a new <see cref="Color"/> array in RGB format [0.255].</returns>
         public static Color[] ToRGB(this Color[] colors)
         {
-            if (colors.Length != ColorPalette.LENGTH)
-                throw CreateException(ColorPalette.LENGTH);
-
-            return colors.Select(e => e.ToRGB()).ToArray();
+            return colors.Length != ColorPalette.LENGTH ? 
+                throw CreateException(ColorPalette.LENGTH) : 
+                colors.Select(e => e.ToRGB()).ToArray();
         }
 
         /// <summary>

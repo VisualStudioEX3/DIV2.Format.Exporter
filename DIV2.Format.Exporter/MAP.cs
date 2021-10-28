@@ -49,12 +49,12 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0: return this.x;
-                    case 1: return this.y;
-                    default: throw new IndexOutOfRangeException();
-                }
+                    0 => this.x,
+                    1 => this.y,
+                    _ => throw new IndexOutOfRangeException(),
+                };
             }
             set
             {
@@ -183,9 +183,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ControlPoint)) return false;
-
-            return this == (ControlPoint)obj;
+            return obj is ControlPoint point && this == point;
         }
 
         /// <summary>
@@ -211,7 +209,7 @@ namespace DIV2.Format.Exporter
     class MAPEnumerator : IEnumerator<byte>
     {
         #region Internal vars
-        IList<byte> _bitmap;
+        readonly IList<byte> _bitmap;
         int _currentIndex;
         #endregion
 
@@ -224,7 +222,7 @@ namespace DIV2.Format.Exporter
         public MAPEnumerator(IList<byte> bitmap)
         {
             this._bitmap = bitmap;
-            this.Current = default(byte);
+            this.Current = default;
             this.Reset();
         }
 
@@ -349,10 +347,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, this._bitmap.Length))
-                    throw new IndexOutOfRangeException(string.Format(INDEX_OUT_OF_RANGE_EXCEPTION_MESSAGE, this._bitmap.Length, index));
-
-                return this._bitmap[index];
+                return !index.IsClamped(0, this._bitmap.Length)
+                    ? throw new IndexOutOfRangeException(string.Format(INDEX_OUT_OF_RANGE_EXCEPTION_MESSAGE, this._bitmap.Length, index))
+                    : this._bitmap[index];
             }
             set
             {
@@ -372,13 +369,11 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!x.IsClamped(0, this.Width - 1))
-                    throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "X", this.Width, x));
-
-                if (!y.IsClamped(0, this.Height - 1))
-                    throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "Y", this.Height, y));
-
-                return this._bitmap[this.GetIndex(x, y)];
+                return !x.IsClamped(0, this.Width - 1)
+                    ? throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "X", this.Width, x))
+                    : !y.IsClamped(0, this.Height - 1)
+                        ? throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "Y", this.Height, y))
+                        : this._bitmap[this.GetIndex(x, y)];
             }
             set
             {
@@ -535,10 +530,9 @@ namespace DIV2.Format.Exporter
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. Also supported 256 color PCX images.</remarks>
         public static MAP FromImage(string filename)
         {
-            if (ValidateFormat(filename))
-                throw new ArgumentException($"The filename is a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or indicate a {nameof(PAL)} file to apply color conversion.");
-
-            return FromImage(File.ReadAllBytes(filename));
+            return ValidateFormat(filename)
+                ? throw new ArgumentException($"The filename is a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or indicate a {nameof(PAL)} file to apply color conversion.")
+                : FromImage(File.ReadAllBytes(filename));
         }
 
         /// <summary>
@@ -779,9 +773,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is MAP)) return false;
-
-            return this == (MAP)obj;
+            return obj is MAP map && this == map;
         }
 
         /// <summary>

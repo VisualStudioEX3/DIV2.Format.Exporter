@@ -11,7 +11,7 @@ namespace DIV2.Format.Exporter
     class ColorRangeTableEnumerator : IEnumerator<ColorRange>
     {
         #region Internal vars
-        IList<ColorRange> _items;
+        readonly IList<ColorRange> _items;
         int _currentIndex;
         #endregion
 
@@ -24,7 +24,7 @@ namespace DIV2.Format.Exporter
         public ColorRangeTableEnumerator(IList<ColorRange> items)
         {
             this._items = items;
-            this.Current = default(ColorRange);
+            this.Current = default;
             this.Reset();
         }
 
@@ -73,7 +73,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Internal vars
-        ColorRange[] _ranges = new ColorRange[LENGTH];
+        readonly ColorRange[] _ranges = new ColorRange[LENGTH];
         #endregion
 
         #region Properties
@@ -86,10 +86,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this._ranges[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this._ranges[index];
             }
             set
             {
@@ -196,9 +195,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ColorRangeTable)) return false;
-
-            return this == (ColorRangeTable)obj;
+            return obj is ColorRangeTable table && this == table;
         }
 
         /// <summary>

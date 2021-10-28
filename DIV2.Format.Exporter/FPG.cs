@@ -140,9 +140,7 @@ namespace DIV2.Format.Exporter
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Register)) return false;
-
-            return this == (Register)obj;
+            return obj is Register register && this == register;
         }
 
         public override int GetHashCode()
@@ -155,7 +153,7 @@ namespace DIV2.Format.Exporter
     class FPGEnumerator : IEnumerator<MAP>
     {
         #region Internal vars
-        IList<Register> _registers;
+        readonly IList<Register> _registers;
         int _currentIndex;
         #endregion
 
@@ -168,7 +166,7 @@ namespace DIV2.Format.Exporter
         public FPGEnumerator(IList<Register> registers)
         {
             this._registers = registers;
-            this.Current = default(MAP);
+            this.Current = default;
             this.Reset();
         }
 
@@ -207,7 +205,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Internal vars
-        List<Register> _registers;
+        readonly List<Register> _registers;
         #endregion
 
         #region Properties
@@ -231,10 +229,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, this.Count - 1))
-                    throw new IndexOutOfRangeException($"The index value must be a value beteween 0 and {this.Count}. (Index: {index})");
-
-                return this._registers[index].map;
+                return !index.IsClamped(0, this.Count - 1)
+                    ? throw new IndexOutOfRangeException($"The index value must be a value beteween 0 and {this.Count}. (Index: {index})")
+                    : this._registers[index].map;
             }
         }
         #endregion
@@ -336,12 +333,11 @@ namespace DIV2.Format.Exporter
         // Sort MAP list by graphic identifiers in ascending order:
         int OrderByAsc(Register x, Register y)
         {
-            if (x.GraphId > y.GraphId)
-                return 1;
-            else if (x.GraphId == y.GraphId)
-                return 0;
-            else
-                return -1;
+            return (x.GraphId > y.GraphId) 
+                ? 1 
+                : (x.GraphId == y.GraphId) 
+                    ? 0 
+                    : -1;
         }
 
         /// <summary>
@@ -616,9 +612,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is FPG)) return false;
-
-            return this == (FPG)obj;
+            return obj is FPG fpg && this == fpg;
         }
 
         /// <summary>

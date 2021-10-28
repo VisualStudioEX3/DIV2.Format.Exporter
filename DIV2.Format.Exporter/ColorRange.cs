@@ -12,7 +12,7 @@ namespace DIV2.Format.Exporter
     class ColorRangeEnumerator : IEnumerator<byte>
     {
         #region Internal vars
-        IList<byte> _items;
+        readonly IList<byte> _items;
         int _currentIndex;
         #endregion
 
@@ -25,7 +25,7 @@ namespace DIV2.Format.Exporter
         public ColorRangeEnumerator(IList<byte> items)
         {
             this._items = items;
-            this.Current = default(byte);
+            this.Current = default;
             this.Reset();
         }
 
@@ -136,7 +136,7 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Public vars
-        byte[] _rangeColors;
+        readonly byte[] _rangeColors;
 
         /// <value>
         /// Ammount of colors for the range.
@@ -166,10 +166,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this._rangeColors[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this._rangeColors[index];
             }
             set
             {
@@ -308,9 +307,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ColorRange)) return false;
-
-            return this == (ColorRange)obj;
+            return obj is ColorRange range && this == range;
         }
 
         /// <summary>
@@ -329,13 +326,7 @@ namespace DIV2.Format.Exporter
         public override string ToString()
         {
             var sb = new StringBuilder();
-            foreach (byte index in this._rangeColors)
-                sb.Append($"{index}, ");
-
-            string rangeValues = sb.ToString();
-            rangeValues = sb.ToString().Substring(0, rangeValues.Length - 2);
-
-            sb = new StringBuilder();
+            string rangeValues = string.Join(", ", this._rangeColors);
 
             sb.Append($"{{ {nameof(ColorRange)}: ");
             sb.Append($"{{ Hash: {this.GetHashCode()}, ");

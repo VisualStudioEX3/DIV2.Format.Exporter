@@ -25,7 +25,7 @@ namespace DIV2.Format.Importer
         const int HEADER_WIDTH_POSITION = 8;
         const int HEADER_HEIGHT_POSITION = 10;
 
-        const byte RLE_COUNTER_MASK = 0xC0; // Mask for check if bits 6 and 7 ar set (to check if is a counter byte).
+        const byte RLE_COUNTER_MASK = 0xC0; // Mask for check if bits 6 and 7 are set (to check if is a counter byte).
         const byte RLE_CLEAR_MASK = 0x3F; // Mask for clear bits 6 and 7 (to get the counter value).
         const byte PALETTE_MARKER = 0x0C; // Marker of the 256 color palette at the end of image data.
         const int PALETTE_LENGTH = 768;
@@ -119,9 +119,8 @@ namespace DIV2.Format.Importer
         {
             stream.BaseStream.Position = stream.BaseStream.Length - PALETTE_LENGTH - 1;
 
-            if (stream.ReadByte() == PALETTE_MARKER)
-                return stream.ReadBytes(PALETTE_LENGTH);
-            else
+            return stream.ReadByte() == PALETTE_MARKER ? 
+                stream.ReadBytes(PALETTE_LENGTH) : 
                 throw NOT_256_COLORS_EXCEPTION;
         }
         #endregion

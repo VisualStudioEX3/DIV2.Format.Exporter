@@ -54,10 +54,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this.Colors[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this.Colors[index];
             }
             set
             {
@@ -315,9 +314,7 @@ namespace DIV2.Format.Exporter
         [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is PAL)) return false;
-
-            return this == (PAL)obj;
+            return obj is PAL pal && this == pal;
         }
 
         /// <summary>
@@ -348,10 +345,7 @@ namespace DIV2.Format.Exporter
         /// Sorts the <see cref="Color"/> values.
         /// </summary>
         /// <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color (0, 0, 0), if exists in palette, be the first color.</remarks>
-        public void Sort()
-        {
-            this.Colors.Sort();
-        }
+        public void Sort() => this.Colors.Sort();
         #endregion
     }
 }
