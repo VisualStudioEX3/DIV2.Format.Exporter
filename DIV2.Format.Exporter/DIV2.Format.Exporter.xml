@@ -181,7 +181,7 @@
             <summary>
             Gets a <see cref="T:System.Numerics.Vector3"/> with normalized values [0..1].
             </summary>
-            <param name="colorType">Indicate the color range for set the normalization factor.</param>
+            <param name="colorType">Indicates the color range for set the normalization factor.</param>
             <returns>Returns a <see cref="T:System.Numerics.Vector3"/> with the <see cref="T:DIV2.Format.Exporter.Color"/> components normalized.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.IsDAC">
@@ -354,7 +354,7 @@
         </member>
         <member name="T:DIV2.Format.Exporter.ColorRange.RangeColors">
             <summary>
-            Available ammount of colors for the range.
+            Available amount of colors for the range.
             </summary>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.RangeColors._8">
@@ -404,7 +404,7 @@
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.colors">
             <value>
-            Ammount of colors for the range.
+            Amount of colors for the range.
             </value>
         </member>
         <member name="F:DIV2.Format.Exporter.ColorRange.type">
@@ -1223,7 +1223,7 @@
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.FromImage(System.String,DIV2.Format.Exporter.PAL)">
             <summary>
-            Creates a new <see cref="T:DIV2.Format.Exporter.MAP"/> instance from a supported image format.
+            Creates a new <see cref="T:DIV2.Format.Exporter.MAP"/> instance from a supported image format and converts the colors to the selected <see cref="T:DIV2.Format.Exporter.PAL"/> instance.
             </summary>
             <param name="filename">Image file to load.</param>
             <param name="palette"><see cref="T:DIV2.Format.Exporter.PAL"/> instance to convert the loaded image.</param>
@@ -1233,7 +1233,7 @@
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.FromImage(System.Byte[],DIV2.Format.Exporter.PAL)">
             <summary>
-            Creates a new <see cref="T:DIV2.Format.Exporter.MAP"/> instance from a supported image format.
+            Creates a new <see cref="T:DIV2.Format.Exporter.MAP"/> instance from a supported image format and converts the colors to the selected <see cref="T:DIV2.Format.Exporter.PAL"/> instance.
             </summary>
             <param name="buffer"><see cref="T:System.Byte"/> array that contain a supported image.</param>
             <param name="palette"><see cref="T:DIV2.Format.Exporter.PAL"/> instance to convert the loaded image.</param>
@@ -1316,10 +1316,10 @@
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.GetRGBTexture">
             <summary>
-            Converts all pixel indexes to the <see cref="T:DIV2.Format.Exporter.Color"/> value from this associated <see cref="T:DIV2.Format.Exporter.PAL"/> instance.
+            Converts all pixel indexes to the RGB <see cref="T:DIV2.Format.Exporter.Color"/> value from this associated <see cref="T:DIV2.Format.Exporter.PAL"/> instance.
             </summary>
             <returns>Returns a new <see cref="T:DIV2.Format.Exporter.Color"/> array with all pixel data from this bitmap. All colors are RGB format [0..255].</returns>
-            <remarks>Use this function when need to render this <see cref="T:DIV2.Format.Exporter.MAP"/> in any modern system that works in full 32 bits color space.</remarks>
+            <remarks>Use this function when need to render this <see cref="T:DIV2.Format.Exporter.MAP"/> in any modern system that works in 24 or 32 bits color space.</remarks>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.ToString">
             <summary>
@@ -1419,7 +1419,7 @@
             Creates new <see cref="T:DIV2.Format.Exporter.PAL"/> instance from a supported image file.
             </summary>
             <param name="filename">Image file to load.</param>
-            <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
+            <param name="sortColors">Indicates if is needed to sort colors of the imported palette. By default is <see langword="false"/>.</param>
             <returns>Returns a new <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
             <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
             Also supported 256 color PCX images, <see cref="T:DIV2.Format.Exporter.MAP"/> and <see cref="T:DIV2.Format.Exporter.FPG"/> files.</remarks>
@@ -1429,7 +1429,7 @@
             Creates new <see cref="T:DIV2.Format.Exporter.PAL"/> instance from a supported image file.
             </summary>
             <param name="buffer">Memory buffer that contains a supported image file.</param>
-            <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
+            <param name="sortColors">Indicates if is needed to sort colors of the imported palette. By default is <see langword="false"/>.</param>
             <returns>Returns a new <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
             <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
             Also supported 256 color PCX images, <see cref="T:DIV2.Format.Exporter.MAP"/> and <see cref="T:DIV2.Format.Exporter.FPG"/> files.</remarks>

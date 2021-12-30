@@ -177,7 +177,7 @@ namespace DIV2.Format.Exporter
         /// Creates new <see cref="PAL"/> instance from a supported image file.
         /// </summary>
         /// <param name="filename">Image file to load.</param>
-        /// <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
+        /// <param name="sortColors">Indicates if is needed to sort colors of the imported palette. By default is <see langword="false"/>.</param>
         /// <returns>Returns a new <see cref="PAL"/> instance.</returns>
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>
@@ -190,7 +190,7 @@ namespace DIV2.Format.Exporter
         /// Creates new <see cref="PAL"/> instance from a supported image file.
         /// </summary>
         /// <param name="buffer">Memory buffer that contains a supported image file.</param>
-        /// <param name="sortColors">Sort colors of the imported palette. By default is <see langword="false"/>.</param>
+        /// <param name="sortColors">Indicates if is needed to sort colors of the imported palette. By default is <see langword="false"/>.</param>
         /// <returns>Returns a new <see cref="PAL"/> instance.</returns>
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. 
         /// Also supported 256 color PCX images, <see cref="MAP"/> and <see cref="FPG"/> files.</remarks>

@@ -293,7 +293,7 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Gets a <see cref="Vector3"/> with normalized values [0..1].
         /// </summary>
-        /// <param name="colorType">Indicate the color range for set the normalization factor.</param>
+        /// <param name="colorType">Indicates the color range for set the normalization factor.</param>
         /// <returns>Returns a <see cref="Vector3"/> with the <see cref="Color"/> components normalized.</returns>
         public Vector3 Normalize(ColorFormat colorType)
         {

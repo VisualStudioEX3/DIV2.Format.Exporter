@@ -89,7 +89,7 @@ namespace DIV2.Format.Exporter
 
         #region Enumerations
         /// <summary>
-        /// Available ammount of colors for the range.
+        /// Available amount of colors for the range.
         /// </summary>
         public enum RangeColors : byte
         {
@@ -139,7 +139,7 @@ namespace DIV2.Format.Exporter
         readonly byte[] _rangeColors;
 
         /// <value>
-        /// Ammount of colors for the range.
+        /// Amount of colors for the range.
         /// </value>
         public RangeColors colors;
         /// <value>

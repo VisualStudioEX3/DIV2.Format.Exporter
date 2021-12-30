@@ -553,7 +553,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Creates a new <see cref="MAP"/> instance from a supported image format.
+        /// Creates a new <see cref="MAP"/> instance from a supported image format and converts the colors to the selected <see cref="PAL"/> instance.
         /// </summary>
         /// <param name="filename">Image file to load.</param>
         /// <param name="palette"><see cref="PAL"/> instance to convert the loaded image.</param>
@@ -566,7 +566,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Creates a new <see cref="MAP"/> instance from a supported image format.
+        /// Creates a new <see cref="MAP"/> instance from a supported image format and converts the colors to the selected <see cref="PAL"/> instance.
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array that contain a supported image.</param>
         /// <param name="palette"><see cref="PAL"/> instance to convert the loaded image.</param>
@@ -786,10 +786,10 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Converts all pixel indexes to the <see cref="Color"/> value from this associated <see cref="PAL"/> instance.
+        /// Converts all pixel indexes to the RGB <see cref="Color"/> value from this associated <see cref="PAL"/> instance.
         /// </summary>
         /// <returns>Returns a new <see cref="Color"/> array with all pixel data from this bitmap. All colors are RGB format [0..255].</returns>
-        /// <remarks>Use this function when need to render this <see cref="MAP"/> in any modern system that works in full 32 bits color space.</remarks>
+        /// <remarks>Use this function when need to render this <see cref="MAP"/> in any modern system that works in 24 or 32 bits color space.</remarks>
         public Color[] GetRGBTexture()
         {
             return this._bitmap.Select(e => this.Palette[e].ToRGB()).ToArray();
