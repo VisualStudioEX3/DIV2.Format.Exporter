@@ -14,8 +14,7 @@
           ]
         }
       ],
-      "dest": "obj/api",
-      "filter": "filterConfig.yml"
+      "dest": "obj/api"
     }
   ],
   "build": {
@@ -29,7 +28,7 @@
       {
         "files": [
           "api/*.md",
-          "articles/**.md",
+          "samples/**.md",
           "toc.yml",
           "*.md"
         ],
@@ -63,7 +62,7 @@
         ]
       }
     ],
-    "dest": "_site",
+    "dest": "../doc",
     "template": [
       "default"
     ]
