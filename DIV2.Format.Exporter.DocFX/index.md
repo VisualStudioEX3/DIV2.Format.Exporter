@@ -1,5 +1,8 @@
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/VisualStudioEX3/Home/master/pictures/div_games_studio/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
+<br>
+DIV2.Format.Exporter</h1>
 
-# This is the **HOMEPAGE**.
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
-## Quick Start Notes:
-1. Add images to *images* folder if the file is referencing an image.
+<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2021</h6>
+
+## Multiplatform framework to converts modern graphic format images to native DIV Games Studio graphic formats: PAL, MAP and FPG files.
