@@ -1163,8 +1163,8 @@
             <summary>
             Gets or sets the color index in the bitmap.
             </summary>
-            <param name="x">Horizontal coordinate of the pixel to read.</param>
-            <param name="y">Vertical coordinate of the pixel to read.</param>
+            <param name="x">Horizontal coordinate of the pixel in the bitmap.</param>
+            <param name="y">Vertical coordinate of the pixel in the bitmap.</param>
             <returns>Returns the color index in the <see cref="T:DIV2.Format.Exporter.PAL"/> instance.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.op_Equality(DIV2.Format.Exporter.MAP,DIV2.Format.Exporter.MAP)">

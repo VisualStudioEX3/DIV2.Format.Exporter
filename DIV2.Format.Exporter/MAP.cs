@@ -362,8 +362,8 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Gets or sets the color index in the bitmap.
         /// </summary>
-        /// <param name="x">Horizontal coordinate of the pixel to read.</param>
-        /// <param name="y">Vertical coordinate of the pixel to read.</param>
+        /// <param name="x">Horizontal coordinate of the pixel in the bitmap.</param>
+        /// <param name="y">Vertical coordinate of the pixel in the bitmap.</param>
         /// <returns>Returns the color index in the <see cref="PAL"/> instance.</returns>
         public byte this[int x, int y]
         {
