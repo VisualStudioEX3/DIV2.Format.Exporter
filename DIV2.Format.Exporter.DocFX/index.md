@@ -3,6 +3,6 @@
 <br>
 DIV2.Format.Exporter</h1>
 
-<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2021</h6>
+<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2022</h6>
 
-## Multiplatform framework to converts modern graphic format images to native DIV Games Studio graphic formats: PAL, MAP and FPG files.
+<h3 align="center">Multiplatform framework to converts modern graphic format images to native DIV Games Studio graphic formats: PAL, MAP and FPG files.</h3>

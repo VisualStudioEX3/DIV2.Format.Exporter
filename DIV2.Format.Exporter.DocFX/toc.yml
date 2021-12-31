@@ -2,6 +2,5 @@
 # Top bar sections:
 - name: API Documentation
   href: obj/api/
-  # homepage: api/index.md
 - name: Samples
   href: samples/
