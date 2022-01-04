@@ -28,10 +28,10 @@ byte[] buffer = System.IO.File.ReadAllBytes("background.png");
 var palette = PAL.FromImage(buffer);
 
 // Sample 7
-var palette = PAL.FromImage("background.png", true);
+var palette = PAL.FromImage("background.png", sortColors: true);
 ...
 byte[] buffer = System.IO.File.ReadAllBytes("background.png");
-var palette = PAL.FromImage(buffer, true);
+var palette = PAL.FromImage(buffer, sortColors: true);
 
 // Sample 8
 var palette = PAL.FromImage("COIN.MAP");

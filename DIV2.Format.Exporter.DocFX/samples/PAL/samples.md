@@ -21,7 +21,7 @@ Also you can load a [PAL](xref:DIV2.Format.Exporter.PAL) file from a byte array:
 [!code-csharp[Main](samples.cs?range=20-21)]
 
 ## Create a palette from an image
-You can create palettes from a image file. The process allows you to load an image file (JPEG, PNG, BMP, GIF, TGA and 8 bit PCX formats) and convert his colors to 8 bit DAC format.
+You can create palettes from a image file. The process allows you to load an image file (JPEG, PNG, BMP, GIF, and TGA image formats, and also supported 256 colors PCX files) and convert his colors to 8 bit DAC format.
 [!code-csharp[Main](samples.cs?range=24)]
 
 Also you can create the palette from a byte array with the content of the image file:
@@ -34,7 +34,7 @@ You can perform a sorting color action when creates the palette from a image:
 > Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, be the first color (index zero). DIV Games Studio draw operations usually uses the first color in a palette, the black, as transparent color for sprite masks.
 
 ## Extract palettes from MAP and FPG files
-You can create the palette from the existing one from a [MAP](xref:DIV2.Format.Exporter.MAP) or [FPG](xref:DIV2.Format.Exporter.FPG) file:
+You can create the palette from the existing one from a [MAP](xref:DIV2.Format.Exporter.MAP) or [FPG](xref:DIV2.Format.Exporter.FPG) file like you load a supported image file:
 [!code-csharp[Main](samples.cs?range=37-38)]
 
 ## Read colors
