@@ -321,7 +321,9 @@ namespace DIV2.Format.Exporter
         /// Optional graphic description.
         /// </summary>
         /// <value>Gets or sets the description for this <see cref="MAP"/> object.</value>
-        /// <remarks>The description only allow a 32 length ASCII null terminated string.</remarks>
+        /// <remarks>The description field in the file only allows a 32 length ASCII null terminated string.
+        /// If the input string is shorter than 32 characters, the string is filled with null chars.
+        /// If the input string is longer than 32 characters, getting a 32 characters length substring.</remarks>
         public string Description { get; set; }
         /// <summary>
         /// Color palette used by this graphic map.
@@ -446,6 +448,9 @@ namespace DIV2.Format.Exporter
         /// <param name="height">Bitmap height.</param>
         /// <param name="graphId"><see cref="MAP"/> graphic identifiers. By default is 1.</param>
         /// <param name="description">Optional <see cref="MAP"/> description.</param>
+        /// <remarks>The <paramref name="description"/> field in the file only allows a 32 length ASCII null terminated string.
+        /// If the input string is shorter than 32 characters, the string is filled with null chars.
+        /// If the input string is longer than 32 characters, getting a 32 characters length substring.</remarks>
         public MAP(PAL palette, short width, short height, int graphId = MIN_GRAPH_ID, string description = "")
             : this()
         {

@@ -191,11 +191,7 @@
             <returns>Returns <see langword="true"/> if the RGB components are into the DAC range values [0..63].</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.Equals(System.Object)">
-            <summary>
-            Indicates whether this instance and a specified object are equal. 
-            </summary>
-            <param name="obj">The object to compare with the current instance.</param>
-            <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+            <inheritdoc/>
         </member>
         <member name="M:DIV2.Format.Exporter.Color.GetHashCode">
             <summary>
@@ -622,9 +618,9 @@
         </member>
         <member name="M:DIV2.Format.Exporter.ExtensionMethods.ByteExtensions.CalculateChecksum(System.Byte[])">
             <summary>
-            Calculates the checksum of this <see cref="T:System.String"/>.
+            Calculates the checksum of this <see cref="T:System.Byte"/> array.
             </summary>
-            <param name="buffer"><see cref="T:System.Byte"/> array.</param>
+            <param name="buffer"><see cref="T:System.Byte"/> array to calculate checksum.</param>
             <returns>Returns the checksum <see cref="T:System.String"/> value of this <see cref="T:System.Byte"/> array.</returns>
         </member>
         <member name="T:DIV2.Format.Exporter.ExtensionMethods.ColorExtensions">
@@ -822,6 +818,9 @@
             </summary>
             <param name="buffer"><see cref="T:System.Byte"/> array that contain the <see cref="T:DIV2.Format.Exporter.MAP"/> file data to load.</param>
             <param name="filename">Optional filename value in DOS 8:3 format.</param>
+            <remarks>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
+            If the input string is shorter than 12 characters, the string is filled with null chars.
+            If the input string is longer than 12 characters, getting a 12 characters length substring.</remarks>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Add(DIV2.Format.Exporter.MAP,System.String)">
             <summary>
@@ -829,6 +828,9 @@
             </summary>
             <param name="map"><see cref="T:DIV2.Format.Exporter.MAP"/> instance to add.</param>
             <param name="filename">Optional filename value in DOS 8:3 format.</param>
+            <remarks>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
+            If the input string is shorter than 12 characters, the string is filled with null chars.
+            If the input string is longer than 12 characters, getting a 12 characters length substring.</remarks>
         </member>
         <member name="M:DIV2.Format.Exporter.FPG.Contains(DIV2.Format.Exporter.MAP)">
             <summary>
@@ -1132,7 +1134,9 @@
             Optional graphic description.
             </summary>
             <value>Gets or sets the description for this <see cref="T:DIV2.Format.Exporter.MAP"/> object.</value>
-            <remarks>The description only allow a 32 length ASCII null terminated string.</remarks>
+            <remarks>The description field in the file only allows a 32 length ASCII null terminated string.
+            If the input string is shorter than 32 characters, the string is filled with null chars.
+            If the input string is longer than 32 characters, getting a 32 characters length substring.</remarks>
         </member>
         <member name="P:DIV2.Format.Exporter.MAP.Palette">
             <summary>
@@ -1192,6 +1196,9 @@
             <param name="height">Bitmap height.</param>
             <param name="graphId"><see cref="T:DIV2.Format.Exporter.MAP"/> graphic identifiers. By default is 1.</param>
             <param name="description">Optional <see cref="T:DIV2.Format.Exporter.MAP"/> description.</param>
+            <remarks>The <paramref name="description"/> field in the file only allows a 32 length ASCII null terminated string.
+            If the input string is shorter than 32 characters, the string is filled with null chars.
+            If the input string is longer than 32 characters, getting a 32 characters length substring.</remarks>
         </member>
         <member name="M:DIV2.Format.Exporter.MAP.#ctor(System.String)">
             <summary>
