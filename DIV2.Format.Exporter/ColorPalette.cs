@@ -334,11 +334,8 @@ namespace DIV2.Format.Exporter
                    this.blue.IsClamped(0, MAX_DAC_VALUE);
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
             return obj is Color color && this == color;
