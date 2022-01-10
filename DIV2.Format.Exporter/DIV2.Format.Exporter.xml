@@ -289,7 +289,8 @@
             <summary>
             Sorts the <see cref="T:DIV2.Format.Exporter.Color"/> values.
             </summary>
-            <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color (0, 0, 0), if exists in palette, be the first color.
+            <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color 
+            (0, 0, 0), if exists in palette, be the first color.
             This implementation is based on this article: https://www.alanzucconi.com/2015/09/30/colour-sorting/ </remarks>
         </member>
         <member name="M:DIV2.Format.Exporter.ColorPalette.GetEnumerator">
@@ -1057,7 +1058,8 @@
             <summary>
             Initializes a new instance.
             </summary>
-            <param name="stream">A <see cref="T:System.IO.BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="T:System.Int16"/> values for X and Y coordinates.</param>
+            <param name="stream">A <see cref="T:System.IO.BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="T:System.Int16"/> 
+            values for X and Y coordinates.</param>
         </member>
         <member name="M:DIV2.Format.Exporter.ControlPoint.Serialize">
             <inheritdoc/>
@@ -1506,13 +1508,15 @@
             <summary>
             Creates a copy of the <see cref="T:DIV2.Format.Exporter.Color"/> array converted to full RGB format [0..255].
             </summary>
-            <returns>Returns a new <see cref="T:DIV2.Format.Exporter.Color"/> array in full RGB format [0..255]. In most of the cases, these values are an aproximation to the real RGB value.</returns>
+            <returns>Returns a new <see cref="T:DIV2.Format.Exporter.Color"/> array in full RGB format [0..255]. In most of the cases, these values are an 
+            aproximation to the real RGB value.</returns>
         </member>
         <member name="M:DIV2.Format.Exporter.PAL.Sort">
             <summary>
             Sorts the <see cref="T:DIV2.Format.Exporter.Color"/> values.
             </summary>
-            <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color (0, 0, 0), if exists in palette, be the first color.</remarks>
+            <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color 
+            (0, 0, 0), if exists in palette, be the first color.</remarks>
         </member>
         <member name="T:DIV2.Format.Exporter.Utils.DocFxIgnoreAttribute">
             <summary>
