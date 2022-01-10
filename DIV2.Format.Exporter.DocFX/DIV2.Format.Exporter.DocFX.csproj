@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="samples\Color\samples.md" />
     <None Include="samples\intro.md" />
     <None Include="samples\PAL\samples.md" />
     <None Include="samples\toc.md" />
@@ -79,7 +80,10 @@
     <Content Include="logo.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="samples\PAL\samples.cs" />
+    <None Include="samples\PAL\samples.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="samples\Color\samples.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\docfx.console.2.58.9\build\docfx.console.targets" Condition="Exists('..\packages\docfx.console.2.58.9\build\docfx.console.targets')" />

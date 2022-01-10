@@ -1,2 +1,3 @@
 #[Introduction](intro.md)
-#[PAL samples](PAL/samples.md)
+#[Color struct samples](Color/samples.md)
+#[PAL class samples](PAL/samples.md)
