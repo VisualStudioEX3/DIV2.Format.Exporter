@@ -1,4 +1,4 @@
-﻿# PAL samples
+﻿# PAL class samples
 This section shows common samples of how to create and manage DIV Games Studio palettes.
 
 > [!NOTE]
@@ -68,3 +68,8 @@ white or the brightest color in the palette:
 ## Save palette to a file
 You can easily save your palette to a [PAL](xref:DIV2.Format.Exporter.PAL) file using the following call:
 [!code-csharp[Main](samples.cs?range=56)]
+
+## Get full RGB colors
+If you need, for example, render the 16x16 palette color matrix in a custom tool, that works with full RGB 24/32 bits, you can get a copy of the all 
+colors in RGB format [0..255] using a simple call:
+[!code-csharp[Main](samples.cs?range=59)]

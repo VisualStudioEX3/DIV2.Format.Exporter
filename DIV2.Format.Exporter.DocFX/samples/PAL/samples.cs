@@ -54,3 +54,6 @@ palette.Sort();
 
 // Sample 13
 palette.Save("NEW.PAL");
+
+// Sample 14
+Color[] rgbPaletteColors = palette.ToRGB();
