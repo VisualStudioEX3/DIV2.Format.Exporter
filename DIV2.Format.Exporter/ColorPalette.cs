@@ -586,7 +586,8 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Sorts the <see cref="Color"/> values.
         /// </summary>
-        /// <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color (0, 0, 0), if exists in palette, be the first color.
+        /// <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color 
+        /// (0, 0, 0), if exists in palette, be the first color.
         /// This implementation is based on this article: https://www.alanzucconi.com/2015/09/30/colour-sorting/ </remarks>
         public void Sort()
         {

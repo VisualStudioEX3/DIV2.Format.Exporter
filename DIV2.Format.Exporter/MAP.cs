@@ -151,7 +151,8 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="stream">A <see cref="BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="short"/> values for X and Y coordinates.</param>
+        /// <param name="stream">A <see cref="BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="short"/> 
+        /// values for X and Y coordinates.</param>
         public ControlPoint(BinaryReader stream)
             : this(stream.ReadInt16(), stream.ReadInt16())
         {
@@ -536,7 +537,8 @@ namespace DIV2.Format.Exporter
         public static MAP FromImage(string filename)
         {
             return ValidateFormat(filename)
-                ? throw new ArgumentException($"The filename is a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or indicate a {nameof(PAL)} file to apply color conversion.")
+                ? throw new ArgumentException($"The filename is a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or " +
+                $"indicate a {nameof(PAL)} file to apply color conversion.")
                 : FromImage(File.ReadAllBytes(filename));
         }
 
@@ -549,7 +551,8 @@ namespace DIV2.Format.Exporter
         public static MAP FromImage(byte[] buffer)
         {
             if (ValidateFormat(buffer))
-                throw new ArgumentException($"The buffer contains a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or indicate a {nameof(PAL)} file to apply color conversion.");
+                throw new ArgumentException($"The buffer contains a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or " +
+                    $"indicate a {nameof(PAL)} file to apply color conversion.");
 
             BMP256Converter.Convert(buffer, out byte[] palette, out short width, out short height, out byte[] bitmap);
 
