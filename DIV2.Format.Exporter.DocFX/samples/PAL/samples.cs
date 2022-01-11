@@ -1,4 +1,4 @@
-﻿// PAL samples
+﻿// PAL class samples
 
 // Sample 1
 var palette = new PAL();
