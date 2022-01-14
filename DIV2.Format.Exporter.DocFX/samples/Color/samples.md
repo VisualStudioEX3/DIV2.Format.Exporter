@@ -31,7 +31,7 @@ You can check if a [Color](xref:DIV2.Format.Exporter.Color) value is a **DAC** v
 [!code-csharp[Main](samples.cs?range=23)]
 
 > [!NOTE]
-> This function only checks if the color channel values are bounded in the **DAC** range [0..63].
+> This function only checks if the color channels values are bounded in the **DAC** range [0..63].
 > There is not way to ensure if a color value is a true **DAC** or full **RGB** value [0..255].
 
 ## Converts a DAC color to RGB equivalent
@@ -44,12 +44,12 @@ You can converts any **RGB** color to his equivalent **DAC** value using the fol
 of the real **DAC** value:
 [!code-csharp[Main](samples.cs?range=29)]
 
-## Cast an integer value as a Color struct value and viceversa
+## Using an integer value as a Color struct value and viceversa
 The [Color](xref:DIV2.Format.Exporter.Color) structure can be casted to integer values and viceversa.
 This is useful in some scenaries where you need to implements algorithms that are more effective working with simple numbers than a structures, for
 example, for sorting processes or similar actions.
 
-You can cast an integer value as [Color](xref:DIV2.Format.Exporter.Color) simply assinging the value using the assignation operator:
+You can cast an integer value as [Color](xref:DIV2.Format.Exporter.Color) simply assigning the value using the assignation operator:
 [!code-csharp[Main](samples.cs?range=32-34)]
 
 And viceversa, you can cast a [Color](xref:DIV2.Format.Exporter.Color) value to an integer value in the similar way:
