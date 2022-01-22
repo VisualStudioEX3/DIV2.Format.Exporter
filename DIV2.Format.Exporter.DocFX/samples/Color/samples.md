@@ -34,13 +34,13 @@ You can check if a [Color](xref:DIV2.Format.Exporter.Color) value is a **DAC** v
 > This function only checks if the color channels values are bounded in the **DAC** range [0..63].
 > There is not way to ensure if a color value is a true **DAC** or full **RGB** value [0..255].
 
-## Converts a DAC color to RGB equivalent
-You can converts any **DAC** color to his equivalent **RGB** value using the following function. Remember that the value is a closer approximation
+## Convert a DAC color to RGB equivalent
+You can convert any **DAC** color to his equivalent **RGB** value using the following function. Remember that the value is a closer approximation
 of the real **RGB** value:
 [!code-csharp[Main](samples.cs?range=26)]
 
-## Converts a RGB color to DAC equivalent
-You can converts any **RGB** color to his equivalent **DAC** value using the following function. Remember that the value is a closer approximation
+## Convert a RGB color to DAC equivalent
+You can convert any **RGB** color to his equivalent **DAC** value using the following function. Remember that the value is a closer approximation
 of the real **DAC** value:
 [!code-csharp[Main](samples.cs?range=29)]
 
