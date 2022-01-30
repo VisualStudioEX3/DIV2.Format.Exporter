@@ -7,7 +7,7 @@ var color = new Color(0, 31, 63);
 color.red = 0;
 color.green = 31;
 color.blue = 63;
-...
+
 Console.Write($"Red: {color.red}, Green: {color.green}, Blue: {color.blue}");
 // Red: 0, Green: 31, Blue: 63
 
@@ -15,7 +15,7 @@ Console.Write($"Red: {color.red}, Green: {color.green}, Blue: {color.blue}");
 color[0] = 0;
 color[1] = 31;
 color[2] = 63;
-...
+
 Console.Write($"Red: {color[0]}, Green: {color[1]}, Blue: {color[2]}");
 // Red: 0, Green: 31, Blue: 63
 

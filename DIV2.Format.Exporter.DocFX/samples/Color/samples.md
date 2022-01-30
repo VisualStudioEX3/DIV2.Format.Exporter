@@ -1,7 +1,7 @@
 ﻿# Color struct samples
 This section shows common samples of how to work with colors to manage **DIV Games Studio** palettes and images.
 
-Remember that **DIV Games Studio** palettes working in **DAC** format. This means that the **RGB** channel ranges are 0 to 63 instead of 0 to 255.
+Remember that **DIV Games Studio** palettes working in **DAC** format. This means that the **RGB** channels ranges are 0 to 63 instead of 0 to 255.
 
 The **DIV Games Studio** files, [PAL](xref:DIV2.Format.Exporter.PAL), [MAP](xref:DIV2.Format.Exporter.MAP), [FPG](xref:DIV2.Format.Exporter.FPG) 
 and **FNT** files, works in **DAC** format. If you try to set a full **RGB** [Color](xref:DIV2.Format.Exporter.Color) value for any related 
@@ -19,7 +19,7 @@ The common way to create a new color value is using the main constructor:
 Also you can create an empty [Color](xref:DIV2.Format.Exporter.Color) value or pure black color (0, 0, 0) using the default non-parametrized 
 consutructor and setup the color channel values later.
 
-## Access color channel values
+## Access color channels values
 You can access, to write or read, the each [Color](xref:DIV2.Format.Exporter.Color) channel values: red, green and blue, using the struct fields:
 [!code-csharp[Main](samples.cs?range=7-12)]
 
