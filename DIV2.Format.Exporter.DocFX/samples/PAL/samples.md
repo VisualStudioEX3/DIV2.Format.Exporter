@@ -15,6 +15,10 @@ instance and setup colors manually:
 Also you can setup a [Color](xref:DIV2.Format.Exporter.Color) array to 
 initialize a new palette:
 [!code-csharp[Main](samples.cs?range=12-14)]
+> [!WARNING]
+> Remember that DIV Games Studio palettes working in DAC format. This means that the RGB channel ranges are 0 to 63 instead of 0 to 255. If you trying to 
+> initialize a palette using values over 63 for any color channel, you thrown an exception.
+
 
 ## Load an existing palette
 This code shows how to load a [PAL](xref:DIV2.Format.Exporter.PAL) file:
@@ -35,7 +39,7 @@ You can perform a sorting color action when creates the palette from a image:
 [!code-csharp[Main](samples.cs?range=31)]
 [!code-csharp[Main](samples.cs?range=33-34)]
 > [!NOTE]
-> Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, be the first color 
+> Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, was the first color 
 > (index zero). DIV Games Studio draw operations usually uses the first color in a palette, the black, as transparent color for sprite masks.
 
 ## Extract palettes from MAP and FPG files
@@ -62,7 +66,7 @@ You can manually perform a color sorting in your palettes. This action trying to
 white or the brightest color in the palette:
 [!code-csharp[Main](samples.cs?range=53)]
 > [!NOTE]
-> Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, be the first color 
+> Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, was the first color 
 > (index zero). DIV Games Studio draw operations usually uses the first color in a palette, the black, as transparent color for sprite masks.
 
 ## Save palette to a file
