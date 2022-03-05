@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://github.com/VisualStudioEX3/Home/blob/master/pictures/div_games_studio/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
+<img src="https://github.com/VisualStudioEX3/Home/blob/master/pictures/div_games_studio/div2_logo/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
 <br>
 DIV2.Format.Exporter</h1>
 
