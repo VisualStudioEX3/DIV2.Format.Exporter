@@ -13,12 +13,12 @@ relatives to the image bitmap but are translated to the screen space when you dr
 
 This feature helps the programmer to define the logical center of the image, used to for draw, rotate and scale 
 operations, but also, and is the main useful usage, to easily place other objects related with the 
-[MAP](xref:DIV2.Format.Exporter.MAP) in screen (e.g. a ship engine particle or a bullet from a weapon barrel).
+[MAP](xref:DIV2.Format.Exporter.MAP) position in screen (e.g. a ship engine particle or a bullet from a weapon barrel).
 
-By default, all [MAP](xref:DIV2.Format.Exporter.MAP) images contains a default 
+By default, all [MAP](xref:DIV2.Format.Exporter.MAP) images has a default 
 [Control Point](xref:DIV2.Format.Exporter.ControlPoint) that reference the center of the image. You can overwrite
-the default point coordinates and create new ones as many you need, with a limit of 1000 points in total per 
-[MAP](xref:DIV2.Format.Exporter.MAP)).
+the default [Control Point](xref:DIV2.Format.Exporter.ControlPoint) coordinates and create new ones as many you need, 
+with a limit of 1000 points in total.
 
 > [!NOTE]
 > Only the first [Control Point](xref:DIV2.Format.Exporter.ControlPoint) is used as center of the image for draw, 
