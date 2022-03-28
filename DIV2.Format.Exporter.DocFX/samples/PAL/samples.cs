@@ -10,7 +10,7 @@ palette[2] = new Color(63, 63, 63);
 
 // Sample 2
 var colors = new Color[256];
-... // Setup each Color array element value.
+... // Sets each Color array element value.
 var palette = new PAL(colors);
 
 // Sample 3

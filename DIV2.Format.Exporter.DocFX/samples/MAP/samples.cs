@@ -25,9 +25,9 @@ map[42] = 224; // Writes the color index 224 in the pixel index 42.
 map[32, 24] = 224; // Writes the color index 224 in the pixel located in x32 y24.
 
 // Sample 8
-... // Created a 64x64 MAP image.
+... // Creates a 64x64 MAP image.
 var bitmap = new byte[64 * 64]; // Creates a 64x64 byte array.
-... // Set the color indexes in each pixel.
+... // Sets color indexes in each pixel.
 map.SetBitmapArray(bitmap);
 
 // Sample 9
