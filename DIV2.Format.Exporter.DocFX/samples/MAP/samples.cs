@@ -1,64 +1,85 @@
 ﻿// MAP class samples
 
 // Sample 1
-Create a new MAP
+var palette = new PAL("DIV.PAL");
+var map = new MAP(palette, 64, 128, 12, "Test map.");
 
 // Sample 2
-Load a MAP file
+var map = new MAP("PLAYER.MAP");
 
-// Sample 3 
-Import a supported image file
+// Sample 3
+byte[] buffer = System.IO.File.ReadAllBytes("PLAYER.MAP");
+var map = new MAP(buffer);
 
 // Sample 4
-Convert a MAP or supported image file to a specific PAL
+var map = MAP.FromImage("PLAYER.PNG");
+
+// Sample 5
+var palette = new PAL("DIV.PAL");
+var map = MAP.FromImage("PLAYER.PNG", palette);
 
 // Sample 6
-Write pixels by index
+map[42] = 224; // Writes the color index 224 in the pixel index 42.
 
 // Sample 7
-Write pixels by bitmap coordinates
+map[32, 24] = 224; // Writes the color index 224 in the pixel located in x32 y24.
 
 // Sample 8
-Set bitmap array data
+... // Created a 64x64 MAP image.
+var bitmap = new byte[64 * 64]; // Creates a 64x64 byte array.
+... // Set the color indexes in each pixel.
+map.SetBitmapArray(bitmap);
 
 // Sample 9
-Read pixels by index
+byte colorIndex = map[42]; // Reads the color index from pixel index 42.
 
 // Sample 10
-Read pixels by bitmap coordinates
+byte colorIndex = map[32, 24]; // Reads the color index from pixel located in x32 y24.
 
 // Sample 11
-Read pixels using foreach loop
+foreach (byte colorIndex in map)
+{
+    Console.WriteLine(colorIndex); // Prints the color index of the current pixel.
+}
 
 // Sample 12
-Get bitmap array data
+byte[] bitmap = map.GetBitmapArray();
 
 // Sample 13
-Get RGB bitmap array
+Color[] texture = map.GetRGBTexture();
 
 // Sample 14
-Clear bitmap
+map.Clear();
 
 // Sample 15
-Read control points by index
+ControlPoint point = map.ControlPoints[0]; // Reads the first/default control point.
 
 // Sample 16
-Read control points using foreach loop
+foreach (ControlPoint point in map.ControlPoints)
+{
+    Console.WriteLine(point); // Prints the Control Point coordinates.
+}
 
 // Sample 17
-Add control point
+map.ControlPoints.Add(new ControlPoint(16, 16)); // Adds a new Control Point in x16 y16.
 
 // Sample 18
-Remove control point
+map.ControlPoints.RemoveAt(2); // Removes the third (index 2) Control Point.
 
 // Sample 19
-Remove all control points
+map.ControlPoints.Clear();
 
 // Sample 20
-Gets or sets the graph id
+int graphId = map.GraphId;
 
 // Sample 21
-Gets or sets the description
+map.GraphId = 10;
 
 // Sample 22
-Save MAP file
+string description = map.Description;
+
+// Sample 23
+map.Description = "A simple description.";
+
+// Sample 24
+map.Save("NEWMAP.MAP");
