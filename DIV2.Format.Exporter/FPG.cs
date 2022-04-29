@@ -344,6 +344,8 @@ namespace DIV2.Format.Exporter
         /// Adds a <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename"><see cref="MAP"/> file to load.</param>
+        /// <remarks>This method always performs a color conversion if the palette is different from the 
+        /// <see cref="FPG"/> instance to ensure the <see cref="MAP"/> image shows properly with the current palette.</remarks>
         public void Add(string filename)
         {
             this.Add(new MAP(File.ReadAllBytes(filename)));
@@ -354,9 +356,12 @@ namespace DIV2.Format.Exporter
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array that contain the <see cref="MAP"/> file data to load.</param>
         /// <param name="filename">Optional filename value in DOS 8:3 format.</param>
-        /// <remarks>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
+        /// <remarks><para>This method always performs a color conversion if the palette is different from the 
+        /// <see cref="FPG"/> instance to ensure the <see cref="MAP"/> image shows properly with the current palette.</para>
+        /// 
+        /// <para>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
         /// If the input string is shorter than 12 characters, the string is filled with null chars.
-        /// If the input string is longer than 12 characters, getting a 12 characters length substring.</remarks>
+        /// If the input string is longer than 12 characters, getting a 12 characters length substring.</para></remarks>
         public void Add(byte[] buffer, string filename = "")
         {
             this.Add(new MAP(buffer), filename);
@@ -367,9 +372,12 @@ namespace DIV2.Format.Exporter
         /// </summary>
         /// <param name="map"><see cref="MAP"/> instance to add.</param>
         /// <param name="filename">Optional filename value in DOS 8:3 format.</param>
-        /// <remarks>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
+        /// <remarks><para>This method always performs a color conversion if the palette is different from the 
+        /// <see cref="FPG"/> instance to ensure the <see cref="MAP"/> image shows properly with the current palette.</para>
+        /// 
+        /// <para>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
         /// If the input string is shorter than 12 characters, the string is filled with null chars.
-        /// If the input string is longer than 12 characters, getting a 12 characters length substring.</remarks>
+        /// If the input string is longer than 12 characters, getting a 12 characters length substring.</para></remarks>
         public void Add(MAP map, string filename = "")
         {
             if (this.Contains(map))
