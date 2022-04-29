@@ -33,12 +33,12 @@ image. The **description** is an optional field used to add a little description
 > **DIV Games Studio** assigned one when you load a [MAP](xref:DIV2.Format.Exporter.MAP) from a file).
 > This field value only is required when you want to store the image in a [FPG](xref:DIV2.Format.Exporter.FPG) file.
 
-## Create a new map
+## Create a new MAP
 This code shows how to create an empty 64x128 [MAP](xref:DIV2.Format.Exporter.MAP) instance, with a **graph id** 
 and a **description** values. You can omit these fields to use default values:
 [!code-csharp[Main](samples.cs?range=4-5)]
 
-## Load a map
+## Load a MAP
 This code shows how to load an existing [MAP](xref:DIV2.Format.Exporter.MAP) file:
 [!code-csharp[Main](samples.cs?range=8)]
 

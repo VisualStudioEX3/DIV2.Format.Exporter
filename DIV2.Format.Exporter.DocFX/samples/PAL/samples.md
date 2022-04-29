@@ -12,8 +12,7 @@ This code shows how to create an empty [PAL](xref:DIV2.Format.Exporter.PAL)
 instance and setup colors manually:
 [!code-csharp[Main](samples.cs?range=4-9)]
 
-Also you can setup a [Color](xref:DIV2.Format.Exporter.Color) array to 
-initialize a new palette:
+Also you can setup a [Color](xref:DIV2.Format.Exporter.Color) array to initialize a new palette:
 [!code-csharp[Main](samples.cs?range=12-14)]
 > [!WARNING]
 > Remember that **DIV Games Studio palettes** working in DAC format. This means that the RGB channel ranges are 0 to 63 instead of 0 to 255. If you trying to 
