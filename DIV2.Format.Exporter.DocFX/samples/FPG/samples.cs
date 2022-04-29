@@ -1,33 +1,71 @@
 ﻿// FPG class samples
 
 // Sample 1
-Create a new FPG.
+var palette = new PAL("DIV.PAL");
+var fpg = new FPG(palette);
 
 // Sample 2
-Load a FPG file.
-Load from memory.
+var fpg = new FPG("PLAYER.FPG");
 
 // Sample 3
-Read MAP.
+byte[] buffer = System.IO.File.ReadAllBytes("PLAYER.FPG");
+var fpg = new FPG(buffer);
 
 // Sample 4
-Add a MAP file. 
-NOTE: The auto color conversion.
+var map = fpg[16]; // Gets the MAP in the FPG at index 16.
 
 // Sample 5
-Remove a MAP file.
-Remove by graphId.
-Remove by index.
+foreach (MAP map in fpg)
+{
+    // Prints each MAP graphId and description values:
+    Console.WriteLine($"{map.GraphId}: {map.Description}");
+}
 
 // Sample 6
-Locate MAP by instance.
-Locate MAP by graphId.
+var map = new MAP("RUN101.MAP");
+fpg.Add(map);
 
 // Sample 7
-How to replace an existing MAP by other one.
+byte[] buffer = System.IO.File.ReadAllBytes("RUN101.MAP");
+fpg.Add(buffer);
 
 // Sample 8
-Clear FPG.
+fpg.Add("RUN101.MAP");
 
 // Sample 9
-Save a FPG.
+var map = new MAP("RUN101.MAP");
+// ...
+fpg.Remove(map); // Removes the MAP that match with this instance.
+
+// Sample 10
+fpg.Remove(101); // Removes the MAP with graphId 101.
+
+// Sample 11
+fpg.RemoveAt(16); // Removes the MAP at index 16.
+
+// Sample 12
+var map = new MAP("RUN101.MAP");
+bool exists = fpg.Contains(map);
+
+// Sample 13
+bool exists = fpg.Contains(101); // Checks if the FPG contains any MAP with graphId 101.
+
+// Sample 14
+// How to replace the MAP with graphId 101 on a FPG file:
+var fpg = new FPG("PLAYER.FPG");
+
+// Loads the new MAP to replace an existing one.
+// For this sample, we assume that this MAP has the graphId 101:
+var map = new MAP("RUN101.MAP");
+
+// Remove the current MAP with graphId 101:
+fpg.Remove(101);
+
+// Adds the new MAP:
+fpg.Add(map);
+
+// Sample 15
+fpg.Clear();
+
+// Sample 16
+fpg.Save("PLAYER.FPG");
