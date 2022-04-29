@@ -34,7 +34,6 @@ fpg.Add("RUN101.MAP");
 
 // Sample 9
 var map = new MAP("RUN101.MAP");
-// ...
 fpg.Remove(map); // Removes the MAP that match with this instance.
 
 // Sample 10
@@ -58,7 +57,7 @@ var fpg = new FPG("PLAYER.FPG");
 // For this sample, we assume that this MAP has the graphId 101:
 var map = new MAP("RUN101.MAP");
 
-// Remove the current MAP with graphId 101:
+// Removes the current MAP with graphId 101:
 fpg.Remove(101);
 
 // Adds the new MAP:
