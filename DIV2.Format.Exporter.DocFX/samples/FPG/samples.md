@@ -57,7 +57,7 @@ the graphId before add the [MAP](xref:DIV2.Format.Exporter.MAP) and thrown an ex
 >[!NOTE]
 > The [Add](xref:DIV2.Format.Exporter.FPG.Add(DIV2.Format.Exporter.MAP,System.String)) method, and his overloads, 
 > always performs a color conversion if the palette is different from the [FPG](xref:DIV2.Format.Exporter.FPG) instance
-> to ensure the [MAP](xref:DIV2.Format.Exporter.MAP) colors matched the current palette.
+> to ensure the [MAP](xref:DIV2.Format.Exporter.MAP) image shows properly with the current palette.
 
 ## Remove a MAP image
 This code shows how to remove a [MAP](xref:DIV2.Format.Exporter.MAP) from a [FPG](xref:DIV2.Format.Exporter.FPG) 
