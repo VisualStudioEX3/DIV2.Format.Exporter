@@ -1,9 +1,10 @@
 # DIV2.Format.Exporter common samples
 
 This section contains a samples about the **DIV2.Format.Exporter** API. 
-The samples are grouped by the relevant API classes and structs following 
-with a short explanations to help you to learn how to use the common and
-main features to create our content ready to use in **DIV Games Studio** projects.
+
+The samples are grouped by the relevant API classes and structs following with a 
+short explanations to help you to learn how to use the common and main features 
+to create your content ready to use in **DIV Games Studio** projects.
 
 ## [Color struct samples](Color/samples.md)
 Samples to show how to work with colors in **DIV Games Studio** palettes and images.
