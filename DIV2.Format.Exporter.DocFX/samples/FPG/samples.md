@@ -37,18 +37,18 @@ instance using his index position:
 [!code-csharp[Main](samples.cs?range=15)]
 
 And also, you can use a foreach loop to read all [MAP](xref:DIV2.Format.Exporter.MAP)s:
-[!code-csharp[Main](samples.cs?range=18-22)]
+[!code-csharp[Main](samples.cs?range=18-21)]
 
 ## Add a new MAP image
 This code shows how to add a new [MAP](xref:DIV2.Format.Exporter.MAP) to the [FPG](xref:DIV2.Format.Exporter.FPG) 
 instance:
-[!code-csharp[Main](samples.cs?range=25-26)]
+[!code-csharp[Main](samples.cs?range=24-25)]
 
 Also you can load a [MAP](xref:DIV2.Format.Exporter.MAP) file from a byte array and add them in the same way:
-[!code-csharp[Main](samples.cs?range=29-30)]
+[!code-csharp[Main](samples.cs?range=28-29)]
 
 Or simply load by filename:
-[!code-csharp[Main](samples.cs?range=33)]
+[!code-csharp[Main](samples.cs?range=32)]
 
 The [Add](xref:DIV2.Format.Exporter.FPG.Add(DIV2.Format.Exporter.MAP,System.String)) method, and his overloads, checks 
 the graphId before add the [MAP](xref:DIV2.Format.Exporter.MAP) and thrown an exception if already exists a
@@ -62,26 +62,26 @@ the graphId before add the [MAP](xref:DIV2.Format.Exporter.MAP) and thrown an ex
 ## Remove a MAP image
 This code shows how to remove a [MAP](xref:DIV2.Format.Exporter.MAP) from a [FPG](xref:DIV2.Format.Exporter.FPG) 
 instance using different ways:
-[!code-csharp[Main](samples.cs?range=36-37)]
-[!code-csharp[Main](samples.cs?range=40)]
-[!code-csharp[Main](samples.cs?range=43)]
+[!code-csharp[Main](samples.cs?range=35-36)]
+[!code-csharp[Main](samples.cs?range=39)]
+[!code-csharp[Main](samples.cs?range=42)]
 
 ## Check if a FPG contains an specific MAP image
 This code shows how to check if a [FPG](xref:DIV2.Format.Exporter.FPG) instance contains an specific 
 [MAP](xref:DIV2.Format.Exporter.MAP):
-[!code-csharp[Main](samples.cs?range=46-47)]
-[!code-csharp[Main](samples.cs?range=50)]
+[!code-csharp[Main](samples.cs?range=45-46)]
+[!code-csharp[Main](samples.cs?range=49)]
 
 ## Replace an existing MAP image
 This code shows how to replace [MAP](xref:DIV2.Format.Exporter.MAP) from a [FPG](xref:DIV2.Format.Exporter.FPG) 
 instance:
-[!code-csharp[Main](samples.cs?range=53-64)]
+[!code-csharp[Main](samples.cs?range=52-63)]
 
 ## Removes all MAP images
 You can removes all [MAP](xref:DIV2.Format.Exporter.MAP)s from a [FPG](xref:DIV2.Format.Exporter.FPG) instance using 
 the following call:
-[!code-csharp[Main](samples.cs?range=67)]
+[!code-csharp[Main](samples.cs?range=66)]
 
 ## Save FPG to file
 You can easily save your changes to a [MAP](xref:DIV2.Format.Exporter.MAP) file using the following call:
-[!code-csharp[Main](samples.cs?range=70)]
+[!code-csharp[Main](samples.cs?range=69)]

@@ -17,8 +17,7 @@ var map = fpg[16]; // Gets the MAP in the FPG at index 16.
 // Sample 5
 foreach (MAP map in fpg)
 {
-    // Prints each MAP graphId and description values:
-    Console.WriteLine($"{map.GraphId}: {map.Description}");
+    Console.WriteLine(map); // Prints the current MAP properties in console.
 }
 
 // Sample 6
