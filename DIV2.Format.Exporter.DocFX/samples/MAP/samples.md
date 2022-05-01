@@ -42,7 +42,7 @@ and a **description** values. You can omit these fields to use default values:
 This code shows how to load an existing [MAP](xref:DIV2.Format.Exporter.MAP) file:
 [!code-csharp[Main](samples.cs?range=8)]
 
-Also you can load a [MAP](xref:DIV2.Format.Exporter.MAP) file from a byte array:
+Also you can load a [MAP](xref:DIV2.Format.Exporter.MAP) file from a [byte](xref:System.Byte) array:
 [!code-csharp[Main](samples.cs?range=11-12)]
 
 ## Import a supported image format
@@ -100,8 +100,8 @@ You can erase all bitmap data using this call. This method sets all pixels to ze
 [!code-csharp[Main](samples.cs?range=52)]
 
 ## Manage Control Points
-The management of the [Control Point](xref:DIV2.Format.Exporter.ControlPoint)s list is the same as the any generic
-list.
+The management of the [Control Point](xref:DIV2.Format.Exporter.ControlPoint)s list is the same as the 
+[List\<T\>](xref:System.Collections.Generic.List`1) generic class.
 
 You can read any point using his index in the list:
 [!code-csharp[Main](samples.cs?range=55)]
@@ -141,7 +141,7 @@ You can get or set the **description** value using the following property:
 [!code-csharp[Main](samples.cs?range=82)]
 
 > [!NOTE]
-> The **description** field has a limit of 32 characters. You can enter any string value with more of 32 characters, 
+> The **description** field has a limit of 32 characters. You can enter any [string](xref:System.String) value with more of 32 characters, 
 > but when you save the [MAP](xref:DIV2.Format.Exporter.MAP) file, this field save only the first 32 characters.
 > This field is optional.
 

@@ -23,7 +23,7 @@ Also you can setup a [Color](xref:DIV2.Format.Exporter.Color) array to initializ
 This code shows how to load a [PAL](xref:DIV2.Format.Exporter.PAL) file:
 [!code-csharp[Main](samples.cs?range=17)]
 
-Also you can load a [PAL](xref:DIV2.Format.Exporter.PAL) file from a byte array:
+Also you can load a [PAL](xref:DIV2.Format.Exporter.PAL) file from a [byte](xref:System.Byte) array:
 [!code-csharp[Main](samples.cs?range=20-21)]
 
 ## Create a palette from an image
@@ -31,7 +31,7 @@ You can create palettes from a image file. The process allows you to load an ima
 256 colors PCX files), extract all unique colors from the image, and convert them to 8 bit **DAC** format.
 [!code-csharp[Main](samples.cs?range=24)]
 
-Also you can create the palette from a byte array with the content of the image file:
+Also you can create the palette from a [byte](xref:System.Byte) array with the content of the image file:
 [!code-csharp[Main](samples.cs?range=27-28)]
 
 You can perform a sorting color action when creates the palette from a image:

@@ -45,12 +45,12 @@ of the real **DAC** value:
 [!code-csharp[Main](samples.cs?range=29)]
 
 ## Using an integer value as a Color struct value and viceversa
-The [Color](xref:DIV2.Format.Exporter.Color) structure can be casted to integer values and viceversa.
+The [Color](xref:DIV2.Format.Exporter.Color) structure can be casted to [integer](xref:System.Int32) values and viceversa.
 This is useful in some scenaries where you need to implements algorithms that are more effective working with simple numbers than a structures, for
 example, for sorting processes or similar actions.
 
 You can cast an integer value as [Color](xref:DIV2.Format.Exporter.Color) simply assigning the value using the assignation operator:
 [!code-csharp[Main](samples.cs?range=32-34)]
 
-And viceversa, you can cast a [Color](xref:DIV2.Format.Exporter.Color) value to an integer value in the similar way:
+And viceversa, you can cast a [Color](xref:DIV2.Format.Exporter.Color) value to an [integer](xref:System.Int32) value in the similar way:
 [!code-csharp[Main](samples.cs?range=37-39)]

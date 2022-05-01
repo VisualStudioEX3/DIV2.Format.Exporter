@@ -28,7 +28,7 @@ This code shows how to create an empty [FPG](xref:DIV2.Format.Exporter.FPG) inst
 This code shows how to load an existing [FPG](xref:DIV2.Format.Exporter.FPG) file:
 [!code-csharp[Main](samples.cs?range=8)]
 
-Also you can load a [FPG](xref:DIV2.Format.Exporter.FPG) file from a byte array:
+Also you can load a [FPG](xref:DIV2.Format.Exporter.FPG) file from a [byte](xref:System.Byte) array:
 [!code-csharp[Main](samples.cs?range=11-12)]
 
 ## Read a MAP graphic
@@ -44,15 +44,16 @@ This code shows how to add a new [MAP](xref:DIV2.Format.Exporter.MAP) to the [FP
 instance:
 [!code-csharp[Main](samples.cs?range=24-25)]
 
-Also you can load a [MAP](xref:DIV2.Format.Exporter.MAP) file from a byte array and add them in the same way:
+Also you can load a [MAP](xref:DIV2.Format.Exporter.MAP) file from a [byte](xref:System.Byte) array and add them in the 
+same way:
 [!code-csharp[Main](samples.cs?range=28-29)]
 
 Or simply load by filename:
 [!code-csharp[Main](samples.cs?range=32)]
 
 The [Add](xref:DIV2.Format.Exporter.FPG.Add(DIV2.Format.Exporter.MAP,System.String)) method, and his overloads, checks 
-the graphId before add the [MAP](xref:DIV2.Format.Exporter.MAP) and thrown an exception if already exists a
-[MAP](xref:DIV2.Format.Exporter.MAP) with the same graphId.
+the **graphId** before add the [MAP](xref:DIV2.Format.Exporter.MAP) and thrown an exception if already exists a
+[MAP](xref:DIV2.Format.Exporter.MAP) with the same **graphId**.
 
 > [!NOTE]
 > The [Add](xref:DIV2.Format.Exporter.FPG.Add(DIV2.Format.Exporter.MAP,System.String)) method, and his overloads, 
