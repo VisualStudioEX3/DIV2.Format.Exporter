@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Interfaces;
+using DIV2.Format.Exporter.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -139,9 +140,7 @@ namespace DIV2.Format.Exporter
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Register)) return false;
-
-            return this == (Register)obj;
+            return obj is Register register && this == register;
         }
 
         public override int GetHashCode()
@@ -154,7 +153,7 @@ namespace DIV2.Format.Exporter
     class FPGEnumerator : IEnumerator<MAP>
     {
         #region Internal vars
-        IList<Register> _registers;
+        readonly IList<Register> _registers;
         int _currentIndex;
         #endregion
 
@@ -167,7 +166,7 @@ namespace DIV2.Format.Exporter
         public FPGEnumerator(IList<Register> registers)
         {
             this._registers = registers;
-            this.Current = default(MAP);
+            this.Current = default;
             this.Reset();
         }
 
@@ -206,17 +205,20 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Internal vars
-        List<Register> _registers;
+        readonly List<Register> _registers;
         #endregion
 
         #region Properties
         /// <summary>
         /// Color palette used by this <see cref="FPG"/>.
         /// </summary>
+        /// <value>Returns the <see cref="PAL"/> instance for this <see cref="FPG"/> object.</value>
+        /// <remarks>All <see cref="MAP"/>s stored in the <see cref="FPG"/> shared this palette.</remarks>
         public PAL Palette { get; private set; }
         /// <summary>
-        /// Gets the number of <see cref="MAP"/> instances contained in the <see cref="FPG"/>.
+        /// Number of <see cref="MAP"/> objects stored in this <see cref="FPG"/>.
         /// </summary>
+        /// <value>Gets the number of <see cref="MAP"/> instances contained in the <see cref="FPG"/>.</value>
         public int Count => this._registers.Count;
         /// <summary>
         /// Gets a <see cref="MAP"/> instance.
@@ -227,10 +229,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, this.Count - 1))
-                    throw new IndexOutOfRangeException($"The index value must be a value beteween 0 and {this.Count}. (Index: {index})");
-
-                return this._registers[index].map;
+                return !index.IsClamped(0, this.Count - 1)
+                    ? throw new IndexOutOfRangeException($"The index value must be a value beteween 0 and {this.Count}. (Index: {index})")
+                    : this._registers[index].map;
             }
         }
         #endregion
@@ -332,18 +333,19 @@ namespace DIV2.Format.Exporter
         // Sort MAP list by graphic identifiers in ascending order:
         int OrderByAsc(Register x, Register y)
         {
-            if (x.GraphId > y.GraphId)
-                return 1;
-            else if (x.GraphId == y.GraphId)
-                return 0;
-            else
-                return -1;
+            return (x.GraphId > y.GraphId) 
+                ? 1 
+                : (x.GraphId == y.GraphId) 
+                    ? 0 
+                    : -1;
         }
 
         /// <summary>
         /// Adds a <see cref="MAP"/> file.
         /// </summary>
         /// <param name="filename"><see cref="MAP"/> file to load.</param>
+        /// <remarks>This method always performs a color conversion if the palette is different from the 
+        /// <see cref="FPG"/> instance to ensure the <see cref="MAP"/> image shows properly with the current palette.</remarks>
         public void Add(string filename)
         {
             this.Add(new MAP(File.ReadAllBytes(filename)));
@@ -354,6 +356,12 @@ namespace DIV2.Format.Exporter
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array that contain the <see cref="MAP"/> file data to load.</param>
         /// <param name="filename">Optional filename value in DOS 8:3 format.</param>
+        /// <remarks><para>This method always performs a color conversion if the palette is different from the 
+        /// <see cref="FPG"/> instance to ensure the <see cref="MAP"/> image shows properly with the current palette.</para>
+        /// 
+        /// <para>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
+        /// If the input string is shorter than 12 characters, the string is filled with null chars.
+        /// If the input string is longer than 12 characters, getting a 12 characters length substring.</para></remarks>
         public void Add(byte[] buffer, string filename = "")
         {
             this.Add(new MAP(buffer), filename);
@@ -364,6 +372,12 @@ namespace DIV2.Format.Exporter
         /// </summary>
         /// <param name="map"><see cref="MAP"/> instance to add.</param>
         /// <param name="filename">Optional filename value in DOS 8:3 format.</param>
+        /// <remarks><para>This method always performs a color conversion if the palette is different from the 
+        /// <see cref="FPG"/> instance to ensure the <see cref="MAP"/> image shows properly with the current palette.</para>
+        /// 
+        /// <para>The <paramref name="filename"/> field in the file only allows a 12 length ASCII null terminated string.
+        /// If the input string is shorter than 12 characters, the string is filled with null chars.
+        /// If the input string is longer than 12 characters, getting a 12 characters length substring.</para></remarks>
         public void Add(MAP map, string filename = "")
         {
             if (this.Contains(map))
@@ -560,11 +574,8 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Serializes the <see cref="FPG"/> instance in a <see cref="byte"/> array.
-        /// </summary>
-        /// <returns>Returns the <see cref="byte"/> array with the <see cref="FPG"/> serialized data.</returns>
-        /// <remarks>This function not include the file header data.</remarks>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -577,10 +588,8 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -599,34 +608,25 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<MAP> GetEnumerator()
         {
             return new FPGEnumerator(this._registers);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is FPG)) return false;
-
-            return this == (FPG)obj;
+            return obj is FPG fpg && this == fpg;
         }
 
         /// <summary>

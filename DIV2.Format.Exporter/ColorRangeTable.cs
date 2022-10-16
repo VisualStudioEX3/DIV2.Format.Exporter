@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Interfaces;
+using DIV2.Format.Exporter.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace DIV2.Format.Exporter
     class ColorRangeTableEnumerator : IEnumerator<ColorRange>
     {
         #region Internal vars
-        IList<ColorRange> _items;
+        readonly IList<ColorRange> _items;
         int _currentIndex;
         #endregion
 
@@ -23,7 +24,7 @@ namespace DIV2.Format.Exporter
         public ColorRangeTableEnumerator(IList<ColorRange> items)
         {
             this._items = items;
-            this.Current = default(ColorRange);
+            this.Current = default;
             this.Reset();
         }
 
@@ -61,18 +62,18 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION = 
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
+        /// <value>
         /// Number of <see cref="ColorRange"/>s in the table.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 16;
-        /// <summary>
+        /// <value>
         /// Memory size of the color range table.
-        /// </summary>
+        /// </value>
         public const int SIZE = LENGTH * ColorRange.SIZE;
         #endregion
 
         #region Internal vars
-        ColorRange[] _ranges = new ColorRange[LENGTH];
+        readonly ColorRange[] _ranges = new ColorRange[LENGTH];
         #endregion
 
         #region Properties
@@ -85,10 +86,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this._ranges[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this._ranges[index];
             }
             set
             {
@@ -157,10 +157,8 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
@@ -172,43 +170,32 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<ColorRange> GetEnumerator()
         {
             return new ColorRangeTableEnumerator(this._ranges);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ColorRangeTable)) return false;
-
-            return this == (ColorRangeTable)obj;
+            return obj is ColorRangeTable table && this == table;
         }
 
         /// <summary>

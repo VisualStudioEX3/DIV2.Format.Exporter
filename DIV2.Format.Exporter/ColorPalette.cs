@@ -38,17 +38,15 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION =
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
-        /// Max suported value in DAC format [0..63].
-        /// </summary>
+        /// <value>
+        /// Max supported value in DAC format [0..63].
+        /// </value>
         public const byte MAX_DAC_VALUE = 63;
-        /// <summary>
-        /// Number of components.
-        /// </summary>
+        /// <value>Number of components.</value>
         public const int LENGTH = 3;
-        /// <summary>
+        /// <value>
         /// Memory size.
-        /// </summary>
+        /// </value>
         public const int SIZE = sizeof(byte) * LENGTH;
         #endregion
 
@@ -56,14 +54,17 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Red component.
         /// </summary>
+        /// <value>A value between 0 and 255.</value>
         public byte red;
         /// <summary>
         /// Green component.
         /// </summary>
+        /// <value>A value between 0 and 255.</value>
         public byte green;
         /// <summary>
         /// Blue component.
         /// </summary>
+        /// <value>A value between 0 and 255.</value>
         public byte blue;
         #endregion
 
@@ -77,13 +78,13 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0: return this.red;
-                    case 1: return this.green;
-                    case 2: return this.blue;
-                    default: throw INDEX_OUT_OF_RANGE_EXCEPTION;
-                }
+                    0 => this.red,
+                    1 => this.green,
+                    2 => this.blue,
+                    _ => throw INDEX_OUT_OF_RANGE_EXCEPTION,
+                };
             }
 
             set
@@ -172,6 +173,7 @@ namespace DIV2.Format.Exporter
         /// Cast an <see cref="int"/> value to <see cref="Color"/> value.
         /// </summary>
         /// <param name="value"><see cref="int"/> value.</param>
+        /// <returns>Returns the <see cref="Color"/> value from the <see cref="int"/> value.</returns>
         public static implicit operator Color(int value)
         {
             int red = (value >> 16) & 0xFF;
@@ -185,6 +187,7 @@ namespace DIV2.Format.Exporter
         /// Cast the <see cref="Color"/> value to <see cref="int"/> value.
         /// </summary>
         /// <param name="value"><see cref="Color"/> value.</param>
+        /// <returns>Returns the <see cref="int"/> value from the <see cref="Color"/> value.</returns>
         public static explicit operator int(Color value)
         {
             int rgb = value.red;
@@ -245,19 +248,15 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             return new byte[LENGTH] { this.red, this.green, this.blue };
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -294,7 +293,7 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Gets a <see cref="Vector3"/> with normalized values [0..1].
         /// </summary>
-        /// <param name="colorType">Indicate the color range for set the normalization factor.</param>
+        /// <param name="colorType">Indicates the color range for set the normalization factor.</param>
         /// <returns>Returns a <see cref="Vector3"/> with the <see cref="Color"/> components normalized.</returns>
         public Vector3 Normalize(ColorFormat colorType)
         {
@@ -335,16 +334,11 @@ namespace DIV2.Format.Exporter
                    this.blue.IsClamped(0, MAX_DAC_VALUE);
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is Color)) return false;
-
-            return this == (Color)obj;
+            return obj is Color color && this == color;
         }
 
         /// <summary>
@@ -370,7 +364,7 @@ namespace DIV2.Format.Exporter
     class ColorPaletteEnumerator : IEnumerator<Color>
     {
         #region Internal vars
-        IList<Color> _items;
+        readonly IList<Color> _items;
         int _currentIndex;
         #endregion
 
@@ -383,7 +377,7 @@ namespace DIV2.Format.Exporter
         public ColorPaletteEnumerator(IList<Color> items)
         {
             this._items = items;
-            this.Current = default(Color);
+            this.Current = default;
             this.Reset();
         }
 
@@ -421,15 +415,14 @@ namespace DIV2.Format.Exporter
         readonly static ArgumentOutOfRangeException OUT_OF_RANGE_DAC_EXCEPTION =
             new ArgumentOutOfRangeException($"The color array must be contains a {LENGTH} array length, with RGB colors in DAC format [0..{Color.MAX_DAC_VALUE}].");
         readonly static string[] COLOR_FIELD_NAMES = { "Red", "Green", "Blue" };
-        const string DAC_VALUE_OUT_OF_RANGE_EXCEPTION_MESSAGE = "The {0} value must be a DAC range value [{1}..{2}].";
 
-        /// <summary>
+        /// <value>
         /// Number of colors.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 256;
-        /// <summary>
+        /// <value>
         /// Memory size of the palette.
-        /// </summary>
+        /// </value>
         public const int SIZE = LENGTH * Color.SIZE;
         #endregion
 
@@ -447,10 +440,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this._colors[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this._colors[index];
             }
             set
             {
@@ -459,10 +451,7 @@ namespace DIV2.Format.Exporter
 
                 for (int i = 0; i < Color.LENGTH; i++)
                     if (!value[i].IsClamped(0, Color.MAX_DAC_VALUE))
-                        throw new ArgumentOutOfRangeException(string.Format(DAC_VALUE_OUT_OF_RANGE_EXCEPTION_MESSAGE,
-                                                                            COLOR_FIELD_NAMES[i],
-                                                                            0,
-                                                                            Color.MAX_DAC_VALUE));
+                        throw new ArgumentOutOfRangeException($"The {COLOR_FIELD_NAMES[i]} value must be a DAC range value [0..{Color.MAX_DAC_VALUE}].");
 
                 this._colors[index] = value;
             }
@@ -555,10 +544,8 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var buffer = new MemoryStream())
@@ -570,10 +557,8 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -601,18 +586,19 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Sorts the <see cref="Color"/> values.
         /// </summary>
-        /// <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color (0, 0, 0), if exists in palette, be the first color.
+        /// <remarks>This method try to sort the colors using the Nearest Neighbour algorithm, trying to ensure that the black color 
+        /// (0, 0, 0), if exists in palette, be the first color.
         /// This implementation is based on this article: https://www.alanzucconi.com/2015/09/30/colour-sorting/ </remarks>
         public void Sort()
         {
 #if SORT_BY_HSV
-            var vectors = this._colors.Select(e => e.ToHSV(ColorFormat.DAC)).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.ToHSV(ColorFormat.DAC)).ToList();
 #elif SORT_BY_HSL
-            var vectors = this._colors.Select(e => e.ToHSL(ColorFormat.DAC)).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.ToHSL(ColorFormat.DAC)).ToList();
 #elif SORT_BY_HLV_STEP
-            var vectors = this._colors.Select(e => e.Step()).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.Step()).ToList();
 #else
-            var vectors = this._colors.Select(e => e.Normalize(ColorFormat.DAC)).ToList();
+            List<Vector3> vectors = this._colors.Select(e => e.Normalize(ColorFormat.DAC)).ToList();
 #endif
             int start = vectors.FindIndex(e => e == Vector3.Zero); // Try to localize the black color.
             List<int> path = NNAlgorithm.CalculatePath(vectors, start == -1 ? 0 : start, out _);
@@ -620,34 +606,25 @@ namespace DIV2.Format.Exporter
             this._colors = path.Select(e => this._colors[e]).ToArray();
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<Color> GetEnumerator()
         {
             return new ColorPaletteEnumerator(this._colors);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ColorPalette)) return false;
-
-            return this == (ColorPalette)obj;
+            return obj is ColorPalette palette && this == palette;
         }
 
         /// <summary>

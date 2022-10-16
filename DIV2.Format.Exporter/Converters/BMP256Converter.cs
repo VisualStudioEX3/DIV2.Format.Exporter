@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Processors.Images;
+using DIV2.Format.Exporter.Utils;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Bmp;
@@ -13,6 +14,7 @@ namespace DIV2.Format.Exporter.Converters
     /// Base converter for all supported image formats to BMP 256 colors.
     /// </summary>
     /// <remarks>This class is the core of the image conversions to DIV Games Studio formats like <see cref="PAL"/> and <see cref="MAP"/> files.</remarks>
+    [DocFxIgnore]
     class BMP256Converter
     {
         #region Constants
@@ -50,10 +52,10 @@ namespace DIV2.Format.Exporter.Converters
         /// Converts supported image format to a 256 colors BMP.
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array that contais the image data to convert.</param>
-        /// <param name="palette">The palette extracted from the converted image.</param>
-        /// <param name="width">The width of the image.</param>
-        /// <param name="height">The height of the image.</param>
-        /// <param name="bitmap">The bitmap data of the converted image referencing the palette values.</param>
+        /// <param name="palette">Gets the palette extracted from the converted image.</param>
+        /// <param name="width">Gets the width of the image.</param>
+        /// <param name="height">Gets the height of the image.</param>
+        /// <param name="bitmap">Gets the bitmap data of the converted image referencing the palette values.</param>
         public static void Convert(byte[] buffer, out byte[] palette, out short width, out short height, out byte[] bitmap)
         {
             Process(buffer, DefaultEncoder, out palette, out width, out height, out bitmap);
@@ -64,9 +66,9 @@ namespace DIV2.Format.Exporter.Converters
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array that contais the image data to convert.</param>
         /// <param name="palette">The palette that contains the colors that must be used in conversion process.</param>
-        /// <param name="width">The width of the image.</param>
-        /// <param name="height">The height of the image.</param>
-        /// <param name="bitmap">The bitmap data of the converted image referencing the palette values.</param>
+        /// <param name="width">Gets the width of the image.</param>
+        /// <param name="height">Gets the height of the image.</param>
+        /// <param name="bitmap">Gets the bitmap data of the converted image referencing the palette values.</param>
         public static void ConvertTo(byte[] buffer, byte[] palette, out short width, out short height, out byte[] bitmap)
         {
             SetupPalette(palette);
@@ -117,7 +119,7 @@ namespace DIV2.Format.Exporter.Converters
 
             for (int i = 0, j = 0; i < palette.Length; i += 4)
             {
-                // BMP file stored the color table values in this order: blue, green, red, 0x00
+                // BMP file store the color table values as ARGB format in inverse order: blue, green, red, 0x00
                 palette[j++] = buffer[i + 2];
                 palette[j++] = buffer[i + 1];
                 palette[j++] = buffer[i];

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using DIV2.Format.Exporter.Utils;
 
 namespace DIV2.Format.Exporter
 {
@@ -17,24 +18,24 @@ namespace DIV2.Format.Exporter
     public struct ControlPoint : ISerializableAsset
     {
         #region Constants
-        /// <summary>
+        /// <value>
         /// Number of items.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 2;
-        /// <summary>
+        /// <value>
         /// Memory size.
-        /// </summary>
+        /// </value>
         public const int SIZE = sizeof(short) * LENGTH;
         #endregion
 
         #region Public vars
-        /// <summary>
+        /// <value>
         /// Horizontal coordinate.
-        /// </summary>
+        /// </value>
         public short x;
-        /// <summary>
+        /// <value>
         /// Vertical coordinate.
-        /// </summary>
+        /// </value>
         public short y;
         #endregion
 
@@ -48,12 +49,12 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                switch (index)
+                return index switch
                 {
-                    case 0: return this.x;
-                    case 1: return this.y;
-                    default: throw new IndexOutOfRangeException();
-                }
+                    0 => this.x,
+                    1 => this.y,
+                    _ => throw new IndexOutOfRangeException(),
+                };
             }
             set
             {
@@ -150,7 +151,8 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="stream">A <see cref="BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="short"/> values for X and Y coordinates.</param>
+        /// <param name="stream">A <see cref="BinaryReader"/> instance, that contains, in the current position, with 2 <see cref="short"/> 
+        /// values for X and Y coordinates.</param>
         public ControlPoint(BinaryReader stream)
             : this(stream.ReadInt16(), stream.ReadInt16())
         {
@@ -158,10 +160,8 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -173,25 +173,18 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ControlPoint)) return false;
-
-            return this == (ControlPoint)obj;
+            return obj is ControlPoint point && this == point;
         }
 
         /// <summary>
@@ -217,7 +210,7 @@ namespace DIV2.Format.Exporter
     class MAPEnumerator : IEnumerator<byte>
     {
         #region Internal vars
-        IList<byte> _bitmap;
+        readonly IList<byte> _bitmap;
         int _currentIndex;
         #endregion
 
@@ -230,7 +223,7 @@ namespace DIV2.Format.Exporter
         public MAPEnumerator(IList<byte> bitmap)
         {
             this._bitmap = bitmap;
-            this.Current = default(byte);
+            this.Current = default;
             this.Reset();
         }
 
@@ -272,25 +265,25 @@ namespace DIV2.Format.Exporter
         const string INDEX_OUT_OF_RANGE_EXCEPTION_MESSAGE = "The index value must be a value beteween 0 and {0} (Index: {1}).";
         const string COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE = "{0} coordinate must be a value beteween 0 and {1} ({0}: {2}).";
 
-        /// <summary>
+        /// <value>
         /// Min supported size value for width or height properties.
-        /// </summary>
+        /// </value>
         public const int MIN_PIXEL_SIZE = 1;
-        /// <summary>
+        /// <value>
         /// Max description character length.
-        /// </summary>
+        /// </value>
         public const int DESCRIPTION_LENGTH = 32;
-        /// <summary>
+        /// <value>
         /// Min allowed graph id value.
-        /// </summary>
+        /// </value>
         public const int MIN_GRAPH_ID = 1;
-        /// <summary>
+        /// <value>
         /// Max allowed graph id value.
-        /// </summary>
+        /// </value>
         public const int MAX_GRAPH_ID = 999;
-        /// <summary>
-        /// Max supported control points count.
-        /// </summary>
+        /// <value>
+        /// Max supported <see cref="ControlPoint"/>s.
+        /// </value>
         public const int MAX_CONTROL_POINTS = 1000;
         #endregion
 
@@ -303,14 +296,17 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Width of the graphic map.
         /// </summary>
+        /// <value>Returns the width value in pixels.</value>
         public short Width { get; }
         /// <summary>
         /// Height of the graphic map.
         /// </summary>
+        /// <value>Returns the Height value in pixels.</value>
         public short Height { get; }
         /// <summary>
-        /// Graphic identifiers used in <see cref="FPG"/> files.
+        /// Graphic identifier used in <see cref="FPG"/> files.
         /// </summary>
+        /// <value>Gets or sets the graphic indentifier for this <see cref="MAP"/> object.</value>
         public int GraphId
         {
             get => this._graphId;
@@ -325,19 +321,25 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Optional graphic description.
         /// </summary>
-        /// <remarks>The description only allow a 32 length ASCII null terminated string.</remarks>
+        /// <value>Gets or sets the description for this <see cref="MAP"/> object.</value>
+        /// <remarks>The description field in the file only allows a 32 length ASCII null terminated string.
+        /// If the input string is shorter than 32 characters, the string is filled with null chars.
+        /// If the input string is longer than 32 characters, getting a 32 characters length substring.</remarks>
         public string Description { get; set; }
         /// <summary>
         /// Color palette used by this graphic map.
         /// </summary>
+        /// <value>Returns the <see cref="PAL"/> instance for this <see cref="MAP"/> object.</value>
         public PAL Palette { get; private set; }
         /// <summary>
         /// Optional control point list.
         /// </summary>
+        /// <value>Returns the <see cref="ControlPoint"/> list for this <see cref="MAP"/> object.</value>
         public List<ControlPoint> ControlPoints { get; private set; }
         /// <summary>
         /// Number of pixels in the bitmap.
         /// </summary>
+        /// <value>Returns the number of pixels for this <see cref="MAP"/> object.</value>
         public int Count => this._bitmap.Length;
         /// <summary>
         /// Gets or sets the color index in the bitmap.
@@ -348,10 +350,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, this._bitmap.Length))
-                    throw new IndexOutOfRangeException(string.Format(INDEX_OUT_OF_RANGE_EXCEPTION_MESSAGE, this._bitmap.Length, index));
-
-                return this._bitmap[index];
+                return !index.IsClamped(0, this._bitmap.Length)
+                    ? throw new IndexOutOfRangeException(string.Format(INDEX_OUT_OF_RANGE_EXCEPTION_MESSAGE, this._bitmap.Length, index))
+                    : this._bitmap[index];
             }
             set
             {
@@ -364,20 +365,18 @@ namespace DIV2.Format.Exporter
         /// <summary>
         /// Gets or sets the color index in the bitmap.
         /// </summary>
-        /// <param name="x">Horizontal coordinate of the pixel to read.</param>
-        /// <param name="y">Vertical coordinate of the pixel to read.</param>
+        /// <param name="x">Horizontal coordinate of the pixel in the bitmap.</param>
+        /// <param name="y">Vertical coordinate of the pixel in the bitmap.</param>
         /// <returns>Returns the color index in the <see cref="PAL"/> instance.</returns>
         public byte this[int x, int y]
         {
             get
             {
-                if (!x.IsClamped(0, this.Width - 1))
-                    throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "X", this.Width, x));
-
-                if (!y.IsClamped(0, this.Height - 1))
-                    throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "Y", this.Height, y));
-
-                return this._bitmap[this.GetIndex(x, y)];
+                return !x.IsClamped(0, this.Width - 1)
+                    ? throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "X", this.Width, x))
+                    : !y.IsClamped(0, this.Height - 1)
+                        ? throw new IndexOutOfRangeException(string.Format(COORDINATE_OUT_OF_RANGE_EXCEPTION_MESSAGE, "Y", this.Height, y))
+                        : this._bitmap[this.GetIndex(x, y)];
             }
             set
             {
@@ -450,6 +449,9 @@ namespace DIV2.Format.Exporter
         /// <param name="height">Bitmap height.</param>
         /// <param name="graphId"><see cref="MAP"/> graphic identifiers. By default is 1.</param>
         /// <param name="description">Optional <see cref="MAP"/> description.</param>
+        /// <remarks>The <paramref name="description"/> field in the file only allows a 32 length ASCII null terminated string.
+        /// If the input string is shorter than 32 characters, the string is filled with null chars.
+        /// If the input string is longer than 32 characters, getting a 32 characters length substring.</remarks>
         public MAP(PAL palette, short width, short height, int graphId = MIN_GRAPH_ID, string description = "")
             : this()
         {
@@ -534,10 +536,10 @@ namespace DIV2.Format.Exporter
         /// <remarks>Supported image formats are JPEG, PNG, BMP, GIF and TGA. Also supported 256 color PCX images.</remarks>
         public static MAP FromImage(string filename)
         {
-            if (ValidateFormat(filename))
-                throw new ArgumentException($"The filename is a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or indicate a {nameof(PAL)} file to apply color conversion.");
-
-            return FromImage(File.ReadAllBytes(filename));
+            return ValidateFormat(filename)
+                ? throw new ArgumentException($"The filename is a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or " +
+                $"indicate a {nameof(PAL)} file to apply color conversion.")
+                : FromImage(File.ReadAllBytes(filename));
         }
 
         /// <summary>
@@ -549,7 +551,8 @@ namespace DIV2.Format.Exporter
         public static MAP FromImage(byte[] buffer)
         {
             if (ValidateFormat(buffer))
-                throw new ArgumentException($"The buffer contains a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or indicate a {nameof(PAL)} file to apply color conversion.");
+                throw new ArgumentException($"The buffer contains a {nameof(MAP)} file. Use the constructor to load a {nameof(MAP)} file or " +
+                    $"indicate a {nameof(PAL)} file to apply color conversion.");
 
             BMP256Converter.Convert(buffer, out byte[] palette, out short width, out short height, out byte[] bitmap);
 
@@ -558,7 +561,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Creates a new <see cref="MAP"/> instance from a supported image format.
+        /// Creates a new <see cref="MAP"/> instance from a supported image format and converts the colors to the selected <see cref="PAL"/> instance.
         /// </summary>
         /// <param name="filename">Image file to load.</param>
         /// <param name="palette"><see cref="PAL"/> instance to convert the loaded image.</param>
@@ -571,7 +574,7 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Creates a new <see cref="MAP"/> instance from a supported image format.
+        /// Creates a new <see cref="MAP"/> instance from a supported image format and converts the colors to the selected <see cref="PAL"/> instance.
         /// </summary>
         /// <param name="buffer"><see cref="byte"/> array that contain a supported image.</param>
         /// <param name="palette"><see cref="PAL"/> instance to convert the loaded image.</param>
@@ -702,11 +705,8 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Serializes the <see cref="MAP"/> instance in a <see cref="byte"/> array.
-        /// </summary>
-        /// <returns>Returns the <see cref="byte"/> array with the <see cref="MAP"/> serialized data.</returns>
-        /// <remarks>This function not include the file header data.</remarks>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -732,10 +732,8 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
@@ -765,34 +763,25 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<byte> GetEnumerator()
         {
             return new MAPEnumerator(this._bitmap);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is MAP)) return false;
-
-            return this == (MAP)obj;
+            return obj is MAP map && this == map;
         }
 
         /// <summary>
@@ -805,10 +794,10 @@ namespace DIV2.Format.Exporter
         }
 
         /// <summary>
-        /// Converts all pixel indexes to the <see cref="Color"/> value from this associated <see cref="PAL"/> instance.
+        /// Converts all pixel indexes to the RGB <see cref="Color"/> value from this associated <see cref="PAL"/> instance.
         /// </summary>
         /// <returns>Returns a new <see cref="Color"/> array with all pixel data from this bitmap. All colors are RGB format [0..255].</returns>
-        /// <remarks>Use this function when need to render this <see cref="MAP"/> in any modern system that works in full 32 bits color space.</remarks>
+        /// <remarks>Use this function when need to render this <see cref="MAP"/> in any modern system that works in 24 or 32 bits color space.</remarks>
         public Color[] GetRGBTexture()
         {
             return this._bitmap.Select(e => this.Palette[e].ToRGB()).ToArray();

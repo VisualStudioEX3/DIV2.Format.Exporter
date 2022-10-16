@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PAL class samples </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="PAL class samples ">
+    <meta name="generator" content="docfx 2.58.9.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="pal-class-samples">PAL class samples</h1>
+
+<p>This section shows common samples of how to create and manage <strong>DIV Games Studio</strong> palettes.</p>
+<div class="NOTE"><h5>Note</h5><p>Usually is not necessary to edit the <a class="xref" href="../../api/DIV2.Format.Exporter.ColorRangeTable.html">Color Range Tables</a> in a palette to make it usable in games. 
+<a class="xref" href="../../api/DIV2.Format.Exporter.ColorRangeTable.html">Color Range Tables</a> are used by the <strong>DIV Games Studio</strong> built-in Drawing Editor. 
+The default <a class="xref" href="../../api/DIV2.Format.Exporter.ColorRangeTable.html">Color Range Tables</a> initialization performed by this framework is enough to use in this program.
+We are skipped all operations related with <a class="xref" href="../../api/DIV2.Format.Exporter.ColorRangeTable.html">Color Range Tables</a> in palettes in this section.</p>
+</div>
+<h2 id="create-an-empty-palette">Create an empty palette</h2>
+<p>This code shows how to create an empty <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a> 
+instance and setup colors manually:</p>
+<pre><code class="lang-csharp" name="Main">var palette = new PAL();
+
+palette[0] = new Color(0, 0, 0);
+palette[1] = new Color(63, 0, 0);
+palette[2] = new Color(63, 63, 63);
+...
+</code></pre><p>Also you can setup a <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> array to initialize a new palette:</p>
+<pre><code class="lang-csharp" name="Main">var colors = new Color[256];
+... // Sets each Color array element value.
+var palette = new PAL(colors);
+</code></pre><div class="WARNING"><h5>Warning</h5><p>Remember that <strong>DIV Games Studio palettes</strong> working in DAC format. This means that the RGB channel ranges are 0 to 63 instead of 0 to 255. If you trying to 
+initialize a palette using values over 63 for any color channel, you thrown an exception.</p>
+</div>
+<h2 id="load-an-existing-palette">Load an existing palette</h2>
+<p>This code shows how to load a <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a> file:</p>
+<pre><code class="lang-csharp" name="Main">var palette = new PAL(&quot;DIV.PAL&quot;);
+</code></pre><p>Also you can load a <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a> file from a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">byte</a> array:</p>
+<pre><code class="lang-csharp" name="Main">byte[] buffer = System.IO.File.ReadAllBytes(&quot;DIV.PAL&quot;);
+var palette = new PAL(buffer);
+</code></pre><h2 id="create-a-palette-from-an-image">Create a palette from an image</h2>
+<p>You can create palettes from a image file. The process allows you to load an image file (JPEG, PNG, BMP, GIF, and TGA image formats, and also supported 
+256 colors PCX files), extract all unique colors from the image, and convert them to 8 bit <strong>DAC</strong> format.</p>
+<pre><code class="lang-csharp" name="Main">var palette = PAL.FromImage(&quot;background.png&quot;);
+</code></pre><p>Also you can create the palette from a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">byte</a> array with the content of the image file:</p>
+<pre><code class="lang-csharp" name="Main">byte[] buffer = System.IO.File.ReadAllBytes(&quot;background.png&quot;);
+var palette = PAL.FromImage(buffer);
+</code></pre><p>You can perform a sorting color action when creates the palette from a image:</p>
+<pre><code class="lang-csharp" name="Main">var palette = PAL.FromImage(&quot;background.png&quot;, sortColors: true);
+</code></pre><pre><code class="lang-csharp" name="Main">byte[] buffer = System.IO.File.ReadAllBytes(&quot;background.png&quot;);
+var palette = PAL.FromImage(buffer, sortColors: true);
+</code></pre><div class="NOTE"><h5>Note</h5><p>Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, was the first color 
+(index zero). <strong>DIV Games Studio</strong> draw operations usually uses the first color in a palette, the black, as transparent color for sprite masks.</p>
+</div>
+<h2 id="extract-palettes-from-map-and-fpg-files">Extract palettes from MAP and FPG files</h2>
+<p>You can create the palette from the existing one from a <a class="xref" href="../../api/DIV2.Format.Exporter.MAP.html">MAP</a> or <a class="xref" href="../../api/DIV2.Format.Exporter.FPG.html">FPG</a> file like you load 
+a supported image file:</p>
+<pre><code class="lang-csharp" name="Main">var palette = PAL.FromImage(&quot;COIN.MAP&quot;);
+var palette = PAL.FromImage(&quot;PLAYER.FPG&quot;);
+</code></pre><h2 id="read-colors">Read colors</h2>
+<p>You can easily read each color of the palette using a direct accessor, like an array:</p>
+<pre><code class="lang-csharp" name="Main">Color color = palette[42]; // Reads the color at index 42.
+</code></pre><p>And also, you can use a foreach loop to read all colors:</p>
+<pre><code class="lang-csharp" name="Main">foreach (Color color in palette)
+{
+    Console.WriteLine(color); // Prints the current color value in console.
+}
+</code></pre><h2 id="write-colors">Write colors</h2>
+<p>You can easily write each color of the palette using a direct accessor, like an array:</p>
+<pre><code class="lang-csharp" name="Main">palette[42] = new Color(0, 16, 63); // Writes the color at index 42.
+</code></pre><div class="WARNING"><h5>Warning</h5><p>Remember that <strong>DIV Games Studio</strong> palettes working in <strong>DAC</strong> format. This means that the RGB channel ranges are 0 to 63 instead of 0 to 255. If you trying to 
+set a value over 63 for any color channel, you thrown an exception.</p>
+</div>
+<h2 id="sort-colors">Sort colors</h2>
+<p>You can manually perform a color sorting in your palettes. This action trying to sort the colors, from the black, or the darkest color in palette, to the 
+white or the brightest color in the palette:</p>
+<pre><code class="lang-csharp" name="Main">palette.Sort();
+</code></pre><div class="NOTE"><h5>Note</h5><p>Not is a requirement to sort the colors in a palette but is recomended to ensure that the black color, if is present in the palette, was the first color 
+(index zero). <strong>DIV Games Studio</strong> draw operations usually uses the first color in a palette, the black, as transparent color for sprite masks.</p>
+</div>
+<h2 id="save-palette-to-a-file">Save palette to a file</h2>
+<p>You can easily save your palette to a <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a> file using the following call:</p>
+<pre><code class="lang-csharp" name="Main">palette.Save(&quot;NEW.PAL&quot;);
+</code></pre><h2 id="get-full-rgb-colors">Get full RGB colors</h2>
+<p>If you need, for example, render the 16x16 palette color matrix in a custom tool, that works with full RGB 24/32 bits, you can get a copy of the all 
+colors in <strong>RGB</strong> format [0..255] using a simple call:</p>
+<pre><code class="lang-csharp" name="Main">Color[] rgbPaletteColors = palette.ToRGB();
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/VisualStudioEX3/DIV2.Format.Exporter/blob/feature/docfx/DIV2.Format.Exporter.DocFX/samples/PAL/samples.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

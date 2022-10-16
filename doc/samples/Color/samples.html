@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Color struct samples </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Color struct samples ">
+    <meta name="generator" content="docfx 2.58.9.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="color-struct-samples">Color struct samples</h1>
+
+<p>This section shows common samples of how to work with colors to manage <strong>DIV Games Studio</strong> palettes and images.</p>
+<p>Remember that <strong>DIV Games Studio</strong> palettes working in <strong>DAC</strong> format. This means that the <strong>RGB</strong> channels ranges are 0 to 63 instead of 0 to 255.</p>
+<p>The <strong>DIV Games Studio</strong> files, <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a>, <a class="xref" href="../../api/DIV2.Format.Exporter.MAP.html">MAP</a>, <a class="xref" href="../../api/DIV2.Format.Exporter.FPG.html">FPG</a> 
+and <strong>FNT</strong> files, works in <strong>DAC</strong> format. If you try to set a full <strong>RGB</strong> <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> value for any related 
+<strong>DIV Games Studio</strong> file operations, or even try to load a modified file with full <strong>RGB</strong> <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> values, you 
+will gets an exception.</p>
+<p>You can use full <strong>RGB</strong> <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> values when you need to export a <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a> colors
+or the bitmap data from a <a class="xref" href="../../api/DIV2.Format.Exporter.MAP.html">MAP</a> to use in modern systems (e.g. to render a 16x16 <a class="xref" href="../../api/DIV2.Format.Exporter.PAL.html">PAL</a> 
+color matrix or the bitmap image from a <a class="xref" href="../../api/DIV2.Format.Exporter.MAP.html">MAP</a> in a custom tool using the common RGB 24/32 bits system GUI, web 
+based GUI, or a custom GUI in major environments like <a href="https://unity.com/">Unity</a> editor custom tool).</p>
+<h2 id="create-a-color">Create a color</h2>
+<p>The common way to create a new color value is using the main constructor:</p>
+<pre><code class="lang-csharp" name="Main">var color = new Color(0, 31, 63);
+</code></pre><p>Also you can create an empty <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> value or pure black color (0, 0, 0) using the default non-parametrized 
+consutructor and setup the color channel values later.</p>
+<h2 id="access-color-channels-values">Access color channels values</h2>
+<p>You can access, to write or read, the each <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> channel values: red, green and blue, using the struct fields:</p>
+<pre><code class="lang-csharp" name="Main">color.red = 0;
+color.green = 31;
+color.blue = 63;
+
+Console.Write($&quot;Red: {color.red}, Green: {color.green}, Blue: {color.blue}&quot;);
+// Red: 0, Green: 31, Blue: 63
+</code></pre><p>And also, like a vector structure, you can using a direct accessor by index position:</p>
+<pre><code class="lang-csharp" name="Main">color[0] = 0;
+color[1] = 31;
+color[2] = 63;
+
+Console.Write($&quot;Red: {color[0]}, Green: {color[1]}, Blue: {color[2]}&quot;);
+// Red: 0, Green: 31, Blue: 63
+</code></pre><h2 id="check-if-the-color-is-a-valid-dac-value">Check if the color is a valid DAC value</h2>
+<p>You can check if a <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> value is a <strong>DAC</strong> value using the following function:</p>
+<pre><code class="lang-csharp" name="Main">bool isDACColor = color.IsDAC();
+</code></pre><div class="NOTE"><h5>Note</h5><p>This function only checks if the color channels values are bounded in the <strong>DAC</strong> range [0..63].
+There is not way to ensure if a color value is a true <strong>DAC</strong> or full <strong>RGB</strong> value [0..255].</p>
+</div>
+<h2 id="convert-a-dac-color-to-rgb-equivalent">Convert a DAC color to RGB equivalent</h2>
+<p>You can convert any <strong>DAC</strong> color to his equivalent <strong>RGB</strong> value using the following function. Remember that the value is a closer approximation
+of the real <strong>RGB</strong> value:</p>
+<pre><code class="lang-csharp" name="Main">Color rgbColor = color.ToRGB();
+</code></pre><h2 id="convert-a-rgb-color-to-dac-equivalent">Convert a RGB color to DAC equivalent</h2>
+<p>You can convert any <strong>RGB</strong> color to his equivalent <strong>DAC</strong> value using the following function. Remember that the value is a closer approximation
+of the real <strong>DAC</strong> value:</p>
+<pre><code class="lang-csharp" name="Main">Color dacColor = color.ToDAC();
+</code></pre><h2 id="using-an-integer-value-as-a-color-struct-value-and-viceversa">Using an integer value as a Color struct value and viceversa</h2>
+<p>The <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> structure can be casted to <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">integer</a> values and viceversa.
+This is useful in some scenaries where you need to implements algorithms that are more effective working with simple numbers than a structures, for
+example, for sorting processes or similar actions.</p>
+<p>You can cast an integer value as <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> simply assigning the value using the assignation operator:</p>
+<pre><code class="lang-csharp" name="Main">Color color = 33023;
+Console.Write(color);
+// { Color: { Red: 0, Green: 128, Blue: 255 } }
+</code></pre><p>And viceversa, you can cast a <a class="xref" href="../../api/DIV2.Format.Exporter.Color.html">Color</a> value to an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">integer</a> value in the similar way:</p>
+<pre><code class="lang-csharp" name="Main">int color = (int)new Color(0, 128, 255);
+Console.Write(color);
+// 33023
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/VisualStudioEX3/DIV2.Format.Exporter/blob/feature/docfx/DIV2.Format.Exporter.DocFX/samples/Color/samples.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

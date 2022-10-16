@@ -37,9 +37,6 @@ namespace DIV2.Format.Exporter.Processors.Images
     internal sealed class PcxFormat : IImageFormat
     {
         #region Properties
-        /// <summary>
-        /// Gets the current instance.
-        /// </summary>
         public static PcxFormat Instance { get; } = new PcxFormat();
 
         public string Name => "PCX";

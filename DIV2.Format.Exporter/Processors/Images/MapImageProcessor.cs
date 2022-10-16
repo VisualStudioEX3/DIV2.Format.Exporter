@@ -36,9 +36,6 @@ namespace DIV2.Format.Exporter.Processors.Images
     internal sealed class MapFormat : IImageFormat
     {
         #region Properties
-        /// <summary>
-        /// Gets the current instance.
-        /// </summary>
         public static MapFormat Instance { get; } = new MapFormat();
         public string Name => "MAP";
         public string DefaultMimeType => "image/div-map";

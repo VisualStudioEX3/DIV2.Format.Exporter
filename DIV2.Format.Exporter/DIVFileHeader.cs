@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Interfaces;
+using DIV2.Format.Exporter.Utils;
 using System;
 using System.IO;
 
@@ -8,6 +9,7 @@ namespace DIV2.Format.Exporter
     /// <summary>
     /// DIV Games Studio file header.
     /// </summary>
+    [DocFxIgnore]
     sealed class DIVFileHeader : ISerializableAsset, IFormatValidable
     {
         #region Constants
@@ -18,9 +20,9 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Internal vars
-        byte[] _id;
-        int _magicNumber;
-        byte _version;
+        readonly byte[] _id;
+        readonly int _magicNumber;
+        readonly byte _version;
         #endregion
 
         #region Constructors
@@ -95,6 +97,7 @@ namespace DIV2.Format.Exporter
     /// <summary>
     /// An exception ocurred when a DIV Games Studio content data format is invalid.
     /// </summary>
+    /// <typeparam name="T"><see cref="IAssetFile"/> type that reprensents any DIV Games Studio format.</typeparam>
     public sealed class DIVFileFormatException<T> : Exception where T : IAssetFile
     {
         #region Constructor

@@ -1,5 +1,6 @@
 ﻿using DIV2.Format.Exporter.ExtensionMethods;
 using DIV2.Format.Exporter.Interfaces;
+using DIV2.Format.Exporter.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace DIV2.Format.Exporter
     class ColorRangeEnumerator : IEnumerator<byte>
     {
         #region Internal vars
-        IList<byte> _items;
+        readonly IList<byte> _items;
         int _currentIndex;
         #endregion
 
@@ -24,7 +25,7 @@ namespace DIV2.Format.Exporter
         public ColorRangeEnumerator(IList<byte> items)
         {
             this._items = items;
-            this.Current = default(byte);
+            this.Current = default;
             this.Reset();
         }
 
@@ -60,35 +61,35 @@ namespace DIV2.Format.Exporter
         readonly static IndexOutOfRangeException INDEX_OUT_OF_RANGE_EXCEPTION =
             new IndexOutOfRangeException($"The index value must be a value beteween 0 and {LENGTH}.");
 
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="colors"/> field.
-        /// </summary>
+        /// </value>
         public const RangeColors DEFAULT_RANGE_COLORS = RangeColors._8;
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="type"/> field.
-        /// </summary>
+        /// </value>
         public const RangeTypes DEFAULT_TYPE = RangeTypes.Direct;
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="isFixed"/> field.
-        /// </summary>
+        /// </value>
         public const bool DEFAULT_FIXED_STATE = false;
-        /// <summary>
+        /// <value>
         /// Default value for <see cref="blackColor"/> field.
-        /// </summary>
+        /// </value>
         public const int DEFAULT_BLACK_COLOR = 0;
-        /// <summary>
+        /// <value>
         /// Number of color index entries in the range.
-        /// </summary>
+        /// </value>
         public const int LENGTH = 32;
-        /// <summary>
+        /// <value>
         /// Memory size of the range.
-        /// </summary>
+        /// </value>
         public const int SIZE = (sizeof(byte) * 4) + (sizeof(byte) * LENGTH);
         #endregion
 
         #region Enumerations
         /// <summary>
-        /// Available ammount of colors for the range.
+        /// Available amount of colors for the range.
         /// </summary>
         public enum RangeColors : byte
         {
@@ -135,23 +136,23 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Public vars
-        byte[] _rangeColors;
+        readonly byte[] _rangeColors;
 
-        /// <summary>
-        /// Ammount of colors for the range.
-        /// </summary>
+        /// <value>
+        /// Amount of colors for the range.
+        /// </value>
         public RangeColors colors;
-        /// <summary>
+        /// <value>
         /// Range type.
-        /// </summary>
+        /// </value>
         public RangeTypes type;
-        /// <summary>
+        /// <value>
         /// Defines if the range is editable (false) or not (true). By default is false.
-        /// </summary>
+        /// </value>
         public bool isFixed;
-        /// <summary>
+        /// <value>
         /// Index of the black color. Default is zero.
-        /// </summary>
+        /// </value>
         public byte blackColor;
         #endregion
 
@@ -165,10 +166,9 @@ namespace DIV2.Format.Exporter
         {
             get
             {
-                if (!index.IsClamped(0, LENGTH))
-                    throw INDEX_OUT_OF_RANGE_EXCEPTION;
-
-                return this._rangeColors[index];
+                return !index.IsClamped(0, LENGTH) ? 
+                    throw INDEX_OUT_OF_RANGE_EXCEPTION : 
+                    this._rangeColors[index];
             }
             set
             {
@@ -266,10 +266,8 @@ namespace DIV2.Format.Exporter
         #endregion
 
         #region Methods & Functions
-        /// <summary>
-        /// Serializes this instance to binary format.
-        /// </summary>
-        /// <returns>Returns a <see cref="byte"/> array with the serialized data.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public byte[] Serialize()
         {
             using (var stream = new BinaryWriter(new MemoryStream()))
@@ -284,43 +282,32 @@ namespace DIV2.Format.Exporter
             }
         }
 
-        /// <summary>
-        /// Writes this instance data in a <see cref="BinaryWriter"/> instance.
-        /// </summary>
-        /// <param name="stream"><see cref="BinaryWriter"/> instance.</param>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public void Write(BinaryWriter stream)
         {
             stream.Write(this.Serialize());
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public IEnumerator<byte> GetEnumerator()
         {
             return new ColorRangeEnumerator(this._rangeColors);
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection. 
-        /// </summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
 
-        /// <summary>
-        /// Indicates whether this instance and a specified object are equal. 
-        /// </summary>
-        /// <param name="obj">The object to compare with the current instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, <see langword="false"/>.</returns>
+        /// <inheritdoc/>
+        [DocFxIgnore]
         public override bool Equals(object obj)
         {
-            if (!(obj is ColorRange)) return false;
-
-            return this == (ColorRange)obj;
+            return obj is ColorRange range && this == range;
         }
 
         /// <summary>
@@ -339,13 +326,7 @@ namespace DIV2.Format.Exporter
         public override string ToString()
         {
             var sb = new StringBuilder();
-            foreach (byte index in this._rangeColors)
-                sb.Append($"{index}, ");
-
-            string rangeValues = sb.ToString();
-            rangeValues = sb.ToString().Substring(0, rangeValues.Length - 2);
-
-            sb = new StringBuilder();
+            string rangeValues = string.Join(", ", this._rangeColors);
 
             sb.Append($"{{ {nameof(ColorRange)}: ");
             sb.Append($"{{ Hash: {this.GetHashCode()}, ");

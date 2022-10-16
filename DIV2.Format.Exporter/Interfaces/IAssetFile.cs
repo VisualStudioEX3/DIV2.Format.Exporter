@@ -1,12 +1,18 @@
-﻿namespace DIV2.Format.Exporter.Interfaces
+﻿using DIV2.Format.Exporter.Utils;
+
+namespace DIV2.Format.Exporter.Interfaces
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+    /// <summary>
+    /// Implements an asset file.
+    /// </summary>
+    [DocFxIgnore]
     public interface IAssetFile : IFormatValidable, ISerializableAsset
     {
         #region Methods & Functions
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         bool Validate(string filename);
-        void Save(string filename); 
+        void Save(string filename);
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         #endregion
     }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

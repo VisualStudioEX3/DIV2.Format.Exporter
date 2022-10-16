@@ -21,9 +21,9 @@ namespace DIV2.Format.Exporter.ExtensionMethods
         }
 
         /// <summary>
-        /// Calculates the checksum of this <see cref="string"/>.
+        /// Calculates the checksum of this <see cref="byte"/> array.
         /// </summary>
-        /// <param name="buffer"><see cref="byte"/> array.</param>
+        /// <param name="buffer"><see cref="byte"/> array to calculate checksum.</param>
         /// <returns>Returns the checksum <see cref="string"/> value of this <see cref="byte"/> array.</returns>
         public static string CalculateChecksum(this byte[] buffer)
         {
