@@ -1,4 +1,5 @@
-# Workflow for test, build and publish to NuGet.
+# Workflow for test, build and publish to NuGet, and to generate the documentation and publish to GitHub Pages.
+
 name: Build
 
 on:
@@ -9,20 +10,21 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
-      solution: DIV2.Format.Exporter.sln
-      test_project: DIV2.Format.Exporter.Tests\DIV2.Format.Exporter.Tests.csproj
-      
+      DOTNET_NOLOGO: true                                   # Disable the .NET logo
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true               # Disable the .NET first time experience to speed up the build
+      DOTNET_CLI_TELEMETRY_OPTOUT: true                     # Disable sending .NET CLI telemetry
+
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 3.1.x
         
@@ -30,11 +32,25 @@ jobs:
       uses: NuGet/setup-nuget@v1
 
     - name: Execute unit tests
-      run: dotnet test $env:test_project
+      run: dotnet test DIV2.Format.Exporter.Tests/DIV2.Format.Exporter.Tests.csproj
     
     - name: Build project
-      run: dotnet build $env:solution --configuration Release
-      
+      run: dotnet build DIV2.Format.Exporter/DIV2.Format.Exporter.csproj --configuration Release
+
     - if: (github.ref == 'refs/heads/master') # Only publish to NuGet from master branch.
       name: Publish NuGet package (package is generated during the project build process)
-      run: dotnet nuget push "DIV2.Format.Exporter\bin\x64\Release\*.nupkg" --api-key ${{ secrets.NUGET_SECRET_KEY }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate --no-symbols true 
+      run: dotnet nuget push "DIV2.Format.Exporter/bin/Release/*.nupkg" --api-key ${{ secrets.NUGET_SECRET_KEY }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate 
+
+    - if: (github.ref == 'refs/heads/master') # Only build documentation from master branch.
+      uses: nikeee/docfx-action@v1.0.0
+      name: Build documentation (with dotFX)
+      with:
+        args: DIV2.Format.Exporter.DocFX/docfx.json
+
+    - if: (github.ref == 'refs/heads/master') # Only publish documentation from master branch.
+      name: Deploy documentation to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        publish_branch: documentation
