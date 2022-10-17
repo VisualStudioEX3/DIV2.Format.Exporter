@@ -10,8 +10,9 @@
 *.userosscache
 *.sln.docstates
 
-# DocFX log file
+# DocFX build process
 log.txt
+_site/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
