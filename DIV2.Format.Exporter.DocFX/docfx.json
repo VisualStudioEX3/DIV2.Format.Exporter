@@ -39,7 +39,7 @@
         ]
       }
     ],
-    "dest": "../doc",
+    "dest": "_site",
     "overwrite": [
       {
         "files": [
