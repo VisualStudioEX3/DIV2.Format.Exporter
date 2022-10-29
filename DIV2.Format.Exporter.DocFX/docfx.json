@@ -40,6 +40,12 @@
       }
     ],
     "dest": "_site",
+    "globalMetadata": {
+      "_appFooter": "<span><center><strong>DIV2.Format.Exporter</strong> © Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2022 | Site generated with <a href=\"https://dotnet.github.io/docfx\"><strong>DocFX</strong></a></center></span>",
+      "_disableContribution": true,
+      "_enableNewTab": true,
+      "_enableSearch": true
+    },
     "overwrite": [
       {
         "files": [
