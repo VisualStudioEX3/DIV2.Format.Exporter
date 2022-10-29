@@ -3,7 +3,7 @@
 <br>
 DIV2.Format.Exporter</h1>
 
-<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2021</h6>
+<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2020 - 2022</h6>
 
 ## Multiplatform framework to converts modern graphic format images to native DIV Games Studio graphic formats: PAL, MAP and FPG files.
 
@@ -37,13 +37,10 @@ This tool is not designed to work with DIV Games Studio forks like [Fenix Projec
   * Full access to all features: color palette, full access to MAP list and their MAP metadata.
   * Automatic MAP list sorting using graph id value.
   * Import images as MAP files, with palette conversion if is needed.
-* Compatible with Unity editor (see the [Unity Editor dependencies](https://github.com/VisualStudioEX3/DIV2.Format.Exporter#unity-editor-dependencies)).
+* Compatible with Unity editor (see the [Unity Editor dependencies](#unity-editor-dependencies)).
   
 # Future features
-* Creates a wiki with API reference documentation and samples (FYI: the source code is full documented).
 * Implements support for FNT files.
-* Creates separated project with **CLI program** to operate with **DIV2.Format.Exporter** in Windows, Linux and Mac systems.
-* Creates separated project with an **Unity editor** frontend implemnetation with multiple tools designed to create content for **DIV Games Studio** in an easy and quick way.
 
 # Unity Editor dependencies
 **Unity** .NET backend supports ***.NET Standard 2.0*** but not the full subset of libraries. In order to uses **DIV2.Format.Exporter** library in **Unity Editor** you need to add this libraries to ***Unity Assets folder*** in your project.
