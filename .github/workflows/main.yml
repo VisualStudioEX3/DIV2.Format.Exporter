@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest                                  # "peaceiris/actions-gh-pages" action requires Linux, not supported on Windows.
 
     env:
       DOTNET_NOLOGO: true                                   # Disable the .NET logo
@@ -37,20 +37,22 @@ jobs:
     - name: Build project
       run: dotnet build DIV2.Format.Exporter/DIV2.Format.Exporter.csproj --configuration Release
 
-    - if: (github.ref == 'refs/heads/master') # Only publish to NuGet from master branch.
-      name: Publish NuGet package (package is generated during the project build process)
+    # The following actions only run on push events from master branch:
+    - name: Publish NuGet package (package is generated during the project build process)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: dotnet nuget push "DIV2.Format.Exporter/bin/Release/*.nupkg" --api-key ${{ secrets.NUGET_SECRET_KEY }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate 
 
-    - if: (github.ref == 'refs/heads/master') # Only build documentation from master branch.
+    - name: Build documentation (with dotFX)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: nikeee/docfx-action@v1.0.0
-      name: Build documentation (with dotFX)
       with:
         args: DIV2.Format.Exporter.DocFX/docfx.json
 
-    - if: (github.ref == 'refs/heads/master') # Only publish documentation from master branch.
-      name: Deploy documentation to GitHub Pages
+    - name: Deploy documentation to GitHub Pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        # publish_dir: Source folder where DocFX creates the web site files in VS project folder (setup on docfx.json). GitHub Pages must be address to "/ (root)" instead "/docs" folder as target:
+        publish_dir: ./DIV2.Format.Exporter.DocFX/_site
         publish_branch: documentation
