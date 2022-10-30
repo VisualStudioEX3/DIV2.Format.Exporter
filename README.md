@@ -16,6 +16,11 @@ DIV2.Format.Exporter</h1>
 
 This tool is not designed to work with DIV Games Studio forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/) or [PixTudio](https://pixtudio.org/).
 
+# Documentation
+You have available online API documentation for reference and small code samples to learn how to use this library: 
+* [API Documentation](https://visualstudioex3.github.io/DIV2.Format.Exporter/api/DIV2.Format.Exporter.html)
+* [Samples](https://visualstudioex3.github.io/DIV2.Format.Exporter/samples/intro.html)
+
 # Features
 * Multiplatform: Windows, Linux and Mac support.
 * Image formats supported: JPEG, PNG, BMP, GIF, TGA and 8 bit PCX.
