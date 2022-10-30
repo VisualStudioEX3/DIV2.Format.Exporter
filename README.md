@@ -12,6 +12,7 @@ DIV2.Format.Exporter</h1>
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/VisualStudioEX3/DIV2.Format.Exporter?color=green)](https://github.com/VisualStudioEX3/DIV2.Format.Exporter/releases/)
 [![Nuget](https://img.shields.io/nuget/v/DIV2.Format.Exporter?logo=nuget&label=NuGet)](https://www.nuget.org/packages/DIV2.Format.Exporter/)
 
+# Introduction
 **DIV2.Format.Exporter** is writen in **C#** using **.NET Standard 2.1** and using [SixLabors ImageSharp](https://github.com/SixLabors/ImageSharp) library for image and palette conversions. This library is designed initially to works in [Unity](https://unity.com/) editor as content creation tool for [StarFighter](https://github.com/VisualStudioEX3/StarFighter) project, but is possible to using from other implementations (e.g. a CLI program or other engines or frameworks compatible with .NET).
 
 This tool is not designed to work with DIV Games Studio forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/) or [PixTudio](https://pixtudio.org/).
