@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/VisualStudioEX3/Home/master/pictures/div_games_studio/div2_logo/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
+<img src="https://raw.githubusercontent.com/VisualStudioEX3/VisualStudioEX3/master/Shared/Images/div_games_studio/div2_logo/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
 <br>
 DIV2.Format.Exporter</h1>
 
@@ -7,24 +7,24 @@ DIV2.Format.Exporter</h1>
 
 <h3 align="center">Multiplatform framework to converts modern graphic format images to native DIV Games Studio graphic formats: PAL, MAP and FPG files.</h3>
 
-<p align="center">
+<div align="center">
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Project%20Repository-lightgrey?logo=github&label=GitHub)](https://github.com/VisualStudioEX3/DIV2.Format.Exporter)
 [![Build](https://github.com/VisualStudioEX3/DIV2.Format.Exporter/workflows/Build/badge.svg)](https://github.com/VisualStudioEX3/DIV2.Format.Exporter/actions)
 [![Licence](https://img.shields.io/github/license/VisualStudioEX3/DIV2.Format.Exporter?color=yellow)](https://opensource.org/licenses/MIT)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/VisualStudioEX3/DIV2.Format.Exporter?color=green)](https://github.com/VisualStudioEX3/DIV2.Format.Exporter/releases/)
 [![Nuget](https://img.shields.io/nuget/v/DIV2.Format.Exporter?logo=nuget&label=NuGet)](https://www.nuget.org/packages/DIV2.Format.Exporter/)
-</p>
+</div>
 
 # Introduction
 **DIV2.Format.Exporter** is writen in **C#** using **.NET Standard 2.1** and using [SixLabors ImageSharp](https://github.com/SixLabors/ImageSharp) library for image and palette conversions. This library is designed initially to works in [Unity](https://unity.com/) editor as content creation tool for [StarFighter](https://github.com/VisualStudioEX3/StarFighter) project, but is possible to using from other implementations (e.g. a CLI program or other engines or frameworks compatible with .NET).
 
-This tool is not designed to work with DIV Games Studio forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/) or [PixTudio](https://pixtudio.org/).
+> [!WARNING]
+> This tool is not designed to work with DIV Games Studio forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/), [eDivc](https://github.com/vroman/edivc), CDiv, [Div GO](https://www.divgo.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/), or [PixTudio](https://pixtudio.org/).
 
 # Documentation
-
-This site contains full API documentation for reference and small code samples to learn how to use this library:
-* [API Documentation](api/DIV2.Format.Exporter.html)
-* [Samples](samples/intro.html)
+You have available online API documentation for reference and small code samples to learn how to use this library: 
+* [API Documentation](https://visualstudioex3.github.io/DIV2.Format.Exporter/api/DIV2.Format.Exporter.html)
+* [Samples](https://visualstudioex3.github.io/DIV2.Format.Exporter/samples/intro.html)
 
 # Features
 * Multiplatform: Windows, Linux and Mac support.
@@ -49,19 +49,23 @@ This site contains full API documentation for reference and small code samples t
   * Import images as MAP files, with palette conversion if is needed.
 * Compatible with Unity editor (see the [Unity Editor dependencies](#unity-editor-dependencies)).
   
-# Future features
-* Implements support for creation and edition of FNT files.
+# TODO
+- Update project to .NET 7.
+- Prepare repository to be able imported from Unity editor as Git package with all required dependencies.
+- Implement support for FNT files.
 
 # Unity Editor dependencies
 **Unity** .NET backend supports ***.NET Standard 2.0*** but not the full subset of libraries. In order to uses **DIV2.Format.Exporter** library in **Unity Editor** you need to add this libraries to ***Unity Assets folder*** in your project.
 
 This is the list of dependencies used and their source links from **NuGet** repositories:
-- [![Nuget System.Buffers](https://img.shields.io/nuget/v/System.Buffers?logo=nuget&label=NuGet:%20System.Buffers)](https://www.nuget.org/packages/System.Buffers/)
-- [![Nuget System.Memory](https://img.shields.io/nuget/v/System.Memory?logo=nuget&label=NuGet:%20System.Memory)](https://www.nuget.org/packages/System.Memory/)
-- [![Nuget System.Numerics.Vectors](https://img.shields.io/nuget/v/System.Numerics.Vectors?logo=nuget&label=NuGet:%20System.Numerics.Vectors)](https://www.nuget.org/packages/System.Numerics.Vectors/)
-- [![Nuget System.Runtime.CompilerServices.Unsafe](https://img.shields.io/nuget/v/System.Runtime.CompilerServices.Unsafe?logo=nuget&label=NuGet:%20System.Runtime.CompilerServices.Unsafe)](https://www.nuget.org/packages/System.Runtime.CompilerServices.Unsafe/)
+- [![Nuget](https://img.shields.io/nuget/v/System.Buffers?logo=nuget&label=NuGet:%20System.Buffers)](https://www.nuget.org/packages/System.Buffers/)
+- [![Nuget](https://img.shields.io/nuget/v/System.Memory?logo=nuget&label=NuGet:%20System.Memory)](https://www.nuget.org/packages/System.Memory/)
+- [![Nuget](https://img.shields.io/nuget/v/System.Numerics.Vectors?logo=nuget&label=NuGet:%20System.Numerics.Vectors)](https://www.nuget.org/packages/System.Numerics.Vectors/)
+- [![Nuget](https://img.shields.io/nuget/v/System.Runtime.CompilerServices.Unsafe?logo=nuget&label=NuGet:%20System.Runtime.CompilerServices.Unsafe)](https://www.nuget.org/packages/System.Runtime.CompilerServices.Unsafe/)
 
-###### FYI: You can extract the DLL files from NuGet packages opening it as Zip files. The DLL files are located in the "lib" folder.
+> [!NOTE]
+> You can extract the DLL files from NuGet packages opening it as Zip files. The DLL files are located in the `lib` folder.
+
 
 # What is DIV Games Studio?
 
@@ -73,12 +77,12 @@ Is a full windows graphic environment with tools for creation and editing 2D gra
 
 This engine allow to develop common 2D games with a full of advanced graphic features, and pseudo 3D games using the [Mode7](https://en.wikipedia.org/wiki/Mode_7) and later, with DIV2, the Mode8 (3D feature like the original Doom).
 
-**DIV Games Studio** was very popular at the end of ninetys and early 2000. Was the start point of an entire generation of game developers of nowdays. During the years, the community was develop a multiple forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/) (with multiple flavours), CDiv, [Div GO](https://www.divgo.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/), or [PixTudio](https://pixtudio.org/).
+**DIV Games Studio** was very popular at the end of ninetys and early 2000. Was the start point of an entire generation of game developers of nowdays. During the years, the community was develop a multiple forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/) (with multiple flavours), [eDivc](https://github.com/vroman/edivc), CDiv, [Div GO](https://www.divgo.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/), or [PixTudio](https://pixtudio.org/).
 
 Currently exists 2 projects to bring it to live again:
 * [Div DX / DIV Games Studio 3](https://github.com/DIVGAMES/DIV-Games-Studio) - A port of DIV Games Studio 2 to modern systems (running on Windows, Linux and Mac natively) but keeping the all original features of DIV Games Studio 2. One of the interested features, including the fix of most of the existing bugs on original DIV2, is the posibility of export the games natively to multiple systems, including Android, HTML5 and some consoles. This project has still in beta and seems to be abandoned since 2016.
 * [DIV Games Studio 2.02](https://github.com/vii1/DIV) - A reconstruction and fixing of the original DIV Games Studio 2 (v 2.01) for MS-DOS. This is an active project today where the developers want to fix the multiple bugs in the language programming and engine, improve the tools, and, maybe in a future, create a version for Amiga OS.
 
-**DIV Games Studio** is fully functional on [DOSBox](https://www.dosbox.com/). You can download **DIV Games Studio 2** ISO from [Archive.org](https://archive.org/details/div-games-studio-2) as abandoneware.
+**DIV Games Studio** if fully functional on [DOSBox](https://www.dosbox.com/). You can download **DIV Games Studio 2** ISO from [Archive.org](https://archive.org/details/div-games-studio-2) as abandoneware.
 
-![DIV Games Studio 2 screenshots](https://raw.githubusercontent.com/VisualStudioEX3/Home/master/pictures/div_games_studio/div2_screen_mosaic.png)
+![DIV Games Studio 2 screenshots](https://raw.githubusercontent.com/VisualStudioEX3/VisualStudioEX3/master/Shared/Images/div_games_studio/div2_screen_mosaic.png)
