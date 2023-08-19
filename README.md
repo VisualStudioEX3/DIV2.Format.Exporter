@@ -15,7 +15,7 @@ DIV2.Format.Exporter</h1>
 # Introduction
 **DIV2.Format.Exporter** is writen in **C#** using **.NET Standard 2.1** and using [SixLabors ImageSharp](https://github.com/SixLabors/ImageSharp) library for image and palette conversions. This library is designed initially to works in [Unity](https://unity.com/) editor as content creation tool for [StarFighter](https://github.com/VisualStudioEX3/StarFighter) project, but is possible to using from other implementations (e.g. a CLI program or other engines or frameworks compatible with .NET).
 
-> Warning
+> **Warning**
 > This tool is not designed to work with DIV Games Studio forks like [Fenix Project](https://web.archive.org/web/20071012230137/http://fenix.divsite.net/), [eDivc](https://github.com/vroman/edivc), CDiv, [Div GO](https://www.divgo.net/), [Gemix Studio](http://www.gemixstudio.com/), [Bennu GD](https://www.bennugd.org/), or [PixTudio](https://pixtudio.org/).
 
 # Documentation
@@ -60,7 +60,7 @@ This is the list of dependencies used and their source links from **NuGet** repo
 - [![Nuget](https://img.shields.io/nuget/v/System.Numerics.Vectors?logo=nuget&label=NuGet:%20System.Numerics.Vectors)](https://www.nuget.org/packages/System.Numerics.Vectors/)
 - [![Nuget](https://img.shields.io/nuget/v/System.Runtime.CompilerServices.Unsafe?logo=nuget&label=NuGet:%20System.Runtime.CompilerServices.Unsafe)](https://www.nuget.org/packages/System.Runtime.CompilerServices.Unsafe/)
 
-> Note
+> **Note**
 > You can extract the DLL files from NuGet packages opening it as Zip files. The DLL files are located in the `lib` folder.
 
 # What is DIV Games Studio?
