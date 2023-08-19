@@ -81,4 +81,4 @@ Currently exists 2 projects to bring it to live again:
 
 **DIV Games Studio** if fully functional on [DOSBox](https://www.dosbox.com/). You can download **DIV Games Studio 2** ISO from [Archive.org](https://archive.org/details/div-games-studio-2) as abandoneware.
 
-![DIV Games Studio 2 screenshots](https://github.com/VisualStudioEX3/VisualStudioEX3/blob/develop/Shared/Images/div_games_studio/div2_screen_mosaic.png)
+![DIV Games Studio 2 screenshots](https://github.com/VisualStudioEX3/VisualStudioEX3/blob/master/Shared/Images/div_games_studio/div2_screen_mosaic.png)
