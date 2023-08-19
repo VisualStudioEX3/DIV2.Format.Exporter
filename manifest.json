@@ -36,15 +36,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Yz04kjLRqWriiwY07rnKyw=="
+          "hash": "QMiAb0G/cvdcTbkYDOuguw=="
         }
       },
       "is_incremental": false,
